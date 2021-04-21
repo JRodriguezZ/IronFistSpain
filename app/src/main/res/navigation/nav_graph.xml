@@ -8,12 +8,23 @@
         android:id="@+id/startFragment"
         android:name="com.renegade.ironfistspain.StartFragment"
         android:label="fragment_start"
-        tools:layout="@layout/fragment_start" />
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_registroFragment"
+            app:destination="@id/registroFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registroFragment"
         android:name="com.renegade.ironfistspain.RegistroFragment"
         android:label="fragment_registro"
-        tools:layout="@layout/fragment_registro" />
+        tools:layout="@layout/fragment_registro" >
+        <action
+            android:id="@+id/action_registroFragment_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/inicioFragment"
         android:name="com.renegade.ironfistspain.InicioFragment"
