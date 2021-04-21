@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/ajustes"
-        android:title="Info."
-        android:icon="@drawable/info_circle" />
+    <item android:id="@+id/mensajes"
+        android:title="Mensajes"
+        android:icon="@drawable/mensaje" />
+
+    <item android:id="@+id/notificaciones"
+        android:title="Notificaciones"
+        android:icon="@drawable/notificaciones" />
 
     <item android:id="@+id/menu"
         android:title="Inicio"
         android:icon="@drawable/home_alt_fill" />
 
     <item android:id="@+id/ticket"
-        android:title="Ticket"
+        android:title="Tierlist"
         android:icon="@drawable/ticket" />
+
+    <item android:id="@+id/hueco"
+        android:title=""/>
 
 
 </menu>
