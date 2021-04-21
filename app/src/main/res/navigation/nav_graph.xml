@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startFragment">
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.renegade.ironfistspain.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" />
+    <fragment
+        android:id="@+id/registroFragment"
+        android:name="com.renegade.ironfistspain.RegistroFragment"
+        android:label="fragment_registro"
+        tools:layout="@layout/fragment_registro" />
+    <fragment
+        android:id="@+id/inicioFragment"
+        android:name="com.renegade.ironfistspain.InicioFragment"
+        android:label="fragment_inicio"
+        tools:layout="@layout/fragment_inicio" />
+    <fragment
+        android:id="@+id/notificacionesFragment"
+        android:name="com.renegade.ironfistspain.NotificacionesFragment"
+        android:label="fragment_notificaciones"
+        tools:layout="@layout/fragment_notificaciones" />
+    <fragment
+        android:id="@+id/mensajesFragment"
+        android:name="com.renegade.ironfistspain.MensajesFragment"
+        android:label="fragment_mensajes"
+        tools:layout="@layout/fragment_mensajes" />
+    <fragment
+        android:id="@+id/rankingFragment"
+        android:name="com.renegade.ironfistspain.RankingFragment"
+        android:label="fragment_ranking"
+        tools:layout="@layout/fragment_ranking" />
+    <fragment
+        android:id="@+id/crearRetoFragment"
+        android:name="com.renegade.ironfistspain.CrearRetoFragment"
+        android:label="fragment_crear_reto"
+        tools:layout="@layout/fragment_crear_reto" />
+</navigation>
