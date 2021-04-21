@@ -20,5 +20,6 @@ public class MainActivity extends AppCompatActivity {
                 h
                 hg
 
+                        int g = 0;
     }
 }
