@@ -50,4 +50,9 @@
         android:name="com.renegade.ironfistspain.CrearRetoFragment"
         android:label="fragment_crear_reto"
         tools:layout="@layout/fragment_crear_reto" />
+    <fragment
+        android:id="@+id/perfilJugadorFragment"
+        android:name="com.renegade.ironfistspain.PerfilJugadorFragment"
+        android:label="fragment_perfil_jugador"
+        tools:layout="@layout/fragment_perfil_jugador" />
 </navigation>
