@@ -11,6 +11,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //comentario de joan
+        String nombre = "Joan";
+
         // comentario de dylan
         int a = 0;
         g
