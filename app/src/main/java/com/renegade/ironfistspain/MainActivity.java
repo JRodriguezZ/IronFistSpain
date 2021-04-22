@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 // Top-level destinations:
-                R.id.historialFragment
+                R.id.historialFragment, R.id.ajustesFragment, R.id.aboutFragment
         )
                 .setOpenableLayout(binding.drawerLayout)
                 .build();
