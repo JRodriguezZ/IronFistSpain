@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/mensajes"
+    <item android:id="@+id/mensajesFragment"
         android:title="Mensajes"
         android:icon="@drawable/mensaje" />
 
-    <item android:id="@+id/notificaciones"
+    <item android:id="@+id/notificacionesFragment"
         android:title="Notificaciones"
         android:icon="@drawable/notificaciones" />
 
-    <item android:id="@+id/menu"
+    <item android:id="@+id/inicioFragment"
         android:title="Inicio"
         android:icon="@drawable/home_alt_fill" />
 
-    <item android:id="@+id/ticket"
+    <item android:id="@+id/rankingFragment"
         android:title="Tierlist"
         android:icon="@drawable/ticket" />
 
-    <item android:id="@+id/hueco"
+    <item android:id="@+id/crearRetoFragment"
         android:title="Retar"
         android:icon="@drawable/ic_baseline_add_24"/>
 
