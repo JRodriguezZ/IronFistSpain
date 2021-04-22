@@ -56,17 +56,17 @@
         android:label="fragment_perfil_jugador"
         tools:layout="@layout/fragment_perfil_jugador" />
     <fragment
-        android:id="@+id/aboutFragment2"
+        android:id="@+id/aboutFragment"
         android:name="com.renegade.ironfistspain.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
     <fragment
-        android:id="@+id/ajustesFragment2"
+        android:id="@+id/ajustesFragment"
         android:name="com.renegade.ironfistspain.AjustesFragment"
         android:label="fragment_ajustes"
         tools:layout="@layout/fragment_ajustes" />
     <fragment
-        android:id="@+id/historialFragment2"
+        android:id="@+id/historialFragment"
         android:name="com.renegade.ironfistspain.HistorialFragment"
         android:label="fragment_historial"
         tools:layout="@layout/fragment_historial" />
