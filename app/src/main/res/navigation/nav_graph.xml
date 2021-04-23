@@ -24,6 +24,15 @@
         <action
             android:id="@+id/action_registroFragment_to_inicioFragment"
             app:destination="@id/inicioFragment" />
+        <action
+            android:id="@+id/action_registroFragment_to_registroJugadorFragment"
+            app:destination="@id/registroJugadorFragment" />
+        <action
+            android:id="@+id/action_registroFragment_to_registroOrganizadorFragment"
+            app:destination="@id/registroOrganizadorFragment" />
+        <action
+            android:id="@+id/action_registroFragment_to_registroEspectadorFragment2"
+            app:destination="@id/registroEspectadorFragment2" />
     </fragment>
     <fragment
         android:id="@+id/inicioFragment"
@@ -70,4 +79,19 @@
         android:name="com.renegade.ironfistspain.HistorialFragment"
         android:label="fragment_historial"
         tools:layout="@layout/fragment_historial" />
+    <fragment
+        android:id="@+id/registroEspectadorFragment2"
+        android:name="com.renegade.ironfistspain.RegistroEspectadorFragment"
+        android:label="fragment_registro_espectador"
+        tools:layout="@layout/fragment_registro_espectador" />
+    <fragment
+        android:id="@+id/registroJugadorFragment"
+        android:name="com.renegade.ironfistspain.RegistroJugadorFragment"
+        android:label="fragment_registro_jugador"
+        tools:layout="@layout/fragment_registro_jugador" />
+    <fragment
+        android:id="@+id/registroOrganizadorFragment"
+        android:name="com.renegade.ironfistspain.RegistroOrganizadorFragment"
+        android:label="fragment_registro_organizador"
+        tools:layout="@layout/fragment_registro_organizador" />
 </navigation>
