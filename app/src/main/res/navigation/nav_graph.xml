@@ -88,7 +88,11 @@
         android:id="@+id/registroJugadorFragment"
         android:name="com.renegade.ironfistspain.RegistroJugadorFragment"
         android:label="fragment_registro_jugador"
-        tools:layout="@layout/fragment_registro_jugador" />
+        tools:layout="@layout/fragment_registro_jugador" >
+        <action
+            android:id="@+id/action_registroJugadorFragment_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registroOrganizadorFragment"
         android:name="com.renegade.ironfistspain.RegistroOrganizadorFragment"
