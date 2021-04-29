@@ -4,18 +4,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.renegade.ironfistspain.databinding.FragmentRegistroBinding;
 import com.renegade.ironfistspain.databinding.FragmentRegistroJugadorBinding;
 
-public class RegistroJugadorFragment extends Fragment {
+public class RegistroJugadorFragment extends BaseFragment {
 
     private FragmentRegistroJugadorBinding binding;
 
@@ -27,10 +23,14 @@ public class RegistroJugadorFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        NavController navController = Navigation.findNavController(view);
 
-        binding.button5.setOnClickListener(v ->
-                navController.navigate(R.id.action_registroJugadorFragment_to_inicioFragment));
+        binding.button5.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_inicioFragment));
 
+        binding.seleccionPrincipal.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_seleccionPrincipalFragment));
+
+        viewModel.nombreLiveData.observe(getViewLifecycleOwner(), nombre -> {
+            binding.personajeMain.setText(nombre);
+        });
+//        db.guardar(viewModel.nombre);
     }
 }

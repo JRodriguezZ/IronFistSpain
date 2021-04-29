@@ -92,10 +92,18 @@
         <action
             android:id="@+id/action_registroJugadorFragment_to_inicioFragment"
             app:destination="@id/inicioFragment" />
+        <action
+            android:id="@+id/action_registroJugadorFragment_to_seleccionPrincipalFragment"
+            app:destination="@id/seleccionPrincipalFragment" />
     </fragment>
     <fragment
         android:id="@+id/registroOrganizadorFragment"
         android:name="com.renegade.ironfistspain.RegistroOrganizadorFragment"
         android:label="fragment_registro_organizador"
         tools:layout="@layout/fragment_registro_organizador" />
+    <dialog
+        android:id="@+id/seleccionPrincipalFragment"
+        android:name="com.renegade.ironfistspain.SeleccionPrincipalFragment"
+        android:label="fragment_seleccion_principal"
+        tools:layout="@layout/fragment_seleccion_principal" />
 </navigation>
