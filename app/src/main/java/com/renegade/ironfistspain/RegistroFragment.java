@@ -29,8 +29,14 @@ public class RegistroFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         NavController navController = Navigation.findNavController(view);
 
-        binding.button4.setOnClickListener(v ->
+        binding.redirigirRegistroJugador.setOnClickListener(v ->
                 navController.navigate(R.id.action_registroFragment_to_registroJugadorFragment));
+
+        binding.redirigirRegistroEspectador.setOnClickListener(v ->
+                navController.navigate(R.id.action_registroFragment_to_registroEspectadorFragment2));
+
+        binding.redirigirRegistroOrganizador.setOnClickListener(v ->
+                navController.navigate(R.id.action_registroFragment_to_registroOrganizadorFragment));
 
     }
 }

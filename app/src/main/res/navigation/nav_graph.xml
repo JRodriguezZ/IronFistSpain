@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/startFragment">
+    app:startDestination="@id/inicioFragment">
     <fragment
         android:id="@+id/startFragment"
         android:name="com.renegade.ironfistspain.StartFragment"
@@ -58,7 +58,11 @@
         android:id="@+id/crearRetoFragment"
         android:name="com.renegade.ironfistspain.CrearRetoFragment"
         android:label="fragment_crear_reto"
-        tools:layout="@layout/fragment_crear_reto" />
+        tools:layout="@layout/fragment_crear_reto" >
+        <action
+            android:id="@+id/action_crearRetoFragment_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/perfilJugadorFragment"
         android:name="com.renegade.ironfistspain.PerfilJugadorFragment"
@@ -83,7 +87,11 @@
         android:id="@+id/registroEspectadorFragment2"
         android:name="com.renegade.ironfistspain.RegistroEspectadorFragment"
         android:label="fragment_registro_espectador"
-        tools:layout="@layout/fragment_registro_espectador" />
+        tools:layout="@layout/fragment_registro_espectador" >
+        <action
+            android:id="@+id/action_registroEspectadorFragment2_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registroJugadorFragment"
         android:name="com.renegade.ironfistspain.RegistroJugadorFragment"
@@ -100,7 +108,11 @@
         android:id="@+id/registroOrganizadorFragment"
         android:name="com.renegade.ironfistspain.RegistroOrganizadorFragment"
         android:label="fragment_registro_organizador"
-        tools:layout="@layout/fragment_registro_organizador" />
+        tools:layout="@layout/fragment_registro_organizador" >
+        <action
+            android:id="@+id/action_registroOrganizadorFragment_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
+    </fragment>
     <dialog
         android:id="@+id/seleccionPrincipalFragment"
         android:name="com.renegade.ironfistspain.SeleccionPrincipalFragment"

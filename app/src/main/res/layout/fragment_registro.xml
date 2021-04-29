@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/redirigirRegistroEspectador"
         android:layout_width="351dp"
         android:layout_height="80dp"
         android:layout_marginTop="32dp"
@@ -47,24 +47,24 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/redirigirRegistroJugador"
         android:text="Jugador"
         android:layout_width="351dp"
         android:layout_height="80dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/redirigirRegistroEspectador" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/redirigirRegistroOrganizador"
         android:text="Organizador"
         android:layout_width="350dp"
         android:layout_height="80dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/redirigirRegistroJugador" />
 
 
 

@@ -24,13 +24,19 @@ public class RegistroJugadorFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.button5.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_inicioFragment));
+        binding.botonRegistroJugador.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_inicioFragment));
+        binding.personajeMain.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_seleccionPrincipalFragment));
+        binding.personajeSecundario.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_seleccionPrincipalFragment));
 
-        binding.seleccionPrincipal.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_seleccionPrincipalFragment));
 
         viewModel.nombreLiveData.observe(getViewLifecycleOwner(), nombre -> {
             binding.personajeMain.setText(nombre);
         });
+
+        viewModel.nombreLiveData.observe(getViewLifecycleOwner(), nombre2 -> {
+            binding.personajeSecundario.setText(nombre2);
+        });
+
 //        db.guardar(viewModel.nombre);
     }
 }

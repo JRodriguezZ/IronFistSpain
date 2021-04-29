@@ -24,8 +24,11 @@ import java.util.List;
 public class SeleccionPrincipalFragment extends BaseDialogFragment {
 
 
+
     private FragmentSeleccionPrincipalBinding binding;
     List<Personaje> personajes = new ArrayList<>();
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,9 +49,9 @@ public class SeleccionPrincipalFragment extends BaseDialogFragment {
         // Lo que hay aqui se debe cambiar por una consulta a la base de datos. Es decir, el arrayList se debe rellenar con los datos de la consulta
 
         personajes = Arrays.asList(
-            new Personaje("XXX", "https://e00-marca.uecdn.es/assets/multimedia/imagenes/2020/09/12/15999204285953.jpg"),
-                new Personaje("YYY", "https://f.rpp-noticias.io/2020/12/15/tekken_1035156.jpg"),
-                new Personaje("ZZZ", "https://puregaming.es/wp-content/uploads/2021/03/Tekken-7-926x1024.jpg")
+            new Personaje("King", "https://e00-marca.uecdn.es/assets/multimedia/imagenes/2020/09/12/15999204285953.jpg"),
+                new Personaje("Kunimitsu", "https://f.rpp-noticias.io/2020/12/15/tekken_1035156.jpg"),
+                new Personaje("Lidia", "https://puregaming.es/wp-content/uploads/2021/03/Tekken-7-926x1024.jpg")
                 );
 
         personajesAdapter.notifyDataSetChanged();
@@ -79,7 +82,7 @@ public class SeleccionPrincipalFragment extends BaseDialogFragment {
 
         @Override
         public int getItemCount() {
-            return personajes == null ? 0 : personajes.size();
+            return personajes == null ? 10 : personajes.size();
         }
     }
 

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.toolbar, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.bottomNavView, navController);
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.registroFragment || destination.getId() == R.id.registroJugadorFragment ) {
+            if (destination.getId() == R.id.registroFragment || destination.getId() == R.id.registroJugadorFragment || destination.getId() == R.id.registroEspectadorFragment2 || destination.getId() == R.id.registroOrganizadorFragment || destination.getId() == R.id.crearRetoFragment ) {
                 binding.bottomNavView.setVisibility(View.GONE);
                 binding.toolbar.setVisibility(View.GONE);
             } else {
