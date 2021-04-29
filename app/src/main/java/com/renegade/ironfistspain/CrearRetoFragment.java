@@ -17,18 +17,16 @@ public class CrearRetoFragment extends Fragment {
     private FragmentCrearRetoBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return (binding = com.renegade.ironfistspain.databinding.FragmentCrearRetoBinding.inflate(inflater, container, false)).getRoot();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return (binding = FragmentCrearRetoBinding.inflate(inflater, container, false)).getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        WeekdaysPicker weekdaysPicker = (WeekdaysPicker) binding.weekdays;
+        WeekdaysPicker weekdaysPicker = binding.weekdays;
         weekdaysPicker.setOnWeekdaysChangeListener((view1, clickedDayOfWeek, selectedDays) -> {
-
 
         });
     }
