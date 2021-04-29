@@ -21,10 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.renegade.ironfistspain.databinding.FragmentStartBinding;
 
-public class StartFragment extends Fragment {
+public class StartFragment extends BaseFragment {
 
     private FirebaseAuth mAuth;
-    private NavController mNav;
 
     private FragmentStartBinding binding;
 
@@ -40,7 +39,7 @@ public class StartFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mAuth = FirebaseAuth.getInstance();
-        mNav = Navigation.findNavController(view);
+        nav = Navigation.findNavController(view);
 
         signInClient.launch(GoogleSignIn.getClient(requireContext(), new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).build()).getSignInIntent());
 
@@ -49,7 +48,7 @@ public class StartFragment extends Fragment {
     ActivityResultLauncher<Intent> signInClient = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
         try {
             FirebaseAuth.getInstance().signInWithCredential(GoogleAuthProvider.getCredential(GoogleSignIn.getSignedInAccountFromIntent(result.getData()).getResult(ApiException.class).getIdToken(), null));
-            mNav.navigate(R.id.inicioFragment);
+            nav.navigate(R.id.inicioFragment);
         } catch (ApiException e) {}
     });
 }

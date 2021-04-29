@@ -11,18 +11,17 @@
         android:id="@+id/button5"
         android:layout_width="351dp"
         android:layout_height="80dp"
+        android:layout_marginBottom="16dp"
         android:text="Finalizar registro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stanceSpinnerRegistro2"
-        app:layout_constraintVertical_bias="0.867" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="334dp"
         android:layout_height="58dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/rectangle"
         android:ems="10"
@@ -30,8 +29,6 @@
         android:inputType="textPersonName"
         android:paddingHorizontal="20dp"
         android:paddingVertical="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.207"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:ignore="MissingConstraints" />
@@ -54,13 +51,11 @@
         android:id="@+id/textView4"
         android:layout_width="274dp"
         android:layout_height="39dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="100dp"
         android:text="Nombre de usuario"
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -68,13 +63,11 @@
         android:id="@+id/seleccionPrincipal"
         android:layout_width="274dp"
         android:layout_height="39dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="100dp"
         android:text="Personaje principal"
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
@@ -84,12 +77,9 @@
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="100dp"
         android:text="Personaje secundario (opcional)"
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/personajeMain" />
 
@@ -98,26 +88,20 @@
         android:layout_width="364dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginTop="8dp"
         android:text="Personaje secundario (opcional)"
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personajeMain" />
+        app:layout_constraintTop_toBottomOf="@+id/stanceSpinnerRegistro2" />
 
     <Button
-        android:backgroundTint="@color/white"
         android:id="@+id/personajeMain"
         android:layout_width="331dp"
         android:layout_height="47dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:backgroundTint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seleccionPrincipal" />
 
@@ -127,13 +111,10 @@
         android:layout_height="47dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
         android:background="@android:drawable/btn_dropdown"
         android:entries="@array/stance_arrays"
         android:prompt="@string/stance_prompt"
         android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
