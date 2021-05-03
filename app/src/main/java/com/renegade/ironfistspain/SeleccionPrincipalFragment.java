@@ -23,12 +23,8 @@ import java.util.List;
 
 public class SeleccionPrincipalFragment extends BaseDialogFragment {
 
-
-
     private FragmentSeleccionPrincipalBinding binding;
     List<Personaje> personajes = new ArrayList<>();
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,7 +34,6 @@ public class SeleccionPrincipalFragment extends BaseDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
         PersonajesAdapter personajesAdapter = new PersonajesAdapter();
 
