@@ -1,29 +1,29 @@
 package com.renegade.ironfistspain;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.renegade.ironfistspain.databinding.FragmentSeleccionPrincipalBinding;
 import com.renegade.ironfistspain.databinding.ViewholderSeleccionPersonajeBinding;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
-public class SeleccionPrincipalFragment extends BaseDialogFragment {
+public class SeleccionPjSecundarioFragment extends BaseDialogFragment {
 
     private FragmentSeleccionPrincipalBinding binding;
+    private FirebaseFirestore db;
     List<Personaje> personajes = new ArrayList<>();
 
     @Override
@@ -35,25 +35,27 @@ public class SeleccionPrincipalFragment extends BaseDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        PersonajesAdapter personajesAdapter = new PersonajesAdapter();
+        Personajes2Adapter personaje2Adapter = new Personajes2Adapter();
+        db = FirebaseFirestore.getInstance();
 
         binding.listaJugadores.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
-        binding.listaJugadores.setAdapter(personajesAdapter);
+        binding.listaJugadores.setAdapter(personaje2Adapter);
 
+        db.collection("Personajes")
+                .addSnapshotListener((value, error) -> {
+                    for (QueryDocumentSnapshot pj : value) {
+                        String nombre = pj.getString("nombre");
+                        String imagen = pj.getString("imagen");
 
-        // Lo que hay aqui se debe cambiar por una consulta a la base de datos. Es decir, el arrayList se debe rellenar con los datos de la consulta
+                        personajes.add(new Personaje(nombre, imagen));
 
-        personajes = Arrays.asList(
-            new Personaje("King", "https://e00-marca.uecdn.es/assets/multimedia/imagenes/2020/09/12/15999204285953.jpg"),
-                new Personaje("Kunimitsu", "https://f.rpp-noticias.io/2020/12/15/tekken_1035156.jpg"),
-                new Personaje("Lidia", "https://puregaming.es/wp-content/uploads/2021/03/Tekken-7-926x1024.jpg")
-                );
-
-        personajesAdapter.notifyDataSetChanged();
+                        personaje2Adapter.notifyDataSetChanged();
+                    }
+                });
     }
 
 
-    class PersonajesAdapter extends RecyclerView.Adapter<PersonajeViewHolder> {
+    class Personajes2Adapter extends RecyclerView.Adapter<PersonajeViewHolder> {
 
         @NonNull
         @Override
@@ -70,7 +72,7 @@ public class SeleccionPrincipalFragment extends BaseDialogFragment {
             Glide.with(requireContext()).load(personaje.imagenUrl).into(holder.binding.imagenPersonaje);
 
             holder.itemView.setOnClickListener(v -> {
-                viewModel.nombreLiveData.setValue(personaje.nombre);   // aqui poner el ID del personaje
+                viewModel.nombrePj2LiveData.setValue(personaje.nombre);   // aqui poner el ID del personaje
                 nav.popBackStack();
             });
         }
@@ -80,7 +82,6 @@ public class SeleccionPrincipalFragment extends BaseDialogFragment {
             return personajes == null ? 10 : personajes.size();
         }
     }
-
 
     static class PersonajeViewHolder extends RecyclerView.ViewHolder {
         ViewholderSeleccionPersonajeBinding binding;

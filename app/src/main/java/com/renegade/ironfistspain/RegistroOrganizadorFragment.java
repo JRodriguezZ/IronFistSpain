@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import com.renegade.ironfistspain.databinding.FragmentRegistroBinding;
 import com.renegade.ironfistspain.databinding.FragmentRegistroOrganizadorBinding;
 
-public class RegistroOrganizadorFragment extends Fragment {
+public class RegistroOrganizadorFragment extends BaseFragment {
 
     private FragmentRegistroOrganizadorBinding binding;
 

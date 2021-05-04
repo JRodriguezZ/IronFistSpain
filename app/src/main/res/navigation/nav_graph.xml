@@ -103,6 +103,9 @@
         <action
             android:id="@+id/action_registroJugadorFragment_to_seleccionPrincipalFragment"
             app:destination="@id/seleccionPrincipalFragment" />
+        <action
+            android:id="@+id/action_registroJugadorFragment_to_seleccionPjSecundarioFragment"
+            app:destination="@id/seleccionPjSecundarioFragment" />
     </fragment>
     <fragment
         android:id="@+id/registroOrganizadorFragment"
@@ -115,7 +118,11 @@
     </fragment>
     <dialog
         android:id="@+id/seleccionPrincipalFragment"
-        android:name="com.renegade.ironfistspain.SeleccionPrincipalFragment"
+        android:name="com.renegade.ironfistspain.SeleccionPjPrincipalFragment"
         android:label="fragment_seleccion_principal"
         tools:layout="@layout/fragment_seleccion_principal" />
+    <dialog
+        android:id="@+id/seleccionPjSecundarioFragment"
+        android:name="com.renegade.ironfistspain.SeleccionPjSecundarioFragment"
+        android:label="SeleccionPjSecundarioFragment" />
 </navigation>

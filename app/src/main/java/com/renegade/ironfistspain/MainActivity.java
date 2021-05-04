@@ -38,7 +38,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.bottomNavView, navController);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.registroFragment || destination.getId() == R.id.registroJugadorFragment || destination.getId() == R.id.registroEspectadorFragment2 || destination.getId() == R.id.registroOrganizadorFragment || destination.getId() == R.id.crearRetoFragment ) {
+            if (destination.getId() == R.id.registroFragment ||
+                    destination.getId() == R.id.registroJugadorFragment ||
+                    destination.getId() == R.id.registroEspectadorFragment2 ||
+                    destination.getId() == R.id.registroOrganizadorFragment ||
+                    destination.getId() == R.id.crearRetoFragment ||
+                    destination.getId() == R.id.seleccionPrincipalFragment) {
                 binding.bottomNavView.setVisibility(View.GONE);
                 binding.toolbar.setVisibility(View.GONE);
             } else {
