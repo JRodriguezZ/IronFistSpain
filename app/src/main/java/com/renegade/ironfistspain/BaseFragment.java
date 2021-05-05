@@ -11,12 +11,16 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class BaseFragment extends Fragment {
 
+    FirebaseFirestore db;
     IFSViewModel viewModel;
     NavController nav;
     FirebaseAuth auth;
+    FirebaseUser user;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -24,5 +28,7 @@ public class BaseFragment extends Fragment {
         nav = Navigation.findNavController(view);
         viewModel = new ViewModelProvider(requireActivity()).get(IFSViewModel.class);
         auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
     }
 }

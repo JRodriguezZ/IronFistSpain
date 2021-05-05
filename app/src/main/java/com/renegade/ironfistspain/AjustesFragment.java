@@ -7,16 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.renegade.ironfistspain.databinding.FragmentAjustesBinding;
-import com.renegade.ironfistspain.databinding.FragmentCrearRetoBinding;
-
 
 public class AjustesFragment extends BaseFragment {
 
@@ -38,7 +33,7 @@ public class AjustesFragment extends BaseFragment {
 
             auth.signOut();
             mGoogleSignInClient.revokeAccess();
-            nav.navigate(R.id.startFragment);
+            nav.navigate(R.id.registroFragment);
         });
     }
 }
