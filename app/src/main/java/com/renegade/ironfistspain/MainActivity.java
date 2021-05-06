@@ -1,14 +1,13 @@
 package com.renegade.ironfistspain;
 
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
 
 import com.renegade.ironfistspain.databinding.ActivityMainBinding;
 
@@ -43,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
                     destination.getId() == R.id.registroEspectadorFragment2 ||
                     destination.getId() == R.id.registroOrganizadorFragment ||
                     destination.getId() == R.id.crearRetoFragment ||
-                    destination.getId() == R.id.seleccionPrincipalFragment) {
+                    destination.getId() == R.id.seleccionPrincipalFragment ||
+                    destination.getId() == R.id.seleccionPjSecundarioFragment ||
+                    destination.getId() == R.id.startFragment) {
                 binding.bottomNavView.setVisibility(View.GONE);
                 binding.toolbar.setVisibility(View.GONE);
             } else {

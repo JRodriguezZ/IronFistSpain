@@ -6,13 +6,15 @@ public class Jugador {
     String personajeMain;
     String personajeSecundario;
     int puntuacion;
+    String rol;
 
-    public Jugador(String UID, String nickname, String personajeMain, String personajeSecundario, int puntuacion) {
+    public Jugador(String UID, String nickname, String personajeMain, String personajeSecundario, int puntuacion, String rol) {
         this.UID = UID;
         this.nickname = nickname;
         this.personajeMain = personajeMain;
         this.personajeSecundario = personajeSecundario;
         this.puntuacion = puntuacion;
+        this.rol = rol;
     }
 
     public String getUID() {
@@ -49,5 +51,13 @@ public class Jugador {
 
     public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

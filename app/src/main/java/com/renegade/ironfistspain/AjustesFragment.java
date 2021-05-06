@@ -27,13 +27,12 @@ public class AjustesFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.signOutButton.setOnClickListener(v -> {
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .build();
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build();
             GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
 
             auth.signOut();
             mGoogleSignInClient.revokeAccess();
-            nav.navigate(R.id.registroFragment);
+            nav.navigate(R.id.startFragment);
         });
     }
 }

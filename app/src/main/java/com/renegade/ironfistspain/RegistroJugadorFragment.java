@@ -48,10 +48,14 @@ public class RegistroJugadorFragment extends BaseFragment {
 
 
 
+
             // add -> genera un id de documento aleatorio
             // document.set  // le pones el id que quieras
 
-            db.collection("usuarios").document(user.getUid()).set(new Jugador(user.getUid(), binding.jugadorNickname.toString(), binding.personajeMain.getText().toString(), binding.personajeSecundario.getText().toString(),puntuacion));
+            db.collection("usuarios")
+                    .document(user.getUid())
+                    .set(new Jugador(user.getUid(), binding.jugadorNickname.getText().toString(), binding.personajeMain.getText().toString(), binding.personajeSecundario.getText().toString(),puntuacion,"jugador"));
+
             nav.navigate(R.id.action_registroJugadorFragment_to_inicioFragment);
         });
 
