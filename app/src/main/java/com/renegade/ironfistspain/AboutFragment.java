@@ -8,16 +8,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.renegade.ironfistspain.databinding.FragmentAjustesBinding;
+import com.renegade.ironfistspain.databinding.FragmentAboutBinding;
 
 public class AboutFragment extends BaseFragment {
 
-    private FragmentAjustesBinding binding;
+    private FragmentAboutBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return (binding = FragmentAjustesBinding.inflate(inflater, container, false)).getRoot();
+        return (binding = FragmentAboutBinding.inflate(inflater, container, false)).getRoot();
     }
 
     @Override
