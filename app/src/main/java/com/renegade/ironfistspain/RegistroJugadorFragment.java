@@ -1,14 +1,13 @@
 package com.renegade.ironfistspain;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.renegade.ironfistspain.databinding.FragmentRegistroJugadorBinding;
 
@@ -27,7 +26,6 @@ public class RegistroJugadorFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.botonRegistroJugador.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_inicioFragment));
         binding.personajeMain.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_seleccionPrincipalFragment));
         binding.personajeSecundario.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_seleccionPjSecundarioFragment));
 
@@ -42,6 +40,24 @@ public class RegistroJugadorFragment extends BaseFragment {
             Log.d(TAG, "Nombre del personaje 2: " + nombreSecundario);
         });
 
-//        db.guardar(viewModel.nombre);
+        
+        binding.botonRegistroJugador.setOnClickListener(v -> {
+            //TODO: generar una puntuacion a partir del rango indicado en el registro.
+
+            int puntuacion = 0;
+
+
+
+
+            // add -> genera un id de documento aleatorio
+            // document.set  // le pones el id que quieras
+
+            db.collection("usuarios")
+                    .document(user.getUid())
+                    .set(new Jugador(user.getUid(), binding.jugadorNickname.getText().toString(), binding.personajeMain.getText().toString(), binding.personajeSecundario.getText().toString(),puntuacion,"jugador"));
+
+            nav.navigate(R.id.action_registroJugadorFragment_to_inicioFragment);
+        });
+
     }
 }

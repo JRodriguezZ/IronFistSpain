@@ -10,10 +10,6 @@
         android:title="Ajustes" />
 
     <item
-        android:id="@+id/registroFragment"
-        android:title="Cerrar sesion" />
-
-    <item
         android:id="@+id/aboutFragment"
         android:title="About" />
 

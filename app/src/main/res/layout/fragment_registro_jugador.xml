@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/jugadorNickname"
         android:layout_width="335dp"
         android:layout_height="63dp"
         android:layout_marginStart="12dp"
@@ -83,7 +83,7 @@
         android:textColor="@color/black"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/jugadorNickname" />
 
     <TextView
         android:id="@+id/textView6"
