@@ -7,23 +7,72 @@
     android:orientation="vertical"
     tools:context=".CrearRetoFragment">
 
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="308dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="16dp"
+        android:text="Crea un reto"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="430dp"
+        android:layout_height="45dp"
+        android:text="Dias que puedes competir"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/weekdays"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="430dp"
+        android:layout_height="45dp"
+        android:text="Selecciona un jugador"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.443"
+        tools:ignore="MissingConstraints" />
 
     <com.dpro.widgets.WeekdaysPicker
         android:id="@+id/weekdays"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="272dp"
         app:layout_constraintBottom_toTopOf="@+id/enviarRetoButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:sunday_first_day="false" />
 
     <Button
         android:id="@+id/enviarRetoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="334dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="28dp"
         android:text="Enviar reto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent" />
 
 
