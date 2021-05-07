@@ -60,4 +60,9 @@ public class RegistroJugadorFragment extends BaseFragment {
         });
 
     }
+
+    private void calcularPuntuacion() {
+        if (binding.
+        )
+    }
 }
