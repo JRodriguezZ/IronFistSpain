@@ -8,14 +8,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.dpro.widgets.WeekdaysPicker;
 import com.renegade.ironfistspain.databinding.FragmentCrearRetoBinding;
 
-public class CrearRetoFragment extends Fragment {
+public class CrearRetoFragment extends BaseFragment {
 
     private FragmentCrearRetoBinding binding;
 
