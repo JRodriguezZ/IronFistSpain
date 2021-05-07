@@ -5,12 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
-
 import com.renegade.ironfistspain.databinding.FragmentInicioBinding;
 
 
-public class InicioFragment extends Fragment {
+public class InicioFragment extends BaseFragment {
 
     private FragmentInicioBinding binding;
 
