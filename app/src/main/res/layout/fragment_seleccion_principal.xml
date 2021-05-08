@@ -8,11 +8,13 @@
     tools:context=".SeleccionPjPrincipalFragment"
     android:padding="16dp">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Selecciona tu personaje principal" />
+        android:text="Selecciona el personaje"
+        android:textAlignment="center"
+        android:textColor="@color/common_google_signin_btn_text_light_pressed"
+        android:textSize="24sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listaJugadores"

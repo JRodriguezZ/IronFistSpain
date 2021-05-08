@@ -37,7 +37,6 @@ public class SeleccionPjPrincipalFragment extends BaseDialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         Personajes1Adapter personaje1Adapter = new Personajes1Adapter();
-        db = FirebaseFirestore.getInstance();
 
         binding.listaJugadores.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         binding.listaJugadores.setAdapter(personaje1Adapter);
