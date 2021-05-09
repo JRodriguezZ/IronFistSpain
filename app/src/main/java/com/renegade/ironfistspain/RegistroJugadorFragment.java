@@ -41,6 +41,8 @@ public class RegistroJugadorFragment extends BaseFragment {
 //            Log.d(TAG, "Nombre del personaje 2: " + imagenSecundario);
         });
 
+
+
         
         binding.botonRegistroJugador.setOnClickListener(v -> {
             //TODO: generar una puntuacion a partir del rango indicado en el registro.

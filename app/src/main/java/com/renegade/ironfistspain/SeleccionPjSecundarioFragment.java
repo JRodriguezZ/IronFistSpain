@@ -23,7 +23,6 @@ import java.util.List;
 public class SeleccionPjSecundarioFragment extends BaseDialogFragment {
 
     private FragmentSeleccionPrincipalBinding binding;
-    private FirebaseFirestore db;
     List<Personaje> personajes = new ArrayList<>();
 
     @Override
