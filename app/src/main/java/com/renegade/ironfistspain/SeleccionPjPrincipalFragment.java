@@ -73,6 +73,7 @@ public class SeleccionPjPrincipalFragment extends BaseDialogFragment {
 
             holder.itemView.setOnClickListener(v -> {
                 viewModel.nombrePj1LiveData.setValue(personaje.nombre);   // aqui poner el ID del personaje
+                viewModel.imagenPj1LiveData.setValue(personaje.imagenUrl);
                 nav.popBackStack();
             });
         }

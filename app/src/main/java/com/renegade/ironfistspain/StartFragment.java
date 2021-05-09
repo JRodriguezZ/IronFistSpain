@@ -2,6 +2,7 @@ package com.renegade.ironfistspain;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.renegade.ironfistspain.databinding.FragmentStartBinding;
+
 
 public class StartFragment extends BaseFragment {
 
@@ -43,6 +45,7 @@ public class StartFragment extends BaseFragment {
 
         */
 
+        Log.e("ABCD", "Se crea el fragment");
         firebaseAuthWithGoogle(GoogleSignIn.getLastSignedInAccount(requireContext()));
     }
 
@@ -69,15 +72,21 @@ public class StartFragment extends BaseFragment {
     });
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-        if (account == null)
+        if (account == null) {
             signInClient.launch(GoogleSignIn.getClient(requireContext(), new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).build()).getSignInIntent());
-        else auth.signInWithCredential(GoogleAuthProvider.getCredential(account.getIdToken(), null))
-                .addOnCompleteListener(requireActivity(), task -> {
-                    if (task.isSuccessful()) {
-                        nav.navigate(R.id.action_startFragment_to_inicioFragment);
-                    } else Toast.makeText(getActivity(),"Error de red. Comprueve la conexion a internet y reinicie la aplicación.", Toast.LENGTH_LONG).show();
+            Log.e("ABCD", "No hay nadie logueado anteriormente");
+        } else {
+            Log.e("ABCD", "Entra directamente a la app");
+            auth.signInWithCredential(GoogleAuthProvider.getCredential(account.getIdToken(), null))
+                    .addOnCompleteListener(requireActivity(), task -> {
+                        if (task.isSuccessful()) {
+                            nav.navigate(R.id.action_startFragment_to_inicioFragment);
+                        } else {
+                            Toast.makeText(getActivity(),"Error de red. Comprueve la conexion a internet y reinicie la aplicación.", Toast.LENGTH_LONG).show();
+                        }
 
-                });
+                    });
+        }
     }
 
 }

@@ -36,7 +36,6 @@ public class SeleccionPjSecundarioFragment extends BaseDialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         Personajes2Adapter personaje2Adapter = new Personajes2Adapter();
-        db = FirebaseFirestore.getInstance();
 
         binding.listaJugadores.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         binding.listaJugadores.setAdapter(personaje2Adapter);
@@ -73,6 +72,7 @@ public class SeleccionPjSecundarioFragment extends BaseDialogFragment {
 
             holder.itemView.setOnClickListener(v -> {
                 viewModel.nombrePj2LiveData.setValue(personaje.nombre);   // aqui poner el ID del personaje
+                viewModel.imagenPj2LiveData.setValue(personaje.imagenUrl);
                 nav.popBackStack();
             });
         }

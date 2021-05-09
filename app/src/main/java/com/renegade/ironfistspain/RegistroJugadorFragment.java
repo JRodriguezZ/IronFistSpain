@@ -31,13 +31,13 @@ public class RegistroJugadorFragment extends BaseFragment {
         binding.imageButtonPjSecundario.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_seleccionPjSecundarioFragment));
 
 
-        viewModel.nombrePj1LiveData.observe(getViewLifecycleOwner(), imagenMain -> {
-            Glide.with(requireContext()).load(imagenMain).into(binding.imageButtonPjPrincipal);
+        viewModel.imagenPj1LiveData.observe(getViewLifecycleOwner(), imagenMain -> {
+            Glide.with(requireContext()).load(viewModel.imagenPj1LiveData).circleCrop().into(binding.imageButtonPjPrincipal);
 //            Log.d(TAG, "Nombre del personaje 1: " + imagenMain);
         });
 
-        viewModel.nombrePj2LiveData.observe(getViewLifecycleOwner(), imagenSecundario -> {
-            Glide.with(requireContext()).load(imagenSecundario).into(binding.imageButtonPjSecundario);
+        viewModel.imagenPj2LiveData.observe(getViewLifecycleOwner(), imagenSecundario -> {
+            Glide.with(requireContext()).load(viewModel.imagenPj2LiveData).circleCrop().into(binding.imageButtonPjSecundario);
 //            Log.d(TAG, "Nombre del personaje 2: " + imagenSecundario);
         });
 
@@ -47,15 +47,15 @@ public class RegistroJugadorFragment extends BaseFragment {
 
             int puntuacion = 0;
 
-
+            
 
 
             // add -> genera un id de documento aleatorio
             // document.set  // le pones el id que quieras
 
-//            db.collection("usuarios")
-//                    .document(user.getUid())
-//                    .set(new Jugador(user.getUid(), binding.jugadorNickname.getText().toString(), binding.personajeMain.getText().toString(), binding.personajeSecundario.getText().toString(),puntuacion,"jugador"));
+            db.collection("usuarios")
+                    .document(user.getUid())
+                    .set(new Jugador(user.getUid(), binding.editTextNombreUsuario.getText().toString(), viewModel.nombrePj1LiveData.getValue(), viewModel.nombrePj2LiveData.getValue(), puntuacion, "jugador"));
 
             nav.navigate(R.id.action_registroJugadorFragment_to_inicioFragment);
         });
