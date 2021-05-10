@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.akexorcist.snaptimepicker.SnapTimePickerDialog;
 import com.dpro.widgets.WeekdaysPicker;
 import com.renegade.ironfistspain.databinding.FragmentCrearRetoBinding;
 
@@ -24,7 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CrearRetoFragment extends BaseFragment {
-
+    int hora1 = 0;
+    int minutos1 = 0;
     private FragmentCrearRetoBinding binding;
 
     @Override
@@ -38,6 +37,7 @@ public class CrearRetoFragment extends BaseFragment {
         NavController navController = Navigation.findNavController(view);
 
 
+
         WeekdaysPicker weekdaysPicker = binding.weekdays;
         weekdaysPicker.setOnWeekdaysChangeListener((view1, clickedDayOfWeek, selectedDays) -> {
 
@@ -46,8 +46,21 @@ public class CrearRetoFragment extends BaseFragment {
         binding.botonHora1.setOnClickListener(v -> {
             TimePickerDialog timePickerDialog = new TimePickerDialog(
                     getContext(),
-                    android.R.style.Theme_DeviceDefault_Light_Dialog_MinWidth,
-                    (view12, hourOfDay, minute) -> binding.botonHora1.setText(hourOfDay + " : " + minute),12,0,true
+                    android.R.style.Theme_Black,
+                    (view1, hourOfDay, minute) -> {
+                        hora1 = hourOfDay;
+                        minutos1 = minute;
+                        String tiempo = hora1 + ":" + minutos1;
+                        SimpleDateFormat f24horas = new SimpleDateFormat(
+                                "HH:mm"
+                        );
+                        try {
+                            Date date = f24horas.parse(tiempo);
+                            binding.botonHora1.setText(f24horas.format(date));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    },12,0,true
             );
             timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
