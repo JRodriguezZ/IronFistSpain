@@ -1,9 +1,13 @@
 package com.renegade.ironfistspain;
 
+import android.app.TimePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,8 +15,13 @@ import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.akexorcist.snaptimepicker.SnapTimePickerDialog;
 import com.dpro.widgets.WeekdaysPicker;
 import com.renegade.ironfistspain.databinding.FragmentCrearRetoBinding;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CrearRetoFragment extends BaseFragment {
 
@@ -32,6 +41,17 @@ public class CrearRetoFragment extends BaseFragment {
         WeekdaysPicker weekdaysPicker = binding.weekdays;
         weekdaysPicker.setOnWeekdaysChangeListener((view1, clickedDayOfWeek, selectedDays) -> {
 
+        });
+
+        binding.botonHora1.setOnClickListener(v -> {
+            TimePickerDialog timePickerDialog = new TimePickerDialog(
+                    getContext(),
+                    android.R.style.Theme_DeviceDefault_Light_Dialog_MinWidth,
+                    (view12, hourOfDay, minute) -> binding.botonHora1.setText(hourOfDay + " : " + minute),12,0,true
+            );
+            timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+
+            timePickerDialog.show();
         });
 
         binding.enviarRetoButton.setOnClickListener(v ->

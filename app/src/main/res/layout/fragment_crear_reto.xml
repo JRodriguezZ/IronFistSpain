@@ -7,6 +7,16 @@
     android:orientation="vertical"
     tools:context=".CrearRetoFragment">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="asdasddsa"
+        android:textSize="33dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
     <Button
         android:id="@+id/botonHora1"
         android:layout_width="0dp"
@@ -39,15 +49,14 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="Dia y hora que puedes competir"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/weekdays"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -69,13 +78,14 @@
         android:id="@+id/weekdays"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:sunday_first_day="false"
+        android:layout_marginTop="212dp"
         app:full_size="true"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="397dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
+        app:sunday_first_day="false"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/enviarRetoButton"
