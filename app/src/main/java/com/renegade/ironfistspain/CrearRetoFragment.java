@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.dpro.widgets.WeekdaysPicker;
 import com.renegade.ironfistspain.databinding.FragmentCrearRetoBinding;
@@ -63,7 +61,7 @@ public class CrearRetoFragment extends BaseFragment {
                     },12,0,true
             );
             timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-
+            timePickerDialog.updateTime(hora1, minutos1);
             timePickerDialog.show();
         });
 
@@ -94,7 +92,7 @@ public class CrearRetoFragment extends BaseFragment {
 
             //                navController.navigate(R.id.action_crearRetoFragment_to_inicioFragment));
             Log.e("ABCD", "Dias seleccionados: " + diasSeleccionados);
-
+//            db.collection("Encuentros").add(new Encuentro("Enviado", user.getDisplayName(),jugadorSeleccionado.toString()));
             Toast.makeText(getActivity(), "¡Se ha enviado el reto correctamente!", Toast.LENGTH_SHORT).show();
         });
 

@@ -83,10 +83,12 @@
     <ImageView
         android:id="@+id/imageButtonPjPrincipal"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="157dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:padding="2dp"
+        android:background="@drawable/circle"
         app:layout_constraintEnd_toStartOf="@+id/space"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titulo2PjPrincipal" />
@@ -113,13 +115,15 @@
         app:layout_constraintStart_toEndOf="@+id/space"
         app:layout_constraintTop_toBottomOf="@+id/titulo1PjSecundario" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/imageButtonPjSecundario"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="157dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:padding="2dp"
+        android:background="@drawable/circle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/space"
         app:layout_constraintTop_toBottomOf="@+id/titulo2PjSecundario" />
@@ -132,27 +136,18 @@
         android:text="Rango mas alto ancanzado"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/buttonSeleccionRango"
-        app:layout_constraintStart_toStartOf="@+id/buttonSeleccionRango"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonPjPrincipal" />
-
-    <Button
-        android:id="@+id/buttonSeleccionRango"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="60dp"
-        android:layout_marginTop="8dp"
-        android:paddingVertical="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloRango" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonPjPrincipal" />
+
 
     <ImageView
         android:id="@+id/imagenRango"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginTop="8dp"
         android:layout_marginHorizontal="60dp"
+        android:background="@color/LightGrey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tituloRango" />
