@@ -26,9 +26,10 @@ public class BaseDialogFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        nav = Navigation.findNavController(requireParentFragment().requireView());
+
         viewModel = new ViewModelProvider(requireActivity()).get(IFSViewModel.class);
         db = FirebaseFirestore.getInstance();
-        nav = Navigation.findNavController(view);
         auth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
     }

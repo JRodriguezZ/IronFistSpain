@@ -1,15 +1,13 @@
 package com.renegade.ironfistspain;
 
-public class Personaje {
+public class Rango {
     String nombre;
     String imagenUrl;
+    String puntuacion;
 
-    public Personaje(String nombre, String imagenUrl) {
+    public Rango(String nombre, String imagenUrl, String puntuacion) {
         this.nombre = nombre;
         this.imagenUrl = imagenUrl;
-    }
-
-    public String getNombre() {
-        return nombre;
+        this.puntuacion = puntuacion;
     }
 }
