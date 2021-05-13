@@ -1,9 +1,13 @@
 package com.renegade.ironfistspain;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +26,11 @@ import java.util.List;
 public class SeleccionRangoFragment extends BaseDialogFragment {
 
     private FragmentSeleccionRangoBinding binding;
+    
     List<Rango> rangos = new ArrayList<>();
+    List<Rango> rangosOriginal = new ArrayList<>();
+    
+    RangosAdapter rangosAdapter = new RangosAdapter();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,14 +40,26 @@ public class SeleccionRangoFragment extends BaseDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-        RangosAdapter rangosAdapter = new RangosAdapter();
+        
 
         binding.listaRangos.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         binding.listaRangos.setAdapter(rangosAdapter);
 
-        db.collection("Rangos")
+
+        binding.searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                rangosAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        db.collection(CollectionDB.RANGOS)
                 .addSnapshotListener((value, error) -> {
                     for (QueryDocumentSnapshot rango : value) {
                         String nombre = rango.getString("nombre");
@@ -47,6 +67,7 @@ public class SeleccionRangoFragment extends BaseDialogFragment {
                         String puntuacion = rango.getString("puntuacion");
 
                         rangos.add(new Rango(nombre, imagen, puntuacion));
+                        rangosOriginal.add(new Rango(nombre, imagen, puntuacion));
 
                         rangosAdapter.notifyDataSetChanged();
                     }
@@ -54,7 +75,7 @@ public class SeleccionRangoFragment extends BaseDialogFragment {
 
     }
 
-    class RangosAdapter extends RecyclerView.Adapter<SeleccionRangoFragment.RangoViewHolder> {
+    class RangosAdapter extends RecyclerView.Adapter<SeleccionRangoFragment.RangoViewHolder> implements Filterable {
 
         @NonNull
         @Override
@@ -72,6 +93,8 @@ public class SeleccionRangoFragment extends BaseDialogFragment {
                 viewModel.nombreRangoLiveData.setValue(rango.nombre);
                 viewModel.imagenRangoLiveData.setValue(rango.imagenUrl);
                 viewModel.puntuacionRangoLiveData.setValue(rango.puntuacion);
+
+                Log.e("ABCD", "La puntuacion equivalente a " + viewModel.nombreRangoLiveData.getValue() + " es " + viewModel.puntuacionRangoLiveData.getValue());
                 nav.popBackStack();
             });
         }
@@ -80,6 +103,43 @@ public class SeleccionRangoFragment extends BaseDialogFragment {
         public int getItemCount() {
             return rangos == null ? 10 : rangos.size();
         }
+
+        @Override
+        public Filter getFilter() {
+            return busqueda;
+        }
+
+
+        private Filter busqueda = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                List<Rango> rangosFiltrados = new ArrayList<>();
+
+                if (constraint == null || constraint.length() == 0) {
+                    rangosFiltrados.addAll(rangosOriginal);
+                } else {
+                    String filterPattern = constraint.toString().toLowerCase().trim();
+
+                    for (Rango rango : rangosOriginal) {
+                        if (rango.getNombre().toLowerCase().contains(filterPattern)) {
+                            rangosFiltrados.add(rango);
+                        }
+                    }
+                }
+
+                FilterResults results = new FilterResults();
+                results.values = rangosFiltrados;
+
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                rangos.clear();
+                rangos.addAll((List) results.values);
+                notifyDataSetChanged();
+            }
+        };
     }
 
     static class RangoViewHolder extends RecyclerView.ViewHolder {

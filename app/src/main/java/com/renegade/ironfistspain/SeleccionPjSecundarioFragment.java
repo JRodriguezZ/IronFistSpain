@@ -25,11 +25,11 @@ import java.util.List;
 public class SeleccionPjSecundarioFragment extends BaseDialogFragment {
 
     private FragmentSeleccionPrincipalBinding binding;
+
     List<Personaje> personajes = new ArrayList<>();
     List<Personaje> personajesOriginal = new ArrayList<>();
 
     Personajes2Adapter personaje2Adapter = new Personajes2Adapter();
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class SeleccionPjSecundarioFragment extends BaseDialogFragment {
             }
         });
 
-        db.collection("Personajes")
+        db.collection(CollectionDB.PERSONAJES)
                 .addSnapshotListener((value, error) -> {
                     for (QueryDocumentSnapshot pj : value) {
                         String nombre = pj.getString("nombre");

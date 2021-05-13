@@ -54,7 +54,7 @@ public class StartFragment extends BaseFragment {
             auth.signInWithCredential(GoogleAuthProvider.getCredential(GoogleSignIn.getSignedInAccountFromIntent(result.getData()).getResult(ApiException.class).getIdToken(), null))
                     .addOnSuccessListener(authResult -> {
                         Log.e("ABCD", "LOGUEADO COMO " + authResult.getUser().getUid());
-                        db.collection(DB.usuarios).document(authResult.getUser().getUid()).get().addOnCompleteListener(task -> {
+                        db.collection(CollectionDB.USUARIOS).document(authResult.getUser().getUid()).get().addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
                                 Log.e("ABCD", "LOGUEADO COMO " + document.getData());

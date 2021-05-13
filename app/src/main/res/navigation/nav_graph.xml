@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/registroJugadorFragment">
+    app:startDestination="@id/perfilJugadorFragment">
     <fragment
         android:id="@+id/startFragment"
         android:name="com.renegade.ironfistspain.StartFragment"
@@ -107,8 +107,8 @@
             android:id="@+id/action_registroJugadorFragment_to_seleccionPjSecundarioFragment"
             app:destination="@id/seleccionPjSecundarioFragment" />
         <action
-            android:id="@+id/action_registroJugadorFragment_to_selecionRangoFragment"
-            app:destination="@id/selecionRangoFragment" />
+            android:id="@+id/action_registroJugadorFragment_to_seleccionRangoFragment"
+            app:destination="@id/seleccionRangoFragment" />
     </fragment>
     <fragment
         android:id="@+id/registroOrganizadorFragment"
@@ -129,8 +129,7 @@
         android:name="com.renegade.ironfistspain.SeleccionPjSecundarioFragment"
         android:label="SeleccionPjSecundarioFragment" />
     <dialog
-        android:id="@+id/selecionRangoFragment"
+        android:id="@+id/seleccionRangoFragment"
         android:name="com.renegade.ironfistspain.SeleccionRangoFragment"
-        android:label="fragment_selecion_rango"
-        tools:layout="@layout/fragment_seleccion_rango" />
+        android:label="SeleccionRangoFragment" />
 </navigation>

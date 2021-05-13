@@ -10,4 +10,8 @@ public class Rango {
         this.imagenUrl = imagenUrl;
         this.puntuacion = puntuacion;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
 }

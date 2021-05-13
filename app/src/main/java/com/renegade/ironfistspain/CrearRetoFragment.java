@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.dpro.widgets.WeekdaysPicker;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.renegade.ironfistspain.databinding.FragmentCrearRetoBinding;
 
 import java.text.ParseException;
@@ -26,7 +28,13 @@ public class CrearRetoFragment extends BaseFragment {
     int hora2, minutos2;
     private FragmentCrearRetoBinding binding;
 
+
     List<Integer> diasSeleccionados;
+
+    List<Rival> rivalesDispoibles;
+
+    class Rival { String nombre; int puntuacion; public Rival(String nombre, int puntuacion) { this.nombre = nombre; this.puntuacion = puntuacion; }}
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,6 +44,30 @@ public class CrearRetoFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        db.collection(CollectionDB.USUARIOS).document(user.getUid()).get().addOnSuccessListener(doc -> {
+            int p;
+            try {
+                p = Integer.parseInt(doc.getString("puntuacion")); // 1000
+            } catch (Exception e){
+                System.out.println("PUNTUACION INVALIDA EN LA BASE DE DATOS");
+                p = 1000;
+            }
+
+            db.collection(CollectionDB.USUARIOS).whereGreaterThanOrEqualTo("puntuacion", ""+(p-100)).whereLessThan("puntuacion", p+100).orderBy("puntuacion", Query.Direction.valueOf("asc")).addSnapshotListener((value, error) -> {
+                for (QueryDocumentSnapshot rival : value) {
+                    String nombre = rival.getString("nombre");
+                    int puntuacion = Integer.parseInt(rival.getString("puntuacion"));
+
+                    rivalesDispoibles.add(new Rival(nombre, puntuacion));
+
+                    rivalesAdapter.notifyDataSetChanged();
+                }
+            });
+        });
+
+
 
         WeekdaysPicker weekdaysPicker = binding.weekdays;
         weekdaysPicker.setOnWeekdaysChangeListener((view1, clickedDayOfWeek, selectedDays) -> {
@@ -91,6 +123,7 @@ public class CrearRetoFragment extends BaseFragment {
         binding.enviarRetoButton.setOnClickListener(v -> {
 
             //                navController.navigate(R.id.action_crearRetoFragment_to_inicioFragment));
+            //db.collection("Encuentros").document().set(new Encuentro("Enviado", user.getUid(), usuarioSeleccionado.getName()));
             Log.e("ABCD", "Dias seleccionados: " + diasSeleccionados);
 //            db.collection("Encuentros").add(new Encuentro("Enviado", user.getDisplayName(),jugadorSeleccionado.toString()));
             Toast.makeText(getActivity(), "¡Se ha enviado el reto correctamente!", Toast.LENGTH_SHORT).show();
