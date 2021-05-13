@@ -83,4 +83,12 @@
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawer_menu"/>
 
+    <androidx.fragment.app.FragmentContainerView
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:id="@+id/nav_profile_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
+
 </androidx.drawerlayout.widget.DrawerLayout>

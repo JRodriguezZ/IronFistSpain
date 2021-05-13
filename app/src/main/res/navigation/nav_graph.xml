@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/perfilJugadorFragment">
+    app:startDestination="@id/startFragment">
     <fragment
         android:id="@+id/startFragment"
         android:name="com.renegade.ironfistspain.StartFragment"
@@ -38,7 +38,11 @@
         android:id="@+id/inicioFragment"
         android:name="com.renegade.ironfistspain.InicioFragment"
         android:label="Inicio"
-        tools:layout="@layout/fragment_inicio" />
+        tools:layout="@layout/fragment_inicio" >
+        <action
+            android:id="@+id/action_inicioFragment_to_perfilJugadorFragment"
+            app:destination="@id/perfilJugadorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificacionesFragment"
         android:name="com.renegade.ironfistspain.NotificacionesFragment"

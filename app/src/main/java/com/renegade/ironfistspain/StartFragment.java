@@ -67,12 +67,13 @@ public class StartFragment extends BaseFragment {
                                 }
                             } else {
                                 // error de red
-                                Toast.makeText(getActivity(),"Error de red. Comprueve la conexion a internet y reinicie la aplicación.",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(),"Error de red. Compruebe la conexion a internet y reinicie la aplicación.",Toast.LENGTH_LONG).show();
                             }
                         });
                     });
 
         } catch (ApiException e) {
+            e.printStackTrace();
         }
     });
 

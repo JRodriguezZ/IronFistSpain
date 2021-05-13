@@ -62,7 +62,7 @@ public class CrearRetoFragment extends BaseFragment {
 
                     rivalesDispoibles.add(new Rival(nombre, puntuacion));
 
-                    rivalesAdapter.notifyDataSetChanged();
+//                    rivalesAdapter.notifyDataSetChanged();
                 }
             });
         });
