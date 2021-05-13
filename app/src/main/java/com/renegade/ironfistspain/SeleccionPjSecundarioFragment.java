@@ -57,7 +57,7 @@ public class SeleccionPjSecundarioFragment extends BaseDialogFragment {
             }
         });
 
-        db.collection("Personajes")
+        db.collection(CollectionDB.PERSONAJES)
                 .addSnapshotListener((value, error) -> {
                     for (QueryDocumentSnapshot pj : value) {
                         String nombre = pj.getString("nombre");

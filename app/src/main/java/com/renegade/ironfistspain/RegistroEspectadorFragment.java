@@ -25,10 +25,14 @@ public class RegistroEspectadorFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        NavController navController = Navigation.findNavController(view);
 
-        binding.botonRegistroEspectador.setOnClickListener(v ->
-                navController.navigate(R.id.action_registroEspectadorFragment2_to_inicioFragment));
+
+        binding.botonRegistroEspectador.setOnClickListener(v -> {
+
+            db.collection(CollectionDB.USUARIOS).document(user.getUid()).set(binding.editTextTextPersonName5.getText().toString());
+            nav.navigate(R.id.action_registroEspectadorFragment2_to_inicioFragment);
+
+        });
 
 
     }

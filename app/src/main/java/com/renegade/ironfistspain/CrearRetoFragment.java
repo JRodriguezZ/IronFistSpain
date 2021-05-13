@@ -91,6 +91,7 @@ public class CrearRetoFragment extends BaseFragment {
         binding.enviarRetoButton.setOnClickListener(v -> {
 
             //                navController.navigate(R.id.action_crearRetoFragment_to_inicioFragment));
+            //db.collection("Encuentros").document().set(new Encuentro("Enviado", user.getUid(), usuarioSeleccionado.getName()));
             Log.e("ABCD", "Dias seleccionados: " + diasSeleccionados);
 //            db.collection("Encuentros").add(new Encuentro("Enviado", user.getDisplayName(),jugadorSeleccionado.toString()));
             Toast.makeText(getActivity(), "¡Se ha enviado el reto correctamente!", Toast.LENGTH_SHORT).show();

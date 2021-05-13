@@ -58,7 +58,7 @@ public class SeleccionPjPrincipalFragment extends BaseDialogFragment {
             }
         });
 
-        db.collection("Personajes")
+        db.collection(CollectionDB.PERSONAJES)
                 .addSnapshotListener((value, error) -> {
                     personajes.clear();
                     for (QueryDocumentSnapshot pj : value) {

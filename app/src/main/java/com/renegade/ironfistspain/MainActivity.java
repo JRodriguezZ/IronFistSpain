@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     destination.getId() == R.id.crearRetoFragment ||
                     destination.getId() == R.id.seleccionPrincipalFragment ||
                     destination.getId() == R.id.seleccionPjSecundarioFragment ||
+                    destination.getId() == R.id.seleccionRangoFragment ||
                     destination.getId() == R.id.startFragment) {
                 binding.bottomNavView.setVisibility(View.GONE);
                 binding.toolbar.setVisibility(View.GONE);

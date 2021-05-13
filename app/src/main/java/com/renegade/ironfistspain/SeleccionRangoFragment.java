@@ -1,6 +1,7 @@
 package com.renegade.ironfistspain;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class SeleccionRangoFragment extends BaseDialogFragment {
         binding.listaRangos.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         binding.listaRangos.setAdapter(rangosAdapter);
 
-        db.collection("Rangos")
+        db.collection(CollectionDB.RANGOS)
                 .addSnapshotListener((value, error) -> {
                     for (QueryDocumentSnapshot rango : value) {
                         String nombre = rango.getString("nombre");
@@ -72,6 +73,8 @@ public class SeleccionRangoFragment extends BaseDialogFragment {
                 viewModel.nombreRangoLiveData.setValue(rango.nombre);
                 viewModel.imagenRangoLiveData.setValue(rango.imagenUrl);
                 viewModel.puntuacionRangoLiveData.setValue(rango.puntuacion);
+
+                Log.e("ABCD", "La puntuacion equivalente a " + viewModel.nombreRangoLiveData.getValue() + " es " + viewModel.puntuacionRangoLiveData.getValue());
                 nav.popBackStack();
             });
         }

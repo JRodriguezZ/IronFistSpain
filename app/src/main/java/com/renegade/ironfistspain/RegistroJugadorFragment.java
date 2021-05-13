@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +28,7 @@ public class RegistroJugadorFragment extends BaseFragment {
 
         binding.imageButtonPjPrincipal.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_seleccionPrincipalFragment));
         binding.imageButtonPjSecundario.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_seleccionPjSecundarioFragment));
-        binding.imagenRango.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_selecionRangoFragment));
+        binding.imagenRango.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_seleccionRangoFragment));
 
 
 
@@ -44,21 +45,26 @@ public class RegistroJugadorFragment extends BaseFragment {
 
         viewModel.imagenRangoLiveData.observe(getViewLifecycleOwner(), imagenRango -> {
             Glide.with(requireContext()).load(viewModel.imagenRangoLiveData.getValue()).into(binding.imagenRango);
-            Log.e("ABCD", "La puntuacion equivalente a " + viewModel.nombreRangoLiveData.getValue() + " es " + viewModel.puntuacionRangoLiveData.getValue());
         });
 
 
         
         binding.botonRegistroJugador.setOnClickListener(v -> {
 
+            if (binding.editTextNombreUsuario.getText().toString().equals("") ||
+                    viewModel.nombrePj1LiveData.getValue() == null ||
+                    viewModel.puntuacionRangoLiveData.getValue() == null) {
+                Toast.makeText(getActivity(), "¡Hay campos obligatorios sin rellenar!", Toast.LENGTH_LONG).show();
+            } else {
+                db.collection(CollectionDB.USUARIOS)
+                        .document(user.getUid())
+                        .set(new Jugador(user.getUid(), binding.editTextNombreUsuario.getText().toString(), viewModel.nombrePj1LiveData.getValue(), viewModel.nombrePj2LiveData.getValue(), viewModel.puntuacionRangoLiveData.getValue(), "jugador"));
+
+                nav.navigate(R.id.action_registroJugadorFragment_to_inicioFragment);
+            }
             // add -> genera un id de documento aleatorio
             // document.set  // le pones el id que quieras
 
-            db.collection(DB.usuarios)
-                    .document(user.getUid())
-                    .set(new Jugador(user.getUid(), binding.editTextNombreUsuario.getText().toString(), viewModel.nombrePj1LiveData.getValue(), viewModel.nombrePj2LiveData.getValue(), viewModel.puntuacionRangoLiveData.getValue(), "jugador"));
-
-            nav.navigate(R.id.action_registroJugadorFragment_to_inicioFragment);
         });
 
     }
