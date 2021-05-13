@@ -45,6 +45,7 @@
         android:inputType="textPersonName"
         android:paddingHorizontal="20dp"
         android:paddingVertical="20dp"
+        android:maxLength="30"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tituloNombreUsuario" />
@@ -82,13 +83,11 @@
 
     <ImageView
         android:id="@+id/imageButtonPjPrincipal"
-        android:layout_width="0dp"
-        android:layout_height="157dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:padding="2dp"
         android:background="@drawable/circle"
+        android:padding="2dp"
         app:layout_constraintEnd_toStartOf="@+id/space"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titulo2PjPrincipal" />
@@ -117,13 +116,11 @@
 
     <ImageView
         android:id="@+id/imageButtonPjSecundario"
-        android:layout_width="0dp"
-        android:layout_height="157dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:padding="2dp"
         android:background="@drawable/circle"
+        android:padding="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/space"
         app:layout_constraintTop_toBottomOf="@+id/titulo2PjSecundario" />
