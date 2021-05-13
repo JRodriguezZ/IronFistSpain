@@ -8,9 +8,11 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="200dp"
+        android:padding="15dp"
         android:text="Soporte"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,9 +20,11 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
         android:layout_marginTop="32dp"
+        android:padding="15dp"
         android:text="FAQ"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,9 +32,12 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
         android:layout_marginTop="32dp"
+        android:padding="15dp"
         android:text="Acerca"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,8 +45,10 @@
 
     <Button
         android:id="@+id/signOutButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:padding="15dp"
         android:layout_marginTop="32dp"
         android:text="sign out"
         app:layout_constraintEnd_toEndOf="parent"

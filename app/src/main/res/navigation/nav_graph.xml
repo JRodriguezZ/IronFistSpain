@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/registroFragment"
         android:name="com.renegade.ironfistspain.RegistroFragment"
-        android:label="fragment_registro"
+        android:label="Registro"
         tools:layout="@layout/fragment_registro" >
         <action
             android:id="@+id/action_registroFragment_to_inicioFragment"
@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/inicioFragment"
         android:name="com.renegade.ironfistspain.InicioFragment"
-        android:label="fragment_inicio"
+        android:label="Inicio"
         tools:layout="@layout/fragment_inicio" />
     <fragment
         android:id="@+id/notificacionesFragment"
@@ -57,7 +57,7 @@
     <fragment
         android:id="@+id/crearRetoFragment"
         android:name="com.renegade.ironfistspain.CrearRetoFragment"
-        android:label="fragment_crear_reto"
+        android:label="Crear reto"
         tools:layout="@layout/fragment_crear_reto" >
         <action
             android:id="@+id/action_crearRetoFragment_to_inicioFragment"
@@ -66,7 +66,7 @@
     <fragment
         android:id="@+id/perfilJugadorFragment"
         android:name="com.renegade.ironfistspain.PerfilJugadorFragment"
-        android:label="fragment_perfil_jugador"
+        android:label="Perfil"
         tools:layout="@layout/fragment_perfil_jugador" />
     <fragment
         android:id="@+id/aboutFragment"
@@ -76,7 +76,7 @@
     <fragment
         android:id="@+id/ajustesFragment"
         android:name="com.renegade.ironfistspain.AjustesFragment"
-        android:label="fragment_ajustes"
+        android:label="Ajustes"
         tools:layout="@layout/fragment_ajustes" />
     <fragment
         android:id="@+id/historialFragment"
@@ -86,7 +86,7 @@
     <fragment
         android:id="@+id/registroEspectadorFragment2"
         android:name="com.renegade.ironfistspain.RegistroEspectadorFragment"
-        android:label="fragment_registro_espectador"
+        android:label="Crear cuenta de espectador"
         tools:layout="@layout/fragment_registro_espectador" >
         <action
             android:id="@+id/action_registroEspectadorFragment2_to_inicioFragment"
@@ -95,7 +95,7 @@
     <fragment
         android:id="@+id/registroJugadorFragment"
         android:name="com.renegade.ironfistspain.RegistroJugadorFragment"
-        android:label="fragment_registro_jugador"
+        android:label="Crear cuenta de jugador"
         tools:layout="@layout/fragment_registro_jugador" >
         <action
             android:id="@+id/action_registroJugadorFragment_to_inicioFragment"
@@ -113,7 +113,7 @@
     <fragment
         android:id="@+id/registroOrganizadorFragment"
         android:name="com.renegade.ironfistspain.RegistroOrganizadorFragment"
-        android:label="fragment_registro_organizador"
+        android:label="Crear cuenta de organizador"
         tools:layout="@layout/fragment_registro_organizador" >
         <action
             android:id="@+id/action_registroOrganizadorFragment_to_inicioFragment"
