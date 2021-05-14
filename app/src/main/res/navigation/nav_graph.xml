@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/startFragment"
         android:name="com.renegade.ironfistspain.StartFragment"
-        android:label="fragment_start"
+        android:label="Iron Fist Spain"
         tools:layout="@layout/fragment_start" >
         <action
             android:id="@+id/action_startFragment_to_inicioFragment"
@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/inicioFragment"
         android:name="com.renegade.ironfistspain.InicioFragment"
-        android:label="Inicio"
+        android:label="Iron Fist Spain"
         tools:layout="@layout/fragment_inicio" >
         <action
             android:id="@+id/action_inicioFragment_to_perfilJugadorFragment"
@@ -46,22 +46,22 @@
     <fragment
         android:id="@+id/notificacionesFragment"
         android:name="com.renegade.ironfistspain.NotificacionesFragment"
-        android:label="fragment_notificaciones"
+        android:label="Iron Fist Spain"
         tools:layout="@layout/fragment_notificaciones" />
     <fragment
         android:id="@+id/mensajesFragment"
         android:name="com.renegade.ironfistspain.MensajesFragment"
-        android:label="fragment_mensajes"
+        android:label="Iron Fist Spain"
         tools:layout="@layout/fragment_mensajes" />
     <fragment
         android:id="@+id/rankingFragment"
         android:name="com.renegade.ironfistspain.RankingFragment"
-        android:label="fragment_ranking"
+        android:label="Iron Fist Spain"
         tools:layout="@layout/fragment_ranking" />
     <fragment
         android:id="@+id/crearRetoFragment"
         android:name="com.renegade.ironfistspain.CrearRetoFragment"
-        android:label="Crear reto"
+        android:label="Iron Fist Spain"
         tools:layout="@layout/fragment_crear_reto" >
         <action
             android:id="@+id/action_crearRetoFragment_to_inicioFragment"
@@ -75,7 +75,7 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.renegade.ironfistspain.AboutFragment"
-        android:label="fragment_about"
+        android:label="Sobre Nosotros"
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/ajustesFragment"
@@ -85,7 +85,7 @@
     <fragment
         android:id="@+id/historialFragment"
         android:name="com.renegade.ironfistspain.HistorialFragment"
-        android:label="fragment_historial"
+        android:label="Iron Fist Spain"
         tools:layout="@layout/fragment_historial" />
     <fragment
         android:id="@+id/registroEspectadorFragment2"

@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 // Top-level destinations:
-                R.id.crearRetoFragment, R.id.mensajesFragment, R.id.notificacionesFragment, R.id.perfilJugadorFragment, R.id.rankingFragment, R.id.registroFragment, R.id.startFragment, R.id.inicioFragment)
+                R.id.crearRetoFragment, R.id.mensajesFragment, R.id.notificacionesFragment, R.id.rankingFragment, R.id.registroFragment, R.id.inicioFragment)
                 .setOpenableLayout(binding.drawerLayout)
                 .build();
 
@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
                     destination.getId() == R.id.registroJugadorFragment ||
                     destination.getId() == R.id.registroEspectadorFragment2 ||
                     destination.getId() == R.id.registroOrganizadorFragment ||
-                    destination.getId() == R.id.crearRetoFragment ||
                     destination.getId() == R.id.seleccionPrincipalFragment ||
                     destination.getId() == R.id.seleccionPjSecundarioFragment ||
                     destination.getId() == R.id.seleccionRangoFragment ||
@@ -51,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 binding.bottomNavView.setVisibility(View.VISIBLE);
                 binding.toolbar.setVisibility(View.VISIBLE);
+            }
+
+            if (destination.getId() == R.id.perfilJugadorFragment) {
+                binding.navProfileFragment.setVisibility(View.GONE);
+                binding.bottomNavView.setVisibility(View.GONE);
+            } else {
+                binding.navProfileFragment.setVisibility(View.VISIBLE);
+                binding.bottomNavView.setVisibility(View.VISIBLE);
             }
         });
 

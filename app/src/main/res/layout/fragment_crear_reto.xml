@@ -7,126 +7,157 @@
     android:orientation="vertical"
     tools:context=".CrearRetoFragment">
 
-
-    <TextView
-        android:id="@+id/tituloCreaUnReto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Crea un reto"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="45dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/subTituloSelecciona"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Selecciona un jugador"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloCreaUnReto"
-        tools:ignore="MissingConstraints" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewRivales"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subTituloSelecciona" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/subTituloDiaHora"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Dia y hora que puedes competir"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewRivales"
-        tools:ignore="MissingConstraints" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="100dp" >
 
-    <com.dpro.widgets.WeekdaysPicker
-        android:id="@+id/weekdays"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:full_size="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subTituloDiaHora"
-        app:sunday_first_day="false"
-        tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/subTituloSelecciona"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Selecciona un jugador"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewRivales"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/subTituloSelecciona" >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/nombreRivalSeleccionado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ninguno"
+                app:layout_constraintBottom_toTopOf="@+id/subTituloDiaHora"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewRivales" />
+
+            <TextView
+                android:id="@+id/puntuacionRivalSeleccionado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/subTituloDiaHora"
+                app:layout_constraintStart_toEndOf="@+id/nombreRivalSeleccionado"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewRivales" />
+
+            <TextView
+                android:id="@+id/textoRivalSeleccionado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rival seleccionado: "
+                app:layout_constraintBottom_toTopOf="@+id/subTituloDiaHora"
+                app:layout_constraintEnd_toStartOf="@+id/nombreRivalSeleccionado"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewRivales" />
+
+            <TextView
+                android:id="@+id/subTituloDiaHora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:text="Dia y hora que puedes competir"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewRivales"
+                tools:ignore="MissingConstraints" />
+
+            <com.dpro.widgets.WeekdaysPicker
+                android:id="@+id/weekdays"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:full_size="true"
+                app:highlight_color="@color/DarkRed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/subTituloDiaHora"
+                app:sunday_first_day="false"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/separadorHoras"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:text="-"
+                app:layout_constraintBottom_toBottomOf="@+id/botonHora1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/botonHora1" />
+
+            <Button
+                android:id="@+id/botonHora1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                android:text=":"
+                android:textColor="@color/black"
+                android:textSize="23sp"
+                app:layout_constraintEnd_toStartOf="@+id/separadorHoras"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weekdays"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/botonHora2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:backgroundTint="@color/white"
+                android:background="@drawable/my_button_bg"
+                android:text=":"
+                android:textColor="@color/black"
+                android:textSize="23sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/separadorHoras"
+                app:layout_constraintTop_toTopOf="@+id/botonHora1" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/enviarRetoButton"
-        android:paddingHorizontal="130dp"
-        android:paddingVertical="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="16dp"
+        android:paddingHorizontal="130dp"
+        android:paddingVertical="18dp"
         android:text="Enviar reto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/separadorHoras"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:textColor="@color/black"
-        android:text="-"
-        app:layout_constraintBottom_toBottomOf="@+id/botonHora1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/botonHora1" />
-
-    <Button
-        android:id="@+id/botonHora1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/my_button_bg"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:text=":"
-        android:textColor="@color/black"
-        android:textSize="23sp"
-        app:layout_constraintEnd_toStartOf="@+id/separadorHoras"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weekdays"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/botonHora2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:backgroundTint="@color/white"
-        android:background="@drawable/my_button_bg"
-        android:text=":"
-        android:textColor="@color/black"
-        android:textSize="23sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/separadorHoras"
-        app:layout_constraintTop_toTopOf="@+id/botonHora1" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

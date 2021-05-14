@@ -9,6 +9,10 @@
         android:title="Historial" />
 
     <item
+        android:id="@+id/peticionesFragment"
+        android:title="Peticiones" />
+
+    <item
         android:id="@+id/ajustesFragment"
         android:title="Ajustes" />
 

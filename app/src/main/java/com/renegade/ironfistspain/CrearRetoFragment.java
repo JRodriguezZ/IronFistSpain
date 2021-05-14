@@ -1,7 +1,14 @@
 package com.renegade.ironfistspain;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,22 +19,25 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.Transformation;
+import com.bumptech.glide.load.engine.Resource;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+import com.bumptech.glide.load.resource.bitmap.BitmapResource;
+import com.bumptech.glide.request.RequestOptions;
 import com.dpro.widgets.WeekdaysPicker;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.renegade.ironfistspain.databinding.FragmentCrearRetoBinding;
-import com.renegade.ironfistspain.databinding.ViewholderSeleccionPersonajeBinding;
-import com.renegade.ironfistspain.databinding.ViewholderSeleccionRangoBinding;
 import com.renegade.ironfistspain.databinding.ViewholderSeleccionRivalBinding;
 
+import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -37,7 +47,7 @@ public class CrearRetoFragment extends BaseFragment {
     int hora2, minutos2;
     private FragmentCrearRetoBinding binding;
 
-    List<Integer> diasSeleccionados = new ArrayList<>();
+    List<Integer> diasSeleccionados = Arrays.asList();
     List<Rival> rivalesDisponibles = new ArrayList<>();
 
     RivalesAdapter rivalesAdapter = new RivalesAdapter();
@@ -56,7 +66,7 @@ public class CrearRetoFragment extends BaseFragment {
         LinearLayoutManager horizontalLayoutManager
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.recyclerViewRivales.setLayoutManager(horizontalLayoutManager);
-        binding.recyclerViewRivales.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL));
+//        binding.recyclerViewRivales.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL));
         binding.recyclerViewRivales.setAdapter(rivalesAdapter);
 
         db.collection(CollectionDB.USUARIOS).document(user.getUid()).get().addOnSuccessListener(doc -> {
@@ -96,8 +106,11 @@ public class CrearRetoFragment extends BaseFragment {
         });
 
         WeekdaysPicker weekdaysPicker = binding.weekdays;
+        weekdaysPicker.setSelectedDays(diasSeleccionados);
         weekdaysPicker.setOnWeekdaysChangeListener((view1, clickedDayOfWeek, selectedDays) -> {
                 diasSeleccionados = weekdaysPicker.getSelectedDays();
+
+            Log.e("ABCD", "Dias seleccionados: " + diasSeleccionados);
         });
 
         binding.botonHora1.setOnClickListener(v -> {
@@ -147,9 +160,8 @@ public class CrearRetoFragment extends BaseFragment {
         });
 
         binding.enviarRetoButton.setOnClickListener(v -> {
-//                            navController.navigate(R.id.action_crearRetoFragment_to_inicioFragment));
+//            navController.navigate(R.id.action_crearRetoFragment_to_inicioFragment));
 //            db.collection("Encuentros").document().set(new Encuentro("Enviado", user.getUid(), usuarioSeleccionado.getName()));
-            Log.e("ABCD", "Dias seleccionados: " + diasSeleccionados);
 //            db.collection("Encuentros").add(new Encuentro("Enviado", user.getDisplayName(),jugadorSeleccionado.toString()));
             Toast.makeText(getActivity(), "¡Se ha enviado el reto correctamente!", Toast.LENGTH_SHORT).show();
         });
@@ -157,6 +169,10 @@ public class CrearRetoFragment extends BaseFragment {
     }
 
     class RivalesAdapter extends RecyclerView.Adapter<RivalViewHolder> {
+
+        int posicionOriginal = -1;
+
+        Rival rivalAnterior;
 
         @NonNull
         @Override
@@ -168,14 +184,45 @@ public class CrearRetoFragment extends BaseFragment {
         public void onBindViewHolder(@NonNull CrearRetoFragment.RivalViewHolder holder, int position) {
             Rival rival = rivalesDisponibles.get(position);
 
+
+
             holder.binding.nombreRival.setText(rival.nombre);
             Glide.with(requireContext()).load(rival.imagen).circleCrop().into(holder.binding.imagenRival);
             holder.binding.puntuacionRival.setText(""+rival.puntuacion);
 
             holder.itemView.setOnClickListener(v -> {
+
+
                 viewModel.nombreRivalLiveData.setValue(rival.nombre);   // aqui poner el ID del personaje
                 viewModel.imagenRivalLiveData.setValue(rival.imagen);
                 viewModel.puntuacionRangoLiveData.setValue(String.valueOf(rival.puntuacion));
+
+                // Deseleccionamos el anterior si existe
+                if (posicionOriginal != -1) {
+
+                    rivalAnterior = rivalesDisponibles.get(posicionOriginal);
+
+                    Glide.with(requireContext())
+                            .load(rivalAnterior.imagen)
+                            .circleCrop()
+                            .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(getContext(), 1000,2, "#FFFFFF",5)))
+                            .into(holder.binding.imagenRival);
+                    Log.e("ABCD", "Posicion original: " + rivalesDisponibles.get(posicionOriginal));
+
+                }
+                // Seleccionamos el nuevo rival
+
+                Glide.with(requireContext())
+                        .load(rival.imagen)
+                        .circleCrop()
+                        .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(getContext(), 1000,2, "#8B0000",5)))
+                        .into(holder.binding.imagenRival);
+
+                // Text views placeholder
+
+                binding.nombreRivalSeleccionado.setText(rival.nombre);
+                binding.puntuacionRivalSeleccionado.setText(String.valueOf(posicionOriginal));
+                posicionOriginal = position;
             });
         }
 
@@ -191,5 +238,266 @@ public class CrearRetoFragment extends BaseFragment {
             super(binding.getRoot());
             this.binding = binding;
         }
+    }
+}
+
+class RoundedCornersTransformation implements Transformation<Bitmap> {
+
+    public enum CornerType {
+        ALL,
+        TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT,
+        TOP, BOTTOM, LEFT, RIGHT,
+        OTHER_TOP_LEFT, OTHER_TOP_RIGHT, OTHER_BOTTOM_LEFT, OTHER_BOTTOM_RIGHT,
+        DIAGONAL_FROM_TOP_LEFT, DIAGONAL_FROM_TOP_RIGHT, BORDER
+    }
+
+    private BitmapPool mBitmapPool;
+    private int mRadius;
+    private int mDiameter;
+    private int mMargin;
+    private CornerType mCornerType;
+    private String mColor;
+    private int mBorder;
+
+    public RoundedCornersTransformation(Context context, int radius, int margin) {
+        this(context, radius, margin, CornerType.ALL);
+    }
+
+    public RoundedCornersTransformation(Context context, int radius, int margin, String color, int border) {
+        this(context, radius, margin, CornerType.BORDER);
+        mColor = color;
+        mBorder = border;
+    }
+
+    public RoundedCornersTransformation(BitmapPool pool, int radius, int margin) {
+        this(pool, radius, margin, CornerType.ALL);
+    }
+
+    public RoundedCornersTransformation(Context context, int radius, int margin,
+                                        CornerType cornerType) {
+        this(Glide.get(context).getBitmapPool(), radius, margin, cornerType);
+    }
+
+    public RoundedCornersTransformation(BitmapPool pool, int radius, int margin,
+                                        CornerType cornerType) {
+        mBitmapPool = pool;
+        mRadius = radius;
+        mDiameter = mRadius * 2;
+        mMargin = margin;
+        mCornerType = cornerType;
+    }
+
+    @Override
+    public Resource<Bitmap> transform(Context context, Resource<Bitmap> resource, int outWidth, int outHeight) {
+        Bitmap source = resource.get();
+
+        int width = source.getWidth();
+        int height = source.getHeight();
+
+        Bitmap bitmap = mBitmapPool.get(width, height, Bitmap.Config.ARGB_8888);
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setShader(new BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+        drawRoundRect(canvas, paint, width, height);
+        return BitmapResource.obtain(bitmap, mBitmapPool);
+    }
+
+    private void drawRoundRect(Canvas canvas, Paint paint, float width, float height) {
+        float right = width - mMargin;
+        float bottom = height - mMargin;
+
+        switch (mCornerType) {
+            case ALL:
+                canvas.drawRoundRect(new RectF(mMargin, mMargin, right, bottom), mRadius, mRadius, paint);
+                break;
+            case TOP_LEFT:
+                drawTopLeftRoundRect(canvas, paint, right, bottom);
+                break;
+            case TOP_RIGHT:
+                drawTopRightRoundRect(canvas, paint, right, bottom);
+                break;
+            case BOTTOM_LEFT:
+                drawBottomLeftRoundRect(canvas, paint, right, bottom);
+                break;
+            case BOTTOM_RIGHT:
+                drawBottomRightRoundRect(canvas, paint, right, bottom);
+                break;
+            case TOP:
+                drawTopRoundRect(canvas, paint, right, bottom);
+                break;
+            case BOTTOM:
+                drawBottomRoundRect(canvas, paint, right, bottom);
+                break;
+            case LEFT:
+                drawLeftRoundRect(canvas, paint, right, bottom);
+                break;
+            case RIGHT:
+                drawRightRoundRect(canvas, paint, right, bottom);
+                break;
+            case OTHER_TOP_LEFT:
+                drawOtherTopLeftRoundRect(canvas, paint, right, bottom);
+                break;
+            case OTHER_TOP_RIGHT:
+                drawOtherTopRightRoundRect(canvas, paint, right, bottom);
+                break;
+            case OTHER_BOTTOM_LEFT:
+                drawOtherBottomLeftRoundRect(canvas, paint, right, bottom);
+                break;
+            case OTHER_BOTTOM_RIGHT:
+                drawOtherBottomRightRoundRect(canvas, paint, right, bottom);
+                break;
+            case DIAGONAL_FROM_TOP_LEFT:
+                drawDiagonalFromTopLeftRoundRect(canvas, paint, right, bottom);
+                break;
+            case DIAGONAL_FROM_TOP_RIGHT:
+                drawDiagonalFromTopRightRoundRect(canvas, paint, right, bottom);
+                break;
+            case BORDER:
+                drawBorder(canvas, paint, right, bottom);
+                break;
+            default:
+                canvas.drawRoundRect(new RectF(mMargin, mMargin, right, bottom), mRadius, mRadius, paint);
+                break;
+        }
+    }
+
+    private void drawTopLeftRoundRect(Canvas canvas, Paint paint, float right, float bottom) {
+        canvas.drawRoundRect(new RectF(mMargin, mMargin, mMargin + mDiameter, mMargin + mDiameter),
+                mRadius, mRadius, paint);
+        canvas.drawRect(new RectF(mMargin, mMargin + mRadius, mMargin + mRadius, bottom), paint);
+        canvas.drawRect(new RectF(mMargin + mRadius, mMargin, right, bottom), paint);
+    }
+
+    private void drawTopRightRoundRect(Canvas canvas, Paint paint, float right, float bottom) {
+        canvas.drawRoundRect(new RectF(right - mDiameter, mMargin, right, mMargin + mDiameter), mRadius,
+                mRadius, paint);
+        canvas.drawRect(new RectF(mMargin, mMargin, right - mRadius, bottom), paint);
+        canvas.drawRect(new RectF(right - mRadius, mMargin + mRadius, right, bottom), paint);
+    }
+
+    private void drawBottomLeftRoundRect(Canvas canvas, Paint paint, float right, float bottom) {
+        canvas.drawRoundRect(new RectF(mMargin, bottom - mDiameter, mMargin + mDiameter, bottom),
+                mRadius, mRadius, paint);
+        canvas.drawRect(new RectF(mMargin, mMargin, mMargin + mDiameter, bottom - mRadius), paint);
+        canvas.drawRect(new RectF(mMargin + mRadius, mMargin, right, bottom), paint);
+    }
+
+    private void drawBottomRightRoundRect(Canvas canvas, Paint paint, float right, float bottom) {
+        canvas.drawRoundRect(new RectF(right - mDiameter, bottom - mDiameter, right, bottom), mRadius,
+                mRadius, paint);
+        canvas.drawRect(new RectF(mMargin, mMargin, right - mRadius, bottom), paint);
+        canvas.drawRect(new RectF(right - mRadius, mMargin, right, bottom - mRadius), paint);
+    }
+
+    private void drawTopRoundRect(Canvas canvas, Paint paint, float right, float bottom) {
+        canvas.drawRoundRect(new RectF(mMargin, mMargin, right, mMargin + mDiameter), mRadius, mRadius,
+                paint);
+        canvas.drawRect(new RectF(mMargin, mMargin + mRadius, right, bottom), paint);
+    }
+
+    private void drawBottomRoundRect(Canvas canvas, Paint paint, float right, float bottom) {
+        canvas.drawRoundRect(new RectF(mMargin, bottom - mDiameter, right, bottom), mRadius, mRadius,
+                paint);
+        canvas.drawRect(new RectF(mMargin, mMargin, right, bottom - mRadius), paint);
+    }
+
+    private void drawLeftRoundRect(Canvas canvas, Paint paint, float right, float bottom) {
+        canvas.drawRoundRect(new RectF(mMargin, mMargin, mMargin + mDiameter, bottom), mRadius, mRadius,
+                paint);
+        canvas.drawRect(new RectF(mMargin + mRadius, mMargin, right, bottom), paint);
+    }
+
+    private void drawRightRoundRect(Canvas canvas, Paint paint, float right, float bottom) {
+        canvas.drawRoundRect(new RectF(right - mDiameter, mMargin, right, bottom), mRadius, mRadius,
+                paint);
+        canvas.drawRect(new RectF(mMargin, mMargin, right - mRadius, bottom), paint);
+    }
+
+    private void drawOtherTopLeftRoundRect(Canvas canvas, Paint paint, float right, float bottom) {
+        canvas.drawRoundRect(new RectF(mMargin, bottom - mDiameter, right, bottom), mRadius, mRadius,
+                paint);
+        canvas.drawRoundRect(new RectF(right - mDiameter, mMargin, right, bottom), mRadius, mRadius,
+                paint);
+        canvas.drawRect(new RectF(mMargin, mMargin, right - mRadius, bottom - mRadius), paint);
+    }
+
+    private void drawOtherTopRightRoundRect(Canvas canvas, Paint paint, float right, float bottom) {
+        canvas.drawRoundRect(new RectF(mMargin, mMargin, mMargin + mDiameter, bottom), mRadius, mRadius,
+                paint);
+        canvas.drawRoundRect(new RectF(mMargin, bottom - mDiameter, right, bottom), mRadius, mRadius,
+                paint);
+        canvas.drawRect(new RectF(mMargin + mRadius, mMargin, right, bottom - mRadius), paint);
+    }
+
+    private void drawOtherBottomLeftRoundRect(Canvas canvas, Paint paint, float right, float bottom) {
+        canvas.drawRoundRect(new RectF(mMargin, mMargin, right, mMargin + mDiameter), mRadius, mRadius,
+                paint);
+        canvas.drawRoundRect(new RectF(right - mDiameter, mMargin, right, bottom), mRadius, mRadius,
+                paint);
+        canvas.drawRect(new RectF(mMargin, mMargin + mRadius, right - mRadius, bottom), paint);
+    }
+
+    private void drawOtherBottomRightRoundRect(Canvas canvas, Paint paint, float right,
+                                               float bottom) {
+        canvas.drawRoundRect(new RectF(mMargin, mMargin, right, mMargin + mDiameter), mRadius, mRadius,
+                paint);
+        canvas.drawRoundRect(new RectF(mMargin, mMargin, mMargin + mDiameter, bottom), mRadius, mRadius,
+                paint);
+        canvas.drawRect(new RectF(mMargin + mRadius, mMargin + mRadius, right, bottom), paint);
+    }
+
+    private void drawDiagonalFromTopLeftRoundRect(Canvas canvas, Paint paint, float right,
+                                                  float bottom) {
+        canvas.drawRoundRect(new RectF(mMargin, mMargin, mMargin + mDiameter, mMargin + mDiameter),
+                mRadius, mRadius, paint);
+        canvas.drawRoundRect(new RectF(right - mDiameter, bottom - mDiameter, right, bottom), mRadius,
+                mRadius, paint);
+        canvas.drawRect(new RectF(mMargin, mMargin + mRadius, right - mDiameter, bottom), paint);
+        canvas.drawRect(new RectF(mMargin + mDiameter, mMargin, right, bottom - mRadius), paint);
+    }
+
+    private void drawDiagonalFromTopRightRoundRect(Canvas canvas, Paint paint, float right,
+                                                   float bottom) {
+        canvas.drawRoundRect(new RectF(right - mDiameter, mMargin, right, mMargin + mDiameter), mRadius,
+                mRadius, paint);
+        canvas.drawRoundRect(new RectF(mMargin, bottom - mDiameter, mMargin + mDiameter, bottom),
+                mRadius, mRadius, paint);
+        canvas.drawRect(new RectF(mMargin, mMargin, right - mRadius, bottom - mRadius), paint);
+        canvas.drawRect(new RectF(mMargin + mRadius, mMargin + mRadius, right, bottom), paint);
+    }
+
+    private void drawBorder(Canvas canvas, Paint paint, float right,
+                            float bottom) {
+
+        // stroke
+        Paint strokePaint = new Paint();
+        strokePaint.setStyle(Paint.Style.STROKE);
+        if (mColor != null) {
+            strokePaint.setColor(Color.parseColor(mColor));
+        } else {
+            strokePaint.setColor(Color.BLACK);
+        }
+        strokePaint.setStrokeWidth(mBorder);
+
+        canvas.drawRoundRect(new RectF(mMargin, mMargin, right, bottom), mRadius, mRadius, paint);
+
+        // stroke
+        canvas.drawRoundRect(new RectF(mMargin, mMargin, right, bottom), mRadius, mRadius, strokePaint);
+    }
+
+
+    @Override
+    public void updateDiskCacheKey(MessageDigest messageDigest) {
+
+    }
+
+    public String getId() {
+        return "RoundedTransformation(radius=" + mRadius + ", margin=" + mMargin + ", diameter="
+                + mDiameter + ", cornerType=" + mCornerType.name() + ")";
     }
 }
