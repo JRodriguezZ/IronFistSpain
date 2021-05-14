@@ -60,17 +60,23 @@ public class PerfilJugadorFragment extends BaseFragment {
 
         db.collection(CollectionDB.USUARIOS)
                 .document(user.getUid())
-                .get(Source.SERVER)
+                .get()
                 .addOnSuccessListener(doc -> {
                     binding.puntuacionJugadorPerfil.setText(doc.getString("puntuacion"));
                 });
 
         db.collection(CollectionDB.USUARIOS)
                 .document(user.getUid())
-                .get(Source.SERVER)
+                .get()
                 .addOnSuccessListener(doc -> {
                     binding.nombreJugadorPerfil.setText(doc.getString("nickname"));
                 });
 
+        db.collection(CollectionDB.USUARIOS)
+                .document(user.getUid())
+                .get()
+                .addOnSuccessListener(doc -> {
+                    Glide.with(requireContext()).load(doc.get("imagen")).circleCrop().into(binding.imagenJugadorPerfil);
+                });
     }
 }

@@ -12,29 +12,37 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.dpro.widgets.WeekdaysPicker;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.renegade.ironfistspain.databinding.FragmentCrearRetoBinding;
+import com.renegade.ironfistspain.databinding.ViewholderSeleccionPersonajeBinding;
+import com.renegade.ironfistspain.databinding.ViewholderSeleccionRangoBinding;
+import com.renegade.ironfistspain.databinding.ViewholderSeleccionRivalBinding;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class CrearRetoFragment extends BaseFragment {
     int hora1, minutos1;
     int hora2, minutos2;
     private FragmentCrearRetoBinding binding;
 
+    List<Integer> diasSeleccionados = new ArrayList<>();
+    List<Rival> rivalesDisponibles = new ArrayList<>();
 
-    List<Integer> diasSeleccionados;
+    RivalesAdapter rivalesAdapter = new RivalesAdapter();
 
-    List<Rival> rivalesDispoibles;
-
-    class Rival { String nombre; int puntuacion; public Rival(String nombre, int puntuacion) { this.nombre = nombre; this.puntuacion = puntuacion; }}
-
+    class Rival { String nombre; int puntuacion; String imagen; public Rival(String nombre, int puntuacion, String imagen) { this.nombre = nombre; this.puntuacion = puntuacion; this.imagen = imagen;}}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,29 +53,47 @@ public class CrearRetoFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        LinearLayoutManager horizontalLayoutManager
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        binding.recyclerViewRivales.setLayoutManager(horizontalLayoutManager);
+        binding.recyclerViewRivales.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL));
+        binding.recyclerViewRivales.setAdapter(rivalesAdapter);
 
         db.collection(CollectionDB.USUARIOS).document(user.getUid()).get().addOnSuccessListener(doc -> {
-            int p;
-            try {
-                p = Integer.parseInt(doc.getString("puntuacion")); // 1000
-            } catch (Exception e){
-                System.out.println("PUNTUACION INVALIDA EN LA BASE DE DATOS");
-                p = 1000;
-            }
+//            int p;
+//            String s = null;
+//            try {
 
-            db.collection(CollectionDB.USUARIOS).whereGreaterThanOrEqualTo("puntuacion", ""+(p-100)).whereLessThan("puntuacion", p+100).orderBy("puntuacion", Query.Direction.valueOf("asc")).addSnapshotListener((value, error) -> {
-                for (QueryDocumentSnapshot rival : value) {
-                    String nombre = rival.getString("nombre");
-                    int puntuacion = Integer.parseInt(rival.getString("puntuacion"));
+            int p = Integer.parseInt(doc.getString("puntuacion")); // 1000
+            String s = doc.getString("nickname");
+                Log.e("ABCD", doc.getString("puntuacion"));
 
-                    rivalesDispoibles.add(new Rival(nombre, puntuacion));
+//            } catch (Exception e){
+//                System.out.println("PUNTUACION INVALIDA EN LA BASE DE DATOS");
+//                p = 1000;
+//            }
 
-//                    rivalesAdapter.notifyDataSetChanged();
-                }
+            db.collection(CollectionDB.USUARIOS)
+                    .whereGreaterThanOrEqualTo("puntuacion", ""+(p-100))
+                    .whereLessThanOrEqualTo("puntuacion", ""+(p+100))
+//                    .orderBy("puntuacion", Query.Direction.valueOf("asc"))
+                    .addSnapshotListener((value, error) -> {
+                        rivalesDisponibles.clear();
+                        for (QueryDocumentSnapshot rival : value) {
+                            if (!Objects.equals(rival.getString("nickname"), s)) {
+                                String nombre = rival.getString("nickname");
+                                int puntuacion = Integer.parseInt(rival.getString("puntuacion"));
+                                String imagen = rival.getString("imagen");
+
+                                Log.e("ABCD", "Consulta: " + s + " = " + nombre + ", " + puntuacion);
+
+                                rivalesDisponibles.add(new Rival(nombre, puntuacion, imagen));
+                            }
+
+                            rivalesAdapter.notifyDataSetChanged();
+                        }
             });
         });
-
-
 
         WeekdaysPicker weekdaysPicker = binding.weekdays;
         weekdaysPicker.setOnWeekdaysChangeListener((view1, clickedDayOfWeek, selectedDays) -> {
@@ -121,13 +147,49 @@ public class CrearRetoFragment extends BaseFragment {
         });
 
         binding.enviarRetoButton.setOnClickListener(v -> {
-
-            //                navController.navigate(R.id.action_crearRetoFragment_to_inicioFragment));
-            //db.collection("Encuentros").document().set(new Encuentro("Enviado", user.getUid(), usuarioSeleccionado.getName()));
+//                            navController.navigate(R.id.action_crearRetoFragment_to_inicioFragment));
+//            db.collection("Encuentros").document().set(new Encuentro("Enviado", user.getUid(), usuarioSeleccionado.getName()));
             Log.e("ABCD", "Dias seleccionados: " + diasSeleccionados);
 //            db.collection("Encuentros").add(new Encuentro("Enviado", user.getDisplayName(),jugadorSeleccionado.toString()));
             Toast.makeText(getActivity(), "¡Se ha enviado el reto correctamente!", Toast.LENGTH_SHORT).show();
         });
 
+    }
+
+    class RivalesAdapter extends RecyclerView.Adapter<RivalViewHolder> {
+
+        @NonNull
+        @Override
+        public RivalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new RivalViewHolder(ViewholderSeleccionRivalBinding.inflate(getLayoutInflater(), parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull CrearRetoFragment.RivalViewHolder holder, int position) {
+            Rival rival = rivalesDisponibles.get(position);
+
+            holder.binding.nombreRival.setText(rival.nombre);
+            Glide.with(requireContext()).load(rival.imagen).circleCrop().into(holder.binding.imagenRival);
+            holder.binding.puntuacionRival.setText(""+rival.puntuacion);
+
+            holder.itemView.setOnClickListener(v -> {
+                viewModel.nombreRivalLiveData.setValue(rival.nombre);   // aqui poner el ID del personaje
+                viewModel.imagenRivalLiveData.setValue(rival.imagen);
+                viewModel.puntuacionRangoLiveData.setValue(String.valueOf(rival.puntuacion));
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return rivalesDisponibles == null ? 10 : rivalesDisponibles.size();
+        }
+    }
+
+    static class RivalViewHolder extends RecyclerView.ViewHolder {
+        ViewholderSeleccionRivalBinding binding;
+        public RivalViewHolder(@NonNull ViewholderSeleccionRivalBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
     }
 }

@@ -11,11 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.Source;
 import com.renegade.ironfistspain.databinding.FragmentRegistroJugadorBinding;
 
 public class RegistroJugadorFragment extends BaseFragment {
 
     private FragmentRegistroJugadorBinding binding;
+    String img;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,7 +50,6 @@ public class RegistroJugadorFragment extends BaseFragment {
         });
 
 
-        
         binding.botonRegistroJugador.setOnClickListener(v -> {
 
             if (binding.editTextNombreUsuario.getText().toString().equals("") ||
@@ -56,16 +57,17 @@ public class RegistroJugadorFragment extends BaseFragment {
                     viewModel.puntuacionRangoLiveData.getValue() == null) {
                 Toast.makeText(getActivity(), "¡Hay campos obligatorios sin rellenar!", Toast.LENGTH_LONG).show();
             } else {
-                db.collection(CollectionDB.USUARIOS)
-                        .document(user.getUid())
-                        .set(new Jugador(user.getUid(), binding.editTextNombreUsuario.getText().toString(), viewModel.nombrePj1LiveData.getValue(), viewModel.nombrePj2LiveData.getValue(), viewModel.puntuacionRangoLiveData.getValue(), "jugador"));
+                    db.collection(CollectionDB.USUARIOS)
+                            .document(user.getUid())
+                            .set(new Jugador(user.getUid(), binding.editTextNombreUsuario.getText().toString(), viewModel.imagenPj1LiveData.getValue(), viewModel.nombrePj1LiveData.getValue(), viewModel.nombrePj2LiveData.getValue(), viewModel.puntuacionRangoLiveData.getValue(), "jugador"));
 
-                nav.navigate(R.id.action_registroJugadorFragment_to_inicioFragment);
-            }
+                    nav.navigate(R.id.action_registroJugadorFragment_to_inicioFragment);
+                }
+
+            });
             // add -> genera un id de documento aleatorio
             // document.set  // le pones el id que quieras
 
-        });
 
     }
 

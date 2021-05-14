@@ -16,9 +16,7 @@ import com.renegade.ironfistspain.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
-
     NavController navController;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
