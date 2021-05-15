@@ -44,6 +44,8 @@ import java.util.Objects;
 
 public class CrearRetoFragment extends BaseFragment {
     int hora1, minutos1;
+    Date dateMin, dateMax;
+    SimpleDateFormat f24horas;
     int hora2, minutos2;
     private FragmentCrearRetoBinding binding;
 
@@ -52,7 +54,9 @@ public class CrearRetoFragment extends BaseFragment {
 
     RivalesAdapter rivalesAdapter = new RivalesAdapter();
 
-    class Rival { String nombre; int puntuacion; String imagen; public Rival(String nombre, int puntuacion, String imagen) { this.nombre = nombre; this.puntuacion = puntuacion; this.imagen = imagen;}}
+    List<Rival> rivalSeleccionado = new ArrayList<>();
+
+    class Rival { String uid; String nombre; int puntuacion; String imagen; Boolean estaSeleccionado; public Rival(String uid, String nombre, int puntuacion, String imagen) { this.uid = uid; this.nombre = nombre; this.puntuacion = puntuacion; this.imagen = imagen; estaSeleccionado = false;}}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,7 +80,6 @@ public class CrearRetoFragment extends BaseFragment {
 
             int p = Integer.parseInt(doc.getString("puntuacion")); // 1000
             String s = doc.getString("nickname");
-                Log.e("ABCD", doc.getString("puntuacion"));
 
 //            } catch (Exception e){
 //                System.out.println("PUNTUACION INVALIDA EN LA BASE DE DATOS");
@@ -91,13 +94,14 @@ public class CrearRetoFragment extends BaseFragment {
                         rivalesDisponibles.clear();
                         for (QueryDocumentSnapshot rival : value) {
                             if (!Objects.equals(rival.getString("nickname"), s)) {
-                                String nombre = rival.getString("nickname");
+                                String uid = rival.getString("uid");
+                                String nickname = rival.getString("nickname");
                                 int puntuacion = Integer.parseInt(rival.getString("puntuacion"));
                                 String imagen = rival.getString("imagen");
 
-                                Log.e("ABCD", "Consulta: " + s + " = " + nombre + ", " + puntuacion);
+                                Log.e("ABCD", "Consulta: " + s + " = " + nickname + ", " + puntuacion);
 
-                                rivalesDisponibles.add(new Rival(nombre, puntuacion, imagen));
+                                rivalesDisponibles.add(new Rival(uid, nickname, puntuacion, imagen));
                             }
 
                             rivalesAdapter.notifyDataSetChanged();
@@ -121,14 +125,13 @@ public class CrearRetoFragment extends BaseFragment {
                         hora1 = hourOfDay;
                         minutos1 = minute;
                         String tiempo = hora1 + ":" + minutos1;
-                        SimpleDateFormat f24horas = new SimpleDateFormat("HH:mm");
+                        f24horas = new SimpleDateFormat("HH:mm");
                         try {
-                            Date date = f24horas.parse(tiempo);
-                            binding.botonHora1.setText(f24horas.format(date));
+                            dateMin = f24horas.parse(tiempo);
+                            binding.botonHora1.setText(f24horas.format(dateMin));
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        Log.e("ABCD", "Hora 1: " + binding.botonHora1.getText());
                     },12,0,true
             );
             timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
@@ -144,14 +147,13 @@ public class CrearRetoFragment extends BaseFragment {
                         hora2 = hourOfDay;
                         minutos2 = minute;
                         String tiempo = hora2 + ":" + minutos2;
-                        SimpleDateFormat f24horas = new SimpleDateFormat("HH:mm");
+                        f24horas = new SimpleDateFormat("HH:mm");
                         try {
-                            Date date = f24horas.parse(tiempo);
-                            binding.botonHora2.setText(f24horas.format(date));
+                            dateMax = f24horas.parse(tiempo);
+                            binding.botonHora2.setText(f24horas.format(dateMax));
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        Log.e("ABCD", "Hora 2: " + binding.botonHora2.getText());
                     },12,0,true
             );
             timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
@@ -160,10 +162,9 @@ public class CrearRetoFragment extends BaseFragment {
         });
 
         binding.enviarRetoButton.setOnClickListener(v -> {
-//            navController.navigate(R.id.action_crearRetoFragment_to_inicioFragment));
-//            db.collection("Encuentros").document().set(new Encuentro("Enviado", user.getUid(), usuarioSeleccionado.getName()));
-//            db.collection("Encuentros").add(new Encuentro("Enviado", user.getDisplayName(),jugadorSeleccionado.toString()));
+            db.collection("Encuentros").document().set(new Encuentro("Enviado", user.getUid(), rivalSeleccionado.get(0).uid, diasSeleccionados, f24horas.format(dateMin), f24horas.format(dateMax)));
             Toast.makeText(getActivity(), "¡Se ha enviado el reto correctamente!", Toast.LENGTH_SHORT).show();
+            nav.navigate(R.id.action_crearRetoFragment_to_inicioFragment);
         });
 
     }
@@ -184,44 +185,42 @@ public class CrearRetoFragment extends BaseFragment {
         public void onBindViewHolder(@NonNull CrearRetoFragment.RivalViewHolder holder, int position) {
             Rival rival = rivalesDisponibles.get(position);
 
-
-
             holder.binding.nombreRival.setText(rival.nombre);
             Glide.with(requireContext()).load(rival.imagen).circleCrop().into(holder.binding.imagenRival);
             holder.binding.puntuacionRival.setText(""+rival.puntuacion);
 
             holder.itemView.setOnClickListener(v -> {
 
-
                 viewModel.nombreRivalLiveData.setValue(rival.nombre);   // aqui poner el ID del personaje
                 viewModel.imagenRivalLiveData.setValue(rival.imagen);
                 viewModel.puntuacionRangoLiveData.setValue(String.valueOf(rival.puntuacion));
 
-                // Deseleccionamos el anterior si existe
-                if (posicionOriginal != -1) {
+//                for (Rival rival1: rivalesDisponibles) {
+//                    rival1.estaSeleccionado = false;
+//                    if (rival1.nombre.equals(rivalesDisponibles.get(position).nombre)) {
+//                        Log.e("ABCD", "El rival " + rival1.nombre + " esta en la misma posicion que " + rivalesDisponibles.get(position).nombre);
+//                        rival1.estaSeleccionado = true;
+//                        Glide.with(requireContext())
+//                                .load(rival1.imagen)
+//                                .circleCrop()
+//                                .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(getContext(), 1000,2, "#8B0000",5)))
+//                                .into(holder.binding.imagenRival);
+//                    } else {
+//                        rival1.estaSeleccionado = false;
+//                        Log.e("ABCD", "El rival " + rival1.nombre + " NO esta en la misma posicion que " + rivalesDisponibles.get(position).nombre);
+//                        Glide.with(requireContext())
+//                                .load(rival1.imagen)
+//                                .circleCrop()
+////                                .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(getContext(), 1000,2, "#8B0000",5)))
+//                                .into(holder.binding.imagenRival);
+//                    }
+//                }
 
-                    rivalAnterior = rivalesDisponibles.get(posicionOriginal);
-
-                    Glide.with(requireContext())
-                            .load(rivalAnterior.imagen)
-                            .circleCrop()
-                            .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(getContext(), 1000,2, "#FFFFFF",5)))
-                            .into(holder.binding.imagenRival);
-                    Log.e("ABCD", "Posicion original: " + rivalesDisponibles.get(posicionOriginal));
-
-                }
-                // Seleccionamos el nuevo rival
-
-                Glide.with(requireContext())
-                        .load(rival.imagen)
-                        .circleCrop()
-                        .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(getContext(), 1000,2, "#8B0000",5)))
-                        .into(holder.binding.imagenRival);
-
-                // Text views placeholder
-
+                rivalSeleccionado.clear();
+                rivalSeleccionado.add(new Rival(rival.uid, rival.nombre, rival.puntuacion, rival.imagen));
+                Log.e("ABCD", rivalSeleccionado.get(0).uid);
                 binding.nombreRivalSeleccionado.setText(rival.nombre);
-                binding.puntuacionRivalSeleccionado.setText(String.valueOf(posicionOriginal));
+                binding.puntuacionRivalSeleccionado.setText(String.valueOf(rival.puntuacion));
                 posicionOriginal = position;
             });
         }

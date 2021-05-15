@@ -1,22 +1,29 @@
 package com.renegade.ironfistspain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Encuentro {
     String enlace;
     String estado;
     LocalDateTime fechaPeticion;
     LocalDateTime fechaEncuentro;
-    String jugadorLocal;
-    String jugadorVisitante;
+    String uidLocal;
+    String uidVisitante;
     String organizador;
     String resultadoLocal;
     String resultadoVisitante;
+    List<Integer> diasSeleccionados;
+    String rangoHoraMin;
+    String rangoHoraMax;
 
-    public Encuentro(String estado, String jugadorLocal, String jugadorVisitante) {
+    public Encuentro(String estado, String uidLocal, String uidVisitante, List<Integer> diasSeleccionados, String rangoHoraMin, String rangoHoraMax) {
         this.estado = estado;
-        this.jugadorLocal = jugadorLocal;
-        this.jugadorVisitante = jugadorVisitante;
+        this.uidLocal = uidLocal;
+        this.uidVisitante = uidVisitante;
+        this.diasSeleccionados = diasSeleccionados;
+        this.rangoHoraMin = rangoHoraMin;
+        this.rangoHoraMax = rangoHoraMax;
         fechaPeticion = LocalDateTime.now();
 
     }
@@ -53,20 +60,20 @@ public class Encuentro {
         this.fechaEncuentro = fechaEncuentro;
     }
 
-    public String getJugadorLocal() {
-        return jugadorLocal;
+    public String getUidLocal() {
+        return uidLocal;
     }
 
-    public void setJugadorLocal(String jugadorLocal) {
-        this.jugadorLocal = jugadorLocal;
+    public void setUidLocal(String uidLocal) {
+        this.uidLocal = uidLocal;
     }
 
-    public String getJugadorVisitante() {
-        return jugadorVisitante;
+    public String getUidVisitante() {
+        return uidVisitante;
     }
 
-    public void setJugadorVisitante(String jugadorVisitante) {
-        this.jugadorVisitante = jugadorVisitante;
+    public void setUidVisitante(String uidVisitante) {
+        this.uidVisitante = uidVisitante;
     }
 
     public String getOrganizador() {
