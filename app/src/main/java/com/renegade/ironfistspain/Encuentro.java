@@ -99,4 +99,28 @@ public class Encuentro {
     public void setResultadoVisitante(String resultadoVisitante) {
         this.resultadoVisitante = resultadoVisitante;
     }
+
+    public List<Integer> getDiasSeleccionados() {
+        return diasSeleccionados;
+    }
+
+    public void setDiasSeleccionados(List<Integer> diasSeleccionados) {
+        this.diasSeleccionados = diasSeleccionados;
+    }
+
+    public String getRangoHoraMin() {
+        return rangoHoraMin;
+    }
+
+    public void setRangoHoraMin(String rangoHoraMin) {
+        this.rangoHoraMin = rangoHoraMin;
+    }
+
+    public String getRangoHoraMax() {
+        return rangoHoraMax;
+    }
+
+    public void setRangoHoraMax(String rangoHoraMax) {
+        this.rangoHoraMax = rangoHoraMax;
+    }
 }

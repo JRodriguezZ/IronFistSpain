@@ -10,19 +10,28 @@ import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.renegade.ironfistspain.databinding.FragmentNotificacionesBinding;
 import com.renegade.ironfistspain.databinding.ViewholderNotificacionBinding;
 import com.renegade.ironfistspain.databinding.ViewholderSeleccionRangoBinding;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class NotificacionesFragment extends BaseFragment {
 
     private FragmentNotificacionesBinding binding;
+
+    List<Notificacion> notificaciones = new ArrayList<>();
+
+    NotificacionesAdapter notificacionesAdapter = new NotificacionesAdapter();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +46,39 @@ public class NotificacionesFragment extends BaseFragment {
         // Opcion 2: Almacenar en una base de datos local los retos que te marquen como uidVisitatante y que el fragment consulte localmente.
         //           Solo actualizar los retos si son nuevos y no estaban antes ya almacenados.
 
+        LinearLayoutManager verticalLayoutManager
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        binding.listaNotificaciones.setLayoutManager(verticalLayoutManager);
+        binding.listaNotificaciones.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        binding.listaNotificaciones.setAdapter(notificacionesAdapter);
 
+        db.collection(CollectionDB.ENCUENTROS)
+                .addSnapshotListener((value, error) -> {
+                    notificaciones.clear();
+                    for (QueryDocumentSnapshot noti : value) {
+                        if (noti != null) {
+                            if (noti.getString("uidVisitante").equals(user.getUid())){
+
+                                String uidLocal = noti.getString("uidLocal");
+                                String rangoHoraMin = noti.getString("rangoHoraMin");
+                                String rangoHoraMax = noti.getString("rangoHoraMax");
+                                List<String> diasDisponibles = (List<String>) noti.get("diasSeleccionados");
+
+                                db.collection(CollectionDB.USUARIOS)
+                                        .document(uidLocal)
+                                        .get()
+                                        .addOnSuccessListener(doc -> {
+                                            String nicknameRival = doc.getString("nickname");
+
+                                            Log.e("ABCD", "Nickname Rival: " + nicknameRival + " - Hora minima: " + rangoHoraMin + " - Hora maxima: " + rangoHoraMax + " - Dias Seleccionados: " + diasDisponibles);
+
+                                            notificaciones.add(new Notificacion(nicknameRival, rangoHoraMin, rangoHoraMax, diasDisponibles));
+                                            notificacionesAdapter.notifyDataSetChanged();
+                                        });
+                            }
+                        }
+                    }
+                });
 
 
     }
@@ -54,10 +95,11 @@ public class NotificacionesFragment extends BaseFragment {
         public void onBindViewHolder(@NonNull NotificacionViewHolder holder, int position) {
             Notificacion notificacion = notificaciones.get(position);
 
-            holder.binding.nombreRivalNotificacion.setText("");
-            holder.binding.rangoHora1.setText(":");
-            holder.binding.rangoHora2.setText(":");
-            holder.binding.diasDisponibles.setText("");
+
+            holder.binding.nombreRivalNotificacion.setText(notificacion.nicknameRival);
+            holder.binding.rangoHora1.setText(notificacion.rangoHoraMin);
+            holder.binding.rangoHora2.setText(notificacion.rangoHoraMax);
+            holder.binding.diasDisponibles.setText(Arrays.toString(notificacion.diasDisponibles.toArray()));
 
             holder.itemView.setOnClickListener(v -> {
             });
@@ -67,7 +109,7 @@ public class NotificacionesFragment extends BaseFragment {
         public int getItemCount() {
             return notificaciones == null ? 10 : notificaciones.size();
         }
-//
+
 //            @Override
 //            public Filter getFilter() {
 //                return busqueda;
@@ -115,5 +157,4 @@ public class NotificacionesFragment extends BaseFragment {
     }
 }
 
-}
 

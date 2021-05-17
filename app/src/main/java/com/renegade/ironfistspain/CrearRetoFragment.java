@@ -162,6 +162,7 @@ public class CrearRetoFragment extends BaseFragment {
         });
 
         binding.enviarRetoButton.setOnClickListener(v -> {
+            // Estados del encuentro: Enviado -> Aceptado/Cancelado -> En proceso -> Completado
             db.collection("Encuentros").document().set(new Encuentro("Enviado", user.getUid(), rivalSeleccionado.get(0).uid, diasSeleccionados, f24horas.format(dateMin), f24horas.format(dateMax)));
             Toast.makeText(getActivity(), "¡Se ha enviado el reto correctamente!", Toast.LENGTH_SHORT).show();
             nav.navigate(R.id.action_crearRetoFragment_to_inicioFragment);
