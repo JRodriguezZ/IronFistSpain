@@ -27,6 +27,8 @@ public class MensajesFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Que se cree un chat para cada encuentro que se acepte entre los dos jugadores y el organizador.
+
         binding.signOutButton2.setOnClickListener(v -> {
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build();
             GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);

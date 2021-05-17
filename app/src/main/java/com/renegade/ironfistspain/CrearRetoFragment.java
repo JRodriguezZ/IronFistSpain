@@ -27,7 +27,6 @@ import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
-import com.bumptech.glide.request.RequestOptions;
 import com.dpro.widgets.WeekdaysPicker;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.renegade.ironfistspain.databinding.FragmentCrearRetoBinding;
@@ -67,8 +66,7 @@ public class CrearRetoFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        LinearLayoutManager horizontalLayoutManager
-                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.recyclerViewRivales.setLayoutManager(horizontalLayoutManager);
 //        binding.recyclerViewRivales.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL));
         binding.recyclerViewRivales.setAdapter(rivalesAdapter);
@@ -162,7 +160,7 @@ public class CrearRetoFragment extends BaseFragment {
         });
 
         binding.enviarRetoButton.setOnClickListener(v -> {
-            // Estados del encuentro: Enviado -> Aceptado/Cancelado -> En proceso -> Completado
+            // Estados del encuentro: Enviado -> Aceptado/Cancelado -> En proceso (-> Planeado) -> Completado
             db.collection("Encuentros").document().set(new Encuentro("Enviado", user.getUid(), rivalSeleccionado.get(0).uid, diasSeleccionados, f24horas.format(dateMin), f24horas.format(dateMax)));
             Toast.makeText(getActivity(), "¡Se ha enviado el reto correctamente!", Toast.LENGTH_SHORT).show();
             nav.navigate(R.id.action_crearRetoFragment_to_inicioFragment);
@@ -191,6 +189,8 @@ public class CrearRetoFragment extends BaseFragment {
             holder.binding.puntuacionRival.setText(""+rival.puntuacion);
 
             holder.itemView.setOnClickListener(v -> {
+
+                binding.nombreRivalSeleccionado.setTextColor(Color.rgb(139,0,0));
 
                 viewModel.nombreRivalLiveData.setValue(rival.nombre);   // aqui poner el ID del personaje
                 viewModel.imagenRivalLiveData.setValue(rival.imagen);

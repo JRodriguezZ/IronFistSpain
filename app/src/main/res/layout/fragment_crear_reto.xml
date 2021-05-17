@@ -47,8 +47,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ninguno"
+                android:textStyle="bold"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/subTituloDiaHora"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerViewRivales" />
 
@@ -57,6 +60,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/subTituloDiaHora"
                 app:layout_constraintStart_toEndOf="@+id/nombreRivalSeleccionado"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerViewRivales" />
@@ -66,6 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rival seleccionado: "
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/subTituloDiaHora"
                 app:layout_constraintEnd_toStartOf="@+id/nombreRivalSeleccionado"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerViewRivales" />
@@ -74,15 +80,14 @@
                 android:id="@+id/subTituloDiaHora"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="42dp"
                 android:text="Dia y hora que puedes competir"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerViewRivales"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewRivales" />
 
             <com.dpro.widgets.WeekdaysPicker
                 android:id="@+id/weekdays"
@@ -92,11 +97,9 @@
                 app:full_size="true"
                 app:highlight_color="@color/DarkRed"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/subTituloDiaHora"
-                app:sunday_first_day="false"
-                tools:ignore="MissingConstraints" />
+                app:sunday_first_day="false" />
 
             <TextView
                 android:id="@+id/separadorHoras"
