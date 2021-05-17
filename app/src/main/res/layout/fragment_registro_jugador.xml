@@ -125,6 +125,14 @@
         app:layout_constraintStart_toEndOf="@+id/space"
         app:layout_constraintTop_toBottomOf="@+id/titulo2PjSecundario" />
 
+    <ImageView
+        android:id="@+id/botonLimpiarCasilla"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_close_24"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonPjSecundario"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonPjSecundario" />
+
     <TextView
         android:id="@+id/tituloRango"
         android:layout_width="wrap_content"

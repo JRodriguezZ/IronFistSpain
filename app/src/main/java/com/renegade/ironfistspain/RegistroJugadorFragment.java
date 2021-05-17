@@ -32,8 +32,10 @@ public class RegistroJugadorFragment extends BaseFragment {
         binding.imageButtonPjSecundario.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_seleccionPjSecundarioFragment));
         binding.imagenRango.setOnClickListener(v -> nav.navigate(R.id.action_registroJugadorFragment_to_seleccionRangoFragment));
 
-
-
+        binding.botonLimpiarCasilla.setOnClickListener(v -> {
+            viewModel.imagenPj2LiveData.setValue(null);
+            viewModel.nombrePj2LiveData.setValue(null);
+        });
 
         viewModel.imagenPj1LiveData.observe(getViewLifecycleOwner(), imagenMain -> {
             Glide.with(requireContext()).load(viewModel.imagenPj1LiveData.getValue()).circleCrop().into(binding.imageButtonPjPrincipal);
@@ -48,7 +50,6 @@ public class RegistroJugadorFragment extends BaseFragment {
         viewModel.imagenRangoLiveData.observe(getViewLifecycleOwner(), imagenRango -> {
             Glide.with(requireContext()).load(viewModel.imagenRangoLiveData.getValue()).into(binding.imagenRango);
         });
-
 
         binding.botonRegistroJugador.setOnClickListener(v -> {
 

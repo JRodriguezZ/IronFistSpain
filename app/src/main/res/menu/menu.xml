@@ -18,7 +18,7 @@
 
     <item android:id="@+id/crearRetoFragment"
         android:title="Retar"
-        android:icon="@drawable/ic_baseline_add_24"/>
+        android:icon="@drawable/battle"/>
 
 
 </menu>
