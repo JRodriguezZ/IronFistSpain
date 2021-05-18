@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
             if (destination.getId() == R.id.registroFragment ||
                     destination.getId() == R.id.registroJugadorFragment ||
                     destination.getId() == R.id.registroEspectadorFragment2 ||
-                    destination.getId() == R.id.registroOrganizadorFragment ||
                     destination.getId() == R.id.seleccionPrincipalFragment ||
                     destination.getId() == R.id.seleccionPjSecundarioFragment ||
                     destination.getId() == R.id.seleccionRangoFragment ||

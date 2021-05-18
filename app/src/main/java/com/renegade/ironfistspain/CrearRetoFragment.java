@@ -192,9 +192,9 @@ public class CrearRetoFragment extends BaseFragment {
 
                 binding.nombreRivalSeleccionado.setTextColor(Color.rgb(139,0,0));
 
-                viewModel.nombreRivalLiveData.setValue(rival.nombre);   // aqui poner el ID del personaje
-                viewModel.imagenRivalLiveData.setValue(rival.imagen);
-                viewModel.puntuacionRangoLiveData.setValue(String.valueOf(rival.puntuacion));
+//                viewModel.nombreRivalLiveData.setValue(rival.nombre);   // aqui poner el ID del personaje
+//                viewModel.imagenRivalLiveData.setValue(rival.imagen);
+//                viewModel.puntuacionRangoLiveData.setValue(String.valueOf(rival.puntuacion));
 
 //                for (Rival rival1: rivalesDisponibles) {
 //                    rival1.estaSeleccionado = false;
@@ -220,6 +220,7 @@ public class CrearRetoFragment extends BaseFragment {
                 rivalSeleccionado.clear();
                 rivalSeleccionado.add(new Rival(rival.uid, rival.nombre, rival.puntuacion, rival.imagen));
                 Log.e("ABCD", rivalSeleccionado.get(0).uid);
+
                 binding.nombreRivalSeleccionado.setText(rival.nombre);
                 binding.puntuacionRivalSeleccionado.setText(String.valueOf(rival.puntuacion));
                 posicionOriginal = position;

@@ -28,9 +28,6 @@
             android:id="@+id/action_registroFragment_to_registroJugadorFragment"
             app:destination="@id/registroJugadorFragment" />
         <action
-            android:id="@+id/action_registroFragment_to_registroOrganizadorFragment"
-            app:destination="@id/registroOrganizadorFragment" />
-        <action
             android:id="@+id/action_registroFragment_to_registroEspectadorFragment2"
             app:destination="@id/registroEspectadorFragment2" />
     </fragment>
@@ -47,7 +44,11 @@
         android:id="@+id/notificacionesFragment"
         android:name="com.renegade.ironfistspain.NotificacionesFragment"
         android:label="Iron Fist Spain"
-        tools:layout="@layout/fragment_notificaciones" />
+        tools:layout="@layout/fragment_notificaciones" >
+        <action
+            android:id="@+id/action_notificacionesFragment_to_visualizacionNotificacionFragment"
+            app:destination="@id/visualizacionNotificacionFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mensajesFragment"
         android:name="com.renegade.ironfistspain.MensajesFragment"
@@ -114,15 +115,6 @@
             android:id="@+id/action_registroJugadorFragment_to_seleccionRangoFragment"
             app:destination="@id/seleccionRangoFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/registroOrganizadorFragment"
-        android:name="com.renegade.ironfistspain.RegistroOrganizadorFragment"
-        android:label="Crear cuenta de organizador"
-        tools:layout="@layout/fragment_registro_organizador" >
-        <action
-            android:id="@+id/action_registroOrganizadorFragment_to_inicioFragment"
-            app:destination="@id/inicioFragment" />
-    </fragment>
     <dialog
         android:id="@+id/seleccionPrincipalFragment"
         android:name="com.renegade.ironfistspain.SeleccionPjPrincipalFragment"
@@ -136,4 +128,9 @@
         android:id="@+id/seleccionRangoFragment"
         android:name="com.renegade.ironfistspain.SeleccionRangoFragment"
         android:label="SeleccionRangoFragment" />
+    <dialog
+        android:id="@+id/visualizacionNotificacionFragment"
+        android:name="com.renegade.ironfistspain.VisualizacionNotificacionFragment"
+        android:label="fragment_visualizacion_notificacion"
+        tools:layout="@layout/fragment_visualizacion_notificacion" />
 </navigation>

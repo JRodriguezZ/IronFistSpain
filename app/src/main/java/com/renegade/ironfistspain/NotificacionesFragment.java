@@ -44,16 +44,17 @@ public class NotificacionesFragment extends BaseFragment {
         LinearLayoutManager verticalLayoutManager
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.listaNotificaciones.setLayoutManager(verticalLayoutManager);
-        binding.listaNotificaciones.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+//        binding.listaNotificaciones.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         binding.listaNotificaciones.setAdapter(notificacionesAdapter);
 
         db.collection(CollectionDB.ENCUENTROS)
+                .whereEqualTo("estado", "Enviado")
                 .addSnapshotListener((value, error) -> {
                     notificaciones.clear();
                     for (QueryDocumentSnapshot noti : value) {
                         if (noti != null) {
                             if (noti.getString("uidVisitante").equals(user.getUid())){
-
+                                String id = noti.getId();
                                 String uidLocal = noti.getString("uidLocal");
                                 String rangoHoraMin = noti.getString("rangoHoraMin");
                                 String rangoHoraMax = noti.getString("rangoHoraMax");
@@ -67,7 +68,7 @@ public class NotificacionesFragment extends BaseFragment {
 
                                             Log.e("ABCD", "Nickname Rival: " + nicknameRival + " - Hora minima: " + rangoHoraMin + " - Hora maxima: " + rangoHoraMax + " - Dias Seleccionados: " + diasDisponibles);
 
-                                            notificaciones.add(new Notificacion(nicknameRival, rangoHoraMin, rangoHoraMax, diasDisponibles));
+                                            notificaciones.add(new Notificacion(nicknameRival, rangoHoraMin, rangoHoraMax, diasDisponibles, uidLocal, id));
                                             notificacionesAdapter.notifyDataSetChanged();
                                         });
                             }
@@ -90,13 +91,22 @@ public class NotificacionesFragment extends BaseFragment {
         public void onBindViewHolder(@NonNull NotificacionViewHolder holder, int position) {
             Notificacion notificacion = notificaciones.get(position);
 
-
             holder.binding.nombreRivalNotificacion.setText(notificacion.nicknameRival);
-            holder.binding.rangoHora1.setText(notificacion.rangoHoraMin);
-            holder.binding.rangoHora2.setText(notificacion.rangoHoraMax);
-            holder.binding.diasDisponibles.setText(Arrays.toString(notificacion.diasDisponibles.toArray()));
+//            holder.binding.rangoHora1.setText(notificacion.rangoHoraMin);
+//            holder.binding.rangoHora2.setText(notificacion.rangoHoraMax);
+//            holder.binding.diasDisponibles.setText(Arrays.toString(notificacion.diasDisponibles.toArray()));
 
             holder.itemView.setOnClickListener(v -> {
+
+                viewModel.idNotiRivalLiveData.setValue(notificacion.id);
+                viewModel.nombreRivalLiveData.setValue(notificacion.nicknameRival);
+                viewModel.hora1RivalLiveData.setValue(notificacion.rangoHoraMin);
+                viewModel.hora2RivalLiveData.setValue(notificacion.rangoHoraMax);
+                viewModel.diasSelecRivalLiveData.setValue(notificacion.diasDisponibles);
+                viewModel.uidRivalLiveData.setValue(notificacion.uidRival);
+
+                Log.e("ABCD", "nombre: " + viewModel.nombreRivalLiveData.getValue() + " nombne: " + viewModel.hora1RivalLiveData.getValue() + " nombne: " + viewModel.hora2RivalLiveData.getValue() + " nombne: " + viewModel.diasSelecRivalLiveData.getValue());
+                nav.navigate(R.id.action_notificacionesFragment_to_visualizacionNotificacionFragment);
             });
         }
 

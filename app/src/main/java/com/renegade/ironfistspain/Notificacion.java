@@ -7,12 +7,16 @@ public class Notificacion {
     String rangoHoraMax;
     String nicknameRival;
     List<String> diasDisponibles;
+    String uidRival;
+    String id;
 
-    public Notificacion(String nicknameRival, String rangoHoraMin, String rangoHoraMax, List<String> diasDisponibles) {
+    public Notificacion(String nicknameRival, String rangoHoraMin, String rangoHoraMax, List<String> diasDisponibles, String uidRival, String id) {
         this.nicknameRival = nicknameRival;
         this.rangoHoraMin = rangoHoraMin;
         this.rangoHoraMax = rangoHoraMax;
         this.diasDisponibles = diasDisponibles;
+        this.uidRival = uidRival;
+        this.id = id;
     }
 
     public String getRangoHoraMin() {
@@ -45,5 +49,21 @@ public class Notificacion {
 
     public void setDiasDisponibles(List<String> diasDisponibles) {
         this.diasDisponibles = diasDisponibles;
+    }
+
+    public String getUidRival() {
+        return uidRival;
+    }
+
+    public void setUidRival(String uidRival) {
+        this.uidRival = uidRival;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

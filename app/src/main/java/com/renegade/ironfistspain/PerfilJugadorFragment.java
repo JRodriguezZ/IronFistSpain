@@ -29,34 +29,33 @@ public class PerfilJugadorFragment extends BaseFragment {
         db.collection(CollectionDB.USUARIOS)
                 .document(user.getUid())
                 .get().addOnSuccessListener(doc -> {
-            String s = doc.getString("personajeMain");
-            db.collection(CollectionDB.PERSONAJES)
-                    .document(s)
-                    .get(Source.SERVER)
-                    .addOnSuccessListener(doc2 -> {
-                        Glide.with(requireContext()).load(doc2.get("imagen")).circleCrop().into(binding.imagenPjMain);
-                    });
-
-        });
+                    String s = doc.getString("personajeMain");
+                    db.collection(CollectionDB.PERSONAJES)
+                            .document(s)
+                            .get(Source.SERVER)
+                            .addOnSuccessListener(doc2 -> {
+                                Glide.with(requireContext()).load(doc2.get("imagen")).circleCrop().into(binding.imagenPjMain);
+                            });
+                });
 
         db.collection(CollectionDB.USUARIOS)
                 .document(user.getUid())
                 .get().addOnSuccessListener(doc -> {
-            String s = doc.getString("personajeSecundario");
-            System.out.println("ABCD, " + s);
-            if (s.isEmpty() || s == null) {
-                binding.textPjSec.setVisibility(View.GONE);
-                binding.imagenPjSec.setVisibility(View.GONE);
-            } else {
-                db.collection(CollectionDB.PERSONAJES)
-                        .document(s)
-                        .get()
-                        .addOnSuccessListener(doc2 -> {
-                            Glide.with(requireContext()).load(doc2.get("imagen")).circleCrop().into(binding.imagenPjSec);
+                    String s = doc.getString("personajeSecundario");
+                    System.out.println("ABCD, " + s);
+                    if (s.isEmpty() || s == null) {
+                        binding.textPjSec.setVisibility(View.GONE);
+                        binding.imagenPjSec.setVisibility(View.GONE);
+                    } else {
+                        db.collection(CollectionDB.PERSONAJES)
+                                .document(s)
+                                .get()
+                                .addOnSuccessListener(doc2 -> {
+                                    Glide.with(requireContext()).load(doc2.get("imagen")).circleCrop().into(binding.imagenPjSec);
 
-                        });
-            }
-        });
+                                });
+                    }
+                });
 
         db.collection(CollectionDB.USUARIOS)
                 .document(user.getUid())

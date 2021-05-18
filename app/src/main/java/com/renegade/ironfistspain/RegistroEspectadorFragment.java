@@ -29,7 +29,7 @@ public class RegistroEspectadorFragment extends BaseFragment {
 
         binding.botonRegistroEspectador.setOnClickListener(v -> {
 
-            db.collection(CollectionDB.USUARIOS).document(user.getUid()).set(binding.editTextTextPersonName5.getText().toString());
+            db.collection(CollectionDB.USUARIOS).document(user.getUid()).set(new Espectador(binding.editTextTextPersonName5.getText().toString(), "Espectador"));
             nav.navigate(R.id.action_registroEspectadorFragment2_to_inicioFragment);
 
         });

@@ -4,18 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:elevation="10dp" >
+    android:layout_height="wrap_content">
 
 <!--    <androidx.cardview.widget.CardView-->
 <!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="120dp">-->
+<!--        android:layout_height="100dp">-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp">
-
-
+            android:layout_height="100dp"
+            android:elevation="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/elevationbg" >
 
             <ImageView
                 android:id="@+id/imagenFight"
@@ -26,118 +28,110 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Space
-                android:id="@+id/space"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imagenFight"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="¡"
-                android:textSize="17sp"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toStartOf="@+id/nombreRivalNotificacion"
-                app:layout_constraintTop_toTopOf="@+id/textoTeHaRetado" />
 
-            <TextView
-                android:id="@+id/nombreRivalNotificacion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Rival"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                android:textColor="@color/DarkRed"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.35"
-                app:layout_constraintStart_toEndOf="@+id/imagenFight"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¡"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/textoTeHaRetado"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" te ha retado!"
-                android:textSize="17sp"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toEndOf="@+id/nombreRivalNotificacion"
-                app:layout_constraintTop_toTopOf="@+id/nombreRivalNotificacion" />
+                <TextView
+                    android:id="@+id/nombreRivalNotificacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rival"
+                    android:textColor="@color/DarkRed"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tituloRangoHoras"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rango de horas"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="@+id/rangoHora2"
-                app:layout_constraintStart_toStartOf="@+id/rangoHora1"
-                app:layout_constraintTop_toTopOf="@+id/tituloDiasSeleccionados" />
+                <TextView
+                    android:id="@+id/textoTeHaRetado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" te ha retado!"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/rangoHora1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00:00"
-                android:textColor="@color/DarkRed"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/separadorHoras"
-                app:layout_constraintEnd_toStartOf="@+id/separadorHoras"
-                app:layout_constraintStart_toEndOf="@+id/imagenFight" />
-
-            <TextView
-                android:id="@+id/separadorHoras"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
+                android:text=""
+                android:textSize="0dp"
                 android:textColor="@color/black"
-                android:textSize="17sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/space"
-                app:layout_constraintStart_toEndOf="@+id/imagenFight"
-                app:layout_constraintTop_toBottomOf="@+id/tituloRangoHoras" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/rangoHora2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00:00"
-                android:textColor="@color/DarkRed"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/separadorHoras"
-                app:layout_constraintEnd_toStartOf="@+id/space"
-                app:layout_constraintStart_toEndOf="@+id/separadorHoras" />
-
-            <TextView
-                android:id="@+id/tituloDiasSeleccionados"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="Dias disponibles"
+                android:text=""
+                android:textSize="0dp"
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/space"
-                app:layout_constraintTop_toBottomOf="@+id/textoTeHaRetado" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/diasDisponibles"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lunes"
-                android:textAlignment="center"
-                android:textColor="@color/DarkRed"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/tituloDiasSeleccionados"
-                app:layout_constraintStart_toStartOf="@+id/tituloDiasSeleccionados"
-                app:layout_constraintTop_toBottomOf="@+id/tituloDiasSeleccionados" />
+                android:text=""
+                android:textSize="0dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
+            <TextView
+                android:id="@+id/puntuacionrivalNotificacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="0dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/imagenPerfilRival"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="0dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/imagenPj1Rival"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="0dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/imagenPj2Rival"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="0dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

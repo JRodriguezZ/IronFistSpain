@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    tools:context=".VisualizacionNotificacionFragment">
+
+    <ImageView
+        android:id="@+id/imagenRivalNoti"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ifs_logo_circle_notext"/>
+
+    <TextView
+        android:id="@+id/nombreRivalNoti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="34dp"
+        android:textColor="@color/DarkRed"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/puntuacionRivalNoti"
+        app:layout_constraintStart_toEndOf="@+id/imagenRivalNoti"
+        app:layout_constraintTop_toTopOf="@+id/imagenRivalNoti" />
+
+    <TextView
+        android:id="@+id/puntuacionRivalNoti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0000"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nombreRivalNoti"
+        app:layout_constraintTop_toTopOf="@+id/nombreRivalNoti" />
+
+
+    <ImageView
+        android:id="@+id/imagenPj1RivalNoti"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ifs_logo_circle_notext"
+        app:layout_constraintStart_toStartOf="@+id/imagenRivalNoti"
+        app:layout_constraintTop_toBottomOf="@+id/imagenRivalNoti" />
+
+
+    <ImageView
+        android:id="@+id/imagenPj2RivalNoti"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ifs_logo_circle_notext"
+        app:layout_constraintEnd_toEndOf="@+id/imagenPj1RivalNoti"
+        app:layout_constraintStart_toStartOf="@+id/imagenPj1RivalNoti"
+        app:layout_constraintTop_toBottomOf="@+id/imagenPj1RivalNoti" />
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imagenRivalNoti"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tituloRangoHoras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Rango de horas"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/space"
+        app:layout_constraintStart_toEndOf="@+id/imagenRivalNoti"
+        app:layout_constraintTop_toBottomOf="@+id/nombreRivalNoti" />
+
+    <TextView
+        android:id="@+id/tituloDiasDisponibles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dias disponibles"
+        android:textColor="@color/black"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/diasDisponibles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/space" />
+
+
+    <TextView
+        android:id="@+id/rangoHora1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:textColor="@color/DarkRed"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/separadorHoras"
+        app:layout_constraintEnd_toEndOf="@+id/separadorHoras"
+        app:layout_constraintStart_toStartOf="@+id/separadorHoras" />
+
+    <TextView
+        android:id="@+id/separadorHoras"
+        android:layout_width="8dp"
+        android:layout_height="19dp"
+        android:layout_marginBottom="8dp"
+        android:text="-"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@id/botonAceptarReto"
+        app:layout_constraintEnd_toEndOf="@+id/tituloRangoHoras"
+        app:layout_constraintStart_toStartOf="@+id/tituloRangoHoras"
+        app:layout_constraintTop_toTopOf="@+id/rangoHora1" />
+
+    <TextView
+        android:id="@+id/rangoHora2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:textColor="@color/DarkRed"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/separadorHoras"
+        app:layout_constraintStart_toStartOf="@+id/separadorHoras"
+        app:layout_constraintTop_toBottomOf="@id/separadorHoras" />
+
+
+    <TextView
+        android:id="@+id/diasDisponibles"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@color/DarkRed"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/botonCancelarReto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/space"
+        app:layout_constraintTop_toTopOf="@+id/rangoHora1" />
+
+    <Button
+        android:id="@+id/botonAceptarReto"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@color/DarkGreen"
+        android:text="Aceptar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/space"
+        app:layout_constraintStart_toEndOf="@+id/imagenPj1RivalNoti" />
+
+    <Button
+        android:id="@+id/botonCancelarReto"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:text="Cancelar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/space" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
