@@ -11,9 +11,9 @@
         android:id="@+id/imagenRivalNoti"
         android:layout_width="75dp"
         android:layout_height="75dp"
+        android:src="@drawable/ifs_logo_circle_notext"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ifs_logo_circle_notext"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nombreRivalNoti"
@@ -85,9 +85,9 @@
         android:id="@+id/tituloDiasDisponibles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="Dias disponibles"
         android:textColor="@color/black"
-        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/diasDisponibles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/space" />
@@ -153,7 +153,8 @@
         android:text="Aceptar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/space"
-        app:layout_constraintStart_toEndOf="@+id/imagenPj1RivalNoti" />
+        app:layout_constraintStart_toEndOf="@+id/imagenPj1RivalNoti"
+        app:layout_constraintTop_toBottomOf="@+id/imagenPj1RivalNoti" />
 
     <Button
         android:id="@+id/botonCancelarReto"
@@ -162,7 +163,8 @@
         android:text="Cancelar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/space" />
+        app:layout_constraintStart_toEndOf="@+id/space"
+        app:layout_constraintTop_toBottomOf="@+id/imagenPj1RivalNoti" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,7 @@ public class IFSViewModel  extends ViewModel {
 
     public MutableLiveData<String> nombreRangoLiveData = new MutableLiveData<>();
     public MutableLiveData<String> imagenRangoLiveData = new MutableLiveData<>();
-    public MutableLiveData<String> puntuacionRangoLiveData = new MutableLiveData<>();
+    public MutableLiveData<Long> puntuacionRangoLiveData = new MutableLiveData<>();
 
     public MutableLiveData<String> imagenRivalLiveData = new MutableLiveData<>();
 

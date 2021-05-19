@@ -1,7 +1,6 @@
 package com.renegade.ironfistspain;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.firestore.Source;
 import com.renegade.ironfistspain.databinding.FragmentRegistroJugadorBinding;
 
 public class RegistroJugadorFragment extends BaseFragment {
 
     private FragmentRegistroJugadorBinding binding;
-    String img;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -1,17 +1,14 @@
 package com.renegade.ironfistspain;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.bumptech.glide.Glide;
-import com.renegade.ironfistspain.databinding.FragmentNotificacionesBinding;
 import com.renegade.ironfistspain.databinding.FragmentVisualizacionNotificacionBinding;
 
 import java.util.Arrays;
@@ -42,14 +39,14 @@ public class VisualizacionNotificacionFragment extends BaseDialogFragment {
                     String pj2Rival = doc.getString("personajeSecundario");
 
                     Glide.with(requireContext()).load(doc.getString("imagen")).circleCrop().into(binding.imagenRivalNoti);
-                    binding.puntuacionRivalNoti.setText(doc.getString("puntuacion"));
+                    binding.puntuacionRivalNoti.setText(""+doc.getLong("puntuacion"));
                     db.collection(CollectionDB.PERSONAJES)
                             .document(pj1Rival)
                             .get()
                             .addOnSuccessListener(doc1 ->
                                     Glide.with(requireContext()).load(doc1.getString("imagen")).circleCrop().into(binding.imagenPj1RivalNoti));
 
-                    if (!pj2Rival.isEmpty()) {
+                    if (pj2Rival != null) {
                         db.collection(CollectionDB.PERSONAJES)
                                 .document(pj2Rival)
                                 .get()

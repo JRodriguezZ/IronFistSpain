@@ -55,7 +55,7 @@ public class CrearRetoFragment extends BaseFragment {
 
     List<Rival> rivalSeleccionado = new ArrayList<>();
 
-    class Rival { String uid; String nombre; int puntuacion; String imagen; Boolean estaSeleccionado; public Rival(String uid, String nombre, int puntuacion, String imagen) { this.uid = uid; this.nombre = nombre; this.puntuacion = puntuacion; this.imagen = imagen; estaSeleccionado = false;}}
+    class Rival { String uid; String nombre; Long puntuacion; String imagen; Boolean estaSeleccionado; public Rival(String uid, String nombre, Long puntuacion, String imagen) { this.uid = uid; this.nombre = nombre; this.puntuacion = puntuacion; this.imagen = imagen; estaSeleccionado = false;}}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,17 +76,19 @@ public class CrearRetoFragment extends BaseFragment {
 //            String s = null;
 //            try {
 
-            int p = Integer.parseInt(doc.getString("puntuacion")); // 1000
+            Long p = doc.getLong("puntuacion"); // 1000
+
             String s = doc.getString("nickname");
 
+            Log.e("ABCD", "Puntuacion del usuario: " + p + " Nombre del usuario: " + s);
 //            } catch (Exception e){
 //                System.out.println("PUNTUACION INVALIDA EN LA BASE DE DATOS");
 //                p = 1000;
 //            }
 
             db.collection(CollectionDB.USUARIOS)
-                    .whereGreaterThanOrEqualTo("puntuacion", ""+(p-100))
-                    .whereLessThanOrEqualTo("puntuacion", ""+(p+100))
+                    .whereGreaterThanOrEqualTo("puntuacion", (p-200))
+                    .whereLessThanOrEqualTo("puntuacion", (p+200))
 //                    .orderBy("puntuacion", Query.Direction.valueOf("asc"))
                     .addSnapshotListener((value, error) -> {
                         rivalesDisponibles.clear();
@@ -94,7 +96,7 @@ public class CrearRetoFragment extends BaseFragment {
                             if (!Objects.equals(rival.getString("nickname"), s)) {
                                 String uid = rival.getString("uid");
                                 String nickname = rival.getString("nickname");
-                                int puntuacion = Integer.parseInt(rival.getString("puntuacion"));
+                                Long puntuacion = rival.getLong("puntuacion");
                                 String imagen = rival.getString("imagen");
 
                                 Log.e("ABCD", "Consulta: " + s + " = " + nickname + ", " + puntuacion);
@@ -161,9 +163,15 @@ public class CrearRetoFragment extends BaseFragment {
 
         binding.enviarRetoButton.setOnClickListener(v -> {
             // Estados del encuentro: Enviado -> Aceptado/Cancelado -> En proceso (-> Planeado) -> Completado
-            db.collection("Encuentros").document().set(new Encuentro("Enviado", user.getUid(), rivalSeleccionado.get(0).uid, diasSeleccionados, f24horas.format(dateMin), f24horas.format(dateMax)));
-            Toast.makeText(getActivity(), "¡Se ha enviado el reto correctamente!", Toast.LENGTH_SHORT).show();
-            nav.navigate(R.id.action_crearRetoFragment_to_inicioFragment);
+            if (rivalSeleccionado.size() == 0 || diasSeleccionados.size() == 0 || dateMin == null || dateMax == null ) {
+                Toast.makeText(getActivity(),"Hay campos sin rellenar!",Toast.LENGTH_LONG).show();
+            } else {
+                db.collection("Encuentros")
+                        .document()
+                        .set(new Encuentro("Enviado", user.getUid(), rivalSeleccionado.get(0).uid, diasSeleccionados, f24horas.format(dateMin), f24horas.format(dateMax)));
+                Toast.makeText(getActivity(), "¡Se ha enviado el reto correctamente!", Toast.LENGTH_SHORT).show();
+                nav.navigate(R.id.action_crearRetoFragment_to_inicioFragment);
+            }
         });
 
     }

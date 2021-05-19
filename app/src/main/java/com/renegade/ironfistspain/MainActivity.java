@@ -11,6 +11,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.renegade.ironfistspain.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView((binding = ActivityMainBinding.inflate(getLayoutInflater())).getRoot());
+
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(false)
+                .build();
+        FirebaseFirestore.getInstance().setFirestoreSettings(settings);
 
         setSupportActionBar(binding.toolbar);
 
@@ -37,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.bottomNavView, navController);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+
+            // toolbar
             if (destination.getId() == R.id.registroFragment ||
                     destination.getId() == R.id.registroJugadorFragment ||
                     destination.getId() == R.id.registroEspectadorFragment2 ||
@@ -44,18 +53,23 @@ public class MainActivity extends AppCompatActivity {
                     destination.getId() == R.id.seleccionPjSecundarioFragment ||
                     destination.getId() == R.id.seleccionRangoFragment ||
                     destination.getId() == R.id.startFragment) {
-                binding.bottomNavView.setVisibility(View.GONE);
                 binding.toolbar.setVisibility(View.GONE);
             } else {
-                binding.bottomNavView.setVisibility(View.VISIBLE);
                 binding.toolbar.setVisibility(View.VISIBLE);
             }
 
-            if (destination.getId() == R.id.perfilJugadorFragment) {
-                binding.navProfileFragment.setVisibility(View.GONE);
+            // bottomNav
+            if (destination.getId() == R.id.perfilJugadorFragment ||
+                    destination.getId() == R.id.registroFragment ||
+                    destination.getId() == R.id.registroJugadorFragment ||
+                    destination.getId() == R.id.registroEspectadorFragment2 ||
+                    destination.getId() == R.id.seleccionPrincipalFragment ||
+                    destination.getId() == R.id.seleccionPjSecundarioFragment ||
+                    destination.getId() == R.id.seleccionRangoFragment ||
+                    destination.getId() == R.id.startFragment) {
                 binding.bottomNavView.setVisibility(View.GONE);
+
             } else {
-                binding.navProfileFragment.setVisibility(View.VISIBLE);
                 binding.bottomNavView.setVisibility(View.VISIBLE);
             }
         });

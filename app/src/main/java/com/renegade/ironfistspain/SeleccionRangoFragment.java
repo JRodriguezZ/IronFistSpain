@@ -64,7 +64,7 @@ public class SeleccionRangoFragment extends BaseDialogFragment {
                     for (QueryDocumentSnapshot rango : value) {
                         String nombre = rango.getString("nombre");
                         String imagen = rango.getString("imagen");
-                        String puntuacion = rango.getString("puntuacion");
+                        Long puntuacion = rango.getLong("puntuacion");
 
                         rangos.add(new Rango(nombre, imagen, puntuacion));
                         rangosOriginal.add(new Rango(nombre, imagen, puntuacion));

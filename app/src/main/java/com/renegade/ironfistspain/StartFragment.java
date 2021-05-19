@@ -49,53 +49,48 @@ public class StartFragment extends BaseFragment {
         firebaseAuthWithGoogle(GoogleSignIn.getLastSignedInAccount(requireContext()));
     }
 
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+        if (account == null) {
+            Log.e("ABCD", "No hay ninguna cuenta de google seleccionada previamente");
+            signInClient.launch(GoogleSignIn.getClient(requireContext(), new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()).getSignInIntent());
+        } else {
+            Log.e("ABCD", "Si que hay una cuenta de google seleccionada: " + account.getEmail());
+            firebaseLogin(account);
+        }
+    }
+
     ActivityResultLauncher<Intent> signInClient = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
         try {
-            auth.signInWithCredential(GoogleAuthProvider.getCredential(GoogleSignIn.getSignedInAccountFromIntent(result.getData()).getResult(ApiException.class).getIdToken(), null))
-                    .addOnSuccessListener(authResult -> {
-                        Log.e("ABCD", "LOGUEADO COMO " + authResult.getUser().getUid());
-                        db.collection(CollectionDB.USUARIOS).document(authResult.getUser().getUid()).get().addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                Log.e("ABCD", "LOGUEADO COMO " + document.getData());
-                                if (document.exists()) {
-                                    Log.e("ABCD", "Entra a la app");
-                                    nav.navigate(R.id.action_startFragment_to_inicioFragment);
-                                } else {
-                                    Log.e("ABCD", "Entra al registro");
-                                    nav.navigate(R.id.action_startFragment_to_registroFragment);
-                                }
-                            } else {
-                                // error de red
-                                Toast.makeText(getActivity(),"Error de red. Compruebe la conexion a internet y reinicie la aplicación.",Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    });
-
+            GoogleSignInAccount account = GoogleSignIn.getSignedInAccountFromIntent(result.getData()).getResult(ApiException.class);
+            firebaseLogin(account);
         } catch (ApiException e) {
             e.printStackTrace();
         }
     });
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-        if (account == null) {
-            signInClient.launch(GoogleSignIn.getClient(requireContext(), new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).build()).getSignInIntent());
-            Log.e("ABCD", "No hay nadie logueado anteriormente");
-        } else {
-            Log.e("ABCD", "Entra directamente a la app");
-            auth.signInWithCredential(GoogleAuthProvider.getCredential(account.getIdToken(), null))
-                    .addOnCompleteListener(requireActivity(), task -> {
-                        if (task.isSuccessful()) {
-                            Log.e("ABCD", "Entra directamente a la app IS SUCCESFULLL");
-                            nav.navigate(R.id.action_startFragment_to_inicioFragment);
-                        } else {
-                            signInClient.launch(GoogleSignIn.getClient(requireContext(), new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).build()).getSignInIntent());
-                            Toast.makeText(getActivity(),"Error de red. Comprueve la conexion a internet y reinicie la aplicación.", Toast.LENGTH_LONG).show();
-                        }
-
-                    });
-        }
+    void firebaseLogin(GoogleSignInAccount account){
+        auth.signInWithCredential(GoogleAuthProvider.getCredential(account.getIdToken(), null))
+                    .addOnSuccessListener(authResult -> {
+            Log.e("ABCD", "LOGUEADO COMO " + authResult.getUser().getUid());
+            db.collection(CollectionDB.USUARIOS).document(authResult.getUser().getUid()).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    Log.e("ABCD", "LOGUEADO COMO " + document.getData());
+                    if (document.exists()) {
+                        Log.e("ABCD", "Entra a la app");
+                        nav.navigate(R.id.action_startFragment_to_inicioFragment);
+                    } else {
+                        Log.e("ABCD", "Entra al registro");
+                        nav.navigate(R.id.action_startFragment_to_registroFragment);
+                    }
+                } else {
+                    // error de red
+                    Toast.makeText(getActivity(),"Error de red. Compruebe la conexion a internet y reinicie la aplicación.",Toast.LENGTH_LONG).show();
+                }
+            });
+        });
     }
+
 
 }
 

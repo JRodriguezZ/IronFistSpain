@@ -43,7 +43,7 @@ public class PerfilJugadorFragment extends BaseFragment {
                 .get().addOnSuccessListener(doc -> {
                     String s = doc.getString("personajeSecundario");
                     System.out.println("ABCD, " + s);
-                    if (s.isEmpty() || s == null) {
+                    if (s == null) {
                         binding.textPjSec.setVisibility(View.GONE);
                         binding.imagenPjSec.setVisibility(View.GONE);
                     } else {
@@ -61,7 +61,7 @@ public class PerfilJugadorFragment extends BaseFragment {
                 .document(user.getUid())
                 .get()
                 .addOnSuccessListener(doc -> {
-                    binding.puntuacionJugadorPerfil.setText(doc.getString("puntuacion"));
+                    binding.puntuacionJugadorPerfil.setText(""+doc.getLong("puntuacion"));
                 });
 
         db.collection(CollectionDB.USUARIOS)
