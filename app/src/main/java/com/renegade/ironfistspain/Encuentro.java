@@ -16,7 +16,9 @@ public class Encuentro {
     List<Integer> diasSeleccionados;
     String rangoHoraMin;
     String rangoHoraMax;
+    String id;
 
+    // Constructor del nuevo encuentro
     public Encuentro(String estado, String uidLocal, String uidVisitante, List<Integer> diasSeleccionados, String rangoHoraMin, String rangoHoraMax) {
         this.estado = estado;
         this.uidLocal = uidLocal;
@@ -25,7 +27,17 @@ public class Encuentro {
         this.rangoHoraMin = rangoHoraMin;
         this.rangoHoraMax = rangoHoraMax;
         fechaPeticion = LocalDateTime.now();
+    }
 
+    // Constructor del encuentro modificado
+    public Encuentro(String estado, String uidLocal, String uidVisitante, List<Integer> diasSeleccionados, String rangoHoraMin, String rangoHoraMax, String id) {
+        this.estado = estado;
+        this.uidLocal = uidLocal;
+        this.uidVisitante = uidVisitante;
+        this.diasSeleccionados = diasSeleccionados;
+        this.rangoHoraMin = rangoHoraMin;
+        this.rangoHoraMax = rangoHoraMax;
+        this.id = id;
     }
 
     public String getEnlace() {

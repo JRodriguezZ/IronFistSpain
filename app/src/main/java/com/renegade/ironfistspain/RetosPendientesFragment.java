@@ -19,15 +19,18 @@ import com.renegade.ironfistspain.databinding.FragmentRetosPendientesBinding;
 import com.renegade.ironfistspain.databinding.ViewholderNotificacionBinding;
 import com.renegade.ironfistspain.databinding.ViewholderRetoPendienteBinding;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 public class RetosPendientesFragment extends BaseFragment {
 
     private FragmentRetosPendientesBinding binding;
 
-    List<Notificacion> retosPendientes = new ArrayList<>();
+    List<Encuentro> retosPendientes = new ArrayList<>();
 
     RetosPendientesAdapter retosPendientesAdapter = new RetosPendientesAdapter();
 
@@ -46,22 +49,23 @@ public class RetosPendientesFragment extends BaseFragment {
         LinearLayoutManager verticalLayoutManager
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.retosPendientesRecycler.setLayoutManager(verticalLayoutManager);
-//        binding.listaNotificaciones.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
         binding.retosPendientesRecycler.setAdapter(retosPendientesAdapter);
 
 
         db.collection(CollectionDB.ENCUENTROS)
-                .whereEqualTo("estado", "Enviado")
                 .addSnapshotListener((value, error) -> {
                     retosPendientes.clear();
                     for (QueryDocumentSnapshot noti : value) {
                         if (noti != null) {
                             if (noti.getString("uidLocal").equals(user.getUid())){
                                 String id = noti.getId();
+                                String estado = noti.getString("estado");
+//                                LocalDateTime fechaPeticion = noti.getDate("fechaPeticion");
                                 String uidLocal = noti.getString("uidLocal");
+                                String uidVisitante = noti.getString("uidVisitante");
+                                List<Integer> diasDisponibles = (List<Integer>) noti.get("diasSeleccionados");
                                 String rangoHoraMin = noti.getString("rangoHoraMin");
                                 String rangoHoraMax = noti.getString("rangoHoraMax");
-                                List<String> diasDisponibles = (List<String>) noti.get("diasSeleccionados");
 
                                 db.collection(CollectionDB.USUARIOS)
                                         .document(uidLocal)
@@ -71,7 +75,7 @@ public class RetosPendientesFragment extends BaseFragment {
 
                                             Log.e("ABCD", "Nickname Rival: " + nicknameRival + " - Hora minima: " + rangoHoraMin + " - Hora maxima: " + rangoHoraMax + " - Dias Seleccionados: " + diasDisponibles);
 
-                                            retosPendientes.add(new Notificacion(nicknameRival, rangoHoraMin, rangoHoraMax, diasDisponibles, uidLocal, id));
+                                            retosPendientes.add(new Encuentro(estado, uidLocal, uidVisitante, diasDisponibles, rangoHoraMin, rangoHoraMax, "a"));
                                             retosPendientesAdapter.notifyDataSetChanged();
 
                                             if (retosPendientes.size() == 0) binding.noTienesRetosPend.setVisibility(View.VISIBLE);
@@ -95,21 +99,63 @@ public class RetosPendientesFragment extends BaseFragment {
         @Override
         public void onBindViewHolder(@NonNull RetoPendienteViewHolder holder, int position) {
 
-            Notificacion notificacion = retosPendientes.get(position);
+            Encuentro encuentro = retosPendientes.get(position);
 
-            holder.binding.nombreRivalNotificacion.setText(notificacion.nicknameRival);
-//            holder.binding.rangoHora1.setText(notificacion.rangoHoraMin);
-//            holder.binding.rangoHora2.setText(notificacion.rangoHoraMax);
-//            holder.binding.diasDisponibles.setText(Arrays.toString(notificacion.diasDisponibles.toArray()));
+            holder.binding.imageEnProceso.setVisibility(View.GONE);
+            holder.binding.imagePlanificado.setVisibility(View.GONE);
+            holder.binding.imagePendiente.setVisibility(View.GONE);
+            holder.binding.imageAceptado.setVisibility(View.GONE);
+            holder.binding.imageCancelado.setVisibility(View.GONE);
+
+
+            if (encuentro.uidLocal.equals(user.getUid())) {
+                db.collection(CollectionDB.USUARIOS)
+                        .document(encuentro.uidVisitante)
+                        .get()
+                        .addOnSuccessListener(doc -> {
+                            holder.binding.nombreRivalNotificacion.setText(doc.getString("nickname"));
+                        });
+            } else if (encuentro.uidVisitante.equals(user.getUid())) {
+                db.collection(CollectionDB.USUARIOS)
+                        .document(encuentro.uidLocal)
+                        .get()
+                        .addOnSuccessListener(doc -> {
+                            holder.binding.nombreRivalNotificacion.setText(doc.getString("nickname"));
+                        });
+            }
+
+            if (encuentro.estado.equals("Enviado")) {
+                holder.binding.imagePendiente.setVisibility(View.VISIBLE);
+                holder.binding.textEstadoReto.setText("Enviado");
+            }
+            else if (encuentro.estado.equals("Aceptado")) {
+                holder.binding.imageAceptado.setVisibility(View.VISIBLE);
+                holder.binding.textEstadoReto.setText("Aceptado");
+            }
+            else if (encuentro.estado.equals("Cancelado")) {
+                holder.binding.imageCancelado.setVisibility(View.VISIBLE);
+                holder.binding.textEstadoReto.setText("Cancelado");
+            }
+            else if (encuentro.estado.equals("En proceso")) {
+                holder.binding.imageEnProceso.setVisibility(View.VISIBLE);
+                holder.binding.textEstadoReto.setText("En proceso");
+            }
+            else if (encuentro.estado.equals("Planificado")) {
+                holder.binding.imagePlanificado.setVisibility(View.VISIBLE);
+                holder.binding.textEstadoReto.setText("Planificado");
+            }
+            else if (encuentro.estado.equals("Finalizado")) {
+                holder.binding.textEstadoReto.setText("Finalizado");
+            }
 
             holder.itemView.setOnClickListener(v -> {
 
-                viewModel.idNotiRivalLiveData.setValue(notificacion.id);
-                viewModel.nombreRivalLiveData.setValue(notificacion.nicknameRival);
-                viewModel.hora1RivalLiveData.setValue(notificacion.rangoHoraMin);
-                viewModel.hora2RivalLiveData.setValue(notificacion.rangoHoraMax);
-                viewModel.diasSelecRivalLiveData.setValue(notificacion.diasDisponibles);
-                viewModel.uidRivalLiveData.setValue(notificacion.uidRival);
+                viewModel.idNotiRivalLiveData.setValue(encuentro.id);
+//                viewModel.nombreRivalLiveData.setValue(encuentro.nicknameRival);
+                viewModel.hora1RivalLiveData.setValue(encuentro.rangoHoraMin);
+                viewModel.hora2RivalLiveData.setValue(encuentro.rangoHoraMax);
+//                viewModel.diasSelecRivalLiveData.setValue(encuentro.diasDisponibles);
+//                viewModel.uidRivalLiveData.setValue(encuentro.uidRival);
 
                 Log.e("ABCD", "nombre: " + viewModel.nombreRivalLiveData.getValue() + " nombne: " + viewModel.hora1RivalLiveData.getValue() + " nombne: " + viewModel.hora2RivalLiveData.getValue() + " nombne: " + viewModel.diasSelecRivalLiveData.getValue());
 //                nav.navigate(R.id.action_notificacionesFragment_to_visualizacionNotificacionFragment);
