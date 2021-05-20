@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NotificacionesFragment">
-
+    tools:context=".RetosPendientesFragment">
 
     <TextView
-        android:id="@+id/noTienesNotificaciones"
+        android:id="@+id/noTienesRetosPend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No tienes notificaciones."
         android:padding="10dp"
+        android:text="No tienes retos pendientes."
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="34sp"
@@ -21,13 +20,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listaNotificaciones"
+        android:id="@+id/retosPendientesRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

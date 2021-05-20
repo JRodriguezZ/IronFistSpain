@@ -70,6 +70,10 @@ public class NotificacionesFragment extends BaseFragment {
 
                                             notificaciones.add(new Notificacion(nicknameRival, rangoHoraMin, rangoHoraMax, diasDisponibles, uidLocal, id));
                                             notificacionesAdapter.notifyDataSetChanged();
+
+                                            if (notificaciones.size() == 0) binding.noTienesNotificaciones.setVisibility(View.VISIBLE);
+                                            else binding.noTienesNotificaciones.setVisibility(View.GONE);
+
                                         });
                             }
                         }

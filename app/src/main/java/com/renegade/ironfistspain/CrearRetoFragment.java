@@ -105,6 +105,9 @@ public class CrearRetoFragment extends BaseFragment {
                             }
 
                             rivalesAdapter.notifyDataSetChanged();
+
+                            if (rivalesDisponibles.size() == 0) binding.noHayRivalesDisp.setVisibility(View.VISIBLE);
+                            else binding.noHayRivalesDisp.setVisibility(View.GONE);
                         }
             });
         });
@@ -170,7 +173,7 @@ public class CrearRetoFragment extends BaseFragment {
                         .document()
                         .set(new Encuentro("Enviado", user.getUid(), rivalSeleccionado.get(0).uid, diasSeleccionados, f24horas.format(dateMin), f24horas.format(dateMax)));
                 Toast.makeText(getActivity(), "¡Se ha enviado el reto correctamente!", Toast.LENGTH_SHORT).show();
-                nav.navigate(R.id.action_crearRetoFragment_to_inicioFragment);
+                nav.navigate(R.id.action_crearRetoFragment_to_retosPendientesFragment2);
             }
         });
 

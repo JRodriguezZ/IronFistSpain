@@ -45,7 +45,6 @@ public class StartFragment extends BaseFragment {
 
         */
 
-        Log.e("ABCD", "Se crea el fragment");
         firebaseAuthWithGoogle(GoogleSignIn.getLastSignedInAccount(requireContext()));
     }
 
@@ -85,6 +84,7 @@ public class StartFragment extends BaseFragment {
                     }
                 } else {
                     // error de red
+                    Log.e("ABCD", "Error de red");
                     Toast.makeText(getActivity(),"Error de red. Compruebe la conexion a internet y reinicie la aplicación.",Toast.LENGTH_LONG).show();
                 }
             });

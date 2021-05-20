@@ -65,8 +65,8 @@
         android:label="Iron Fist Spain"
         tools:layout="@layout/fragment_crear_reto" >
         <action
-            android:id="@+id/action_crearRetoFragment_to_inicioFragment"
-            app:destination="@id/inicioFragment" />
+            android:id="@+id/action_crearRetoFragment_to_retosPendientesFragment2"
+            app:destination="@id/retosPendientesFragment2" />
     </fragment>
     <fragment
         android:id="@+id/perfilJugadorFragment"
@@ -133,4 +133,9 @@
         android:name="com.renegade.ironfistspain.VisualizacionNotificacionFragment"
         android:label="fragment_visualizacion_notificacion"
         tools:layout="@layout/fragment_visualizacion_notificacion" />
+    <fragment
+        android:id="@+id/retosPendientesFragment2"
+        android:name="com.renegade.ironfistspain.RetosPendientesFragment"
+        android:label="Retos Pendientes"
+        tools:layout="@layout/fragment_retos_pendientes" />
 </navigation>

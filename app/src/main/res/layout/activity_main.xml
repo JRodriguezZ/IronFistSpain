@@ -66,8 +66,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:menu="@menu/menu"
-                tools:ignore="MissingConstraints" />
+                app:menu="@menu/menu" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
