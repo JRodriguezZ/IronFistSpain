@@ -19,6 +19,11 @@ public class Jugador {
         this.rol = rol;
     }
 
+    public Jugador(String nickname, Long puntuacion) {
+        this.nickname = nickname;
+        this.puntuacion = puntuacion;
+    }
+
     public String getUID() {
         return UID;
     }

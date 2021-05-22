@@ -126,7 +126,7 @@ public class CrearRetoFragment extends BaseFragment {
         binding.botonHora1.setOnClickListener(v -> {
             TimePickerDialog timePickerDialog = new TimePickerDialog(
                     getContext(),
-                    R.style.Theme_Dialog,
+                   // R.style.Theme_Dialog,
                     (timePicker, hourOfDay, minute) -> {
                         String tiempo = hourOfDay + ":" + minute;
                         f24horas = new SimpleDateFormat("HH:mm");
@@ -143,7 +143,7 @@ public class CrearRetoFragment extends BaseFragment {
         binding.botonHora2.setOnClickListener(view1 -> {
             TimePickerDialog timePickerDialog = new TimePickerDialog(
                     getContext(),
-                    R.style.Theme_Dialog,
+                   // R.style.Theme_Dialog,
                     (view2, hourOfDay, minute) -> {
                         String tiempo = hourOfDay + ":" + minute;
                         f24horas = new SimpleDateFormat("HH:mm");
