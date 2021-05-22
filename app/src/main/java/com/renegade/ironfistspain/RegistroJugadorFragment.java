@@ -50,22 +50,30 @@ public class RegistroJugadorFragment extends BaseFragment {
 
         binding.botonRegistroJugador.setOnClickListener(v -> {
 
-            if (binding.editTextNombreUsuario.getText().toString().equals("") ||
-                    viewModel.nombrePj1LiveData.getValue() == null ||
+            boolean valid = true;
+
+            if (binding.editTextNombreUsuario.getText().toString().isEmpty()) {
+                binding.editTextNombreUsuario.setError("Obligatorio");
+                valid = false;
+            }
+
+            if (viewModel.nombrePj1LiveData.getValue() == null ||
                     viewModel.puntuacionRangoLiveData.getValue() == null) {
+                valid = false;
                 Toast.makeText(getActivity(), "¡Hay campos obligatorios sin rellenar!", Toast.LENGTH_LONG).show();
-            } else {
-                    db.collection(CollectionDB.USUARIOS)
-                            .document(user.getUid())
-                            .set(new Jugador(user.getUid(), binding.editTextNombreUsuario.getText().toString(), viewModel.imagenPj1LiveData.getValue(), viewModel.nombrePj1LiveData.getValue(), viewModel.nombrePj2LiveData.getValue(), viewModel.puntuacionRangoLiveData.getValue(), "jugador"));
+            }
 
-                    nav.navigate(R.id.action_registroJugadorFragment_to_inicioFragment);
-                }
+            if (valid) {
+                db.collection(CollectionDB.USUARIOS)
+                        .document(user.getUid())
+                        .set(new Jugador(user.getUid(), binding.editTextNombreUsuario.getText().toString(), viewModel.imagenPj1LiveData.getValue(), viewModel.nombrePj1LiveData.getValue(), viewModel.nombrePj2LiveData.getValue(), viewModel.puntuacionRangoLiveData.getValue(), "jugador"));
 
-            });
+                nav.navigate(R.id.action_registroJugadorFragment_to_inicioFragment);
+            }
+
+        });
             // add -> genera un id de documento aleatorio
             // document.set  // le pones el id que quieras
-
 
     }
 
