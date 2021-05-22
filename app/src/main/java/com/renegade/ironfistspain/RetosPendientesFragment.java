@@ -57,7 +57,7 @@ public class RetosPendientesFragment extends BaseFragment {
                     retosPendientes.clear();
                     for (QueryDocumentSnapshot noti : value) {
                         if (noti != null) {
-                            if (noti.getString("uidLocal").equals(user.getUid())){
+                            if (noti.getString("uidLocal").equals(user.getUid()) || noti.getString("uidVisitante").equals(user.getUid())) {
                                 String id = noti.getId();
                                 String estado = noti.getString("estado");
 //                                LocalDateTime fechaPeticion = noti.getDate("fechaPeticion");

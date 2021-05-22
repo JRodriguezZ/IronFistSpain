@@ -88,7 +88,7 @@ public class NotificacionesFragment extends BaseFragment {
         @NonNull
         @Override
         public NotificacionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new NotificacionesFragment.NotificacionViewHolder(ViewholderNotificacionBinding.inflate(getLayoutInflater(), parent, false));
+            return new NotificacionViewHolder(ViewholderNotificacionBinding.inflate(getLayoutInflater(), parent, false));
         }
 
         @Override
@@ -119,42 +119,6 @@ public class NotificacionesFragment extends BaseFragment {
             return notificaciones == null ? 10 : notificaciones.size();
         }
 
-//            @Override
-//            public Filter getFilter() {
-//                return busqueda;
-//            }
-//
-//
-//            private Filter busqueda = new Filter() {
-//                @Override
-//                protected FilterResults performFiltering(CharSequence constraint) {
-//                    List<Rango> rangosFiltrados = new ArrayList<>();
-//
-//                    if (constraint == null || constraint.length() == 0) {
-//                        rangosFiltrados.addAll(rangosOriginal);
-//                    } else {
-//                        String filterPattern = constraint.toString().toLowerCase().trim();
-//
-//                        for (Rango rango : rangosOriginal) {
-//                            if (rango.getNombre().toLowerCase().contains(filterPattern)) {
-//                                rangosFiltrados.add(rango);
-//                            }
-//                        }
-//                    }
-//
-//                    FilterResults results = new FilterResults();
-//                    results.values = rangosFiltrados;
-//
-//                    return results;
-//                }
-//
-//                @Override
-//                protected void publishResults(CharSequence constraint, FilterResults results) {
-//                    rangos.clear();
-//                    rangos.addAll((List) results.values);
-//                    notifyDataSetChanged();
-//                }
-//            };
     }
 
     static class NotificacionViewHolder extends RecyclerView.ViewHolder {
