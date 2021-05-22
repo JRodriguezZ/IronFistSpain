@@ -119,6 +119,7 @@ public class NotificacionesFragment extends BaseFragment {
             return notificaciones == null ? 10 : notificaciones.size();
         }
 
+
     }
 
     static class NotificacionViewHolder extends RecyclerView.ViewHolder {
