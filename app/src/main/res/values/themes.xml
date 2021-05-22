@@ -16,4 +16,10 @@
         <item name="windowNoTitle">true</item>
         <item name="fontFamily">@font/oxaniumregular</item>
     </style>
+
+    <style name="Theme.Dialog" parent="android:Theme.Material.Light.Dialog">
+
+        <item name="android:colorAccent">@color/DarkRed</item>
+        <item name="colorControlActivated">@color/DarkRed</item>
+    </style>
 </resources>

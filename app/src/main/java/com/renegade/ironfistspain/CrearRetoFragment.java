@@ -1,5 +1,6 @@
 package com.renegade.ironfistspain;
 
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,14 +12,17 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,15 +41,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class CrearRetoFragment extends BaseFragment {
-    int hora1, minutos1;
     Date dateMin, dateMax;
     SimpleDateFormat f24horas;
-    int hora2, minutos2;
     private FragmentCrearRetoBinding binding;
 
     List<Integer> diasSeleccionados = Arrays.asList();
@@ -123,11 +126,9 @@ public class CrearRetoFragment extends BaseFragment {
         binding.botonHora1.setOnClickListener(v -> {
             TimePickerDialog timePickerDialog = new TimePickerDialog(
                     getContext(),
-                    android.R.style.Theme_Black,
-                    (view1, hourOfDay, minute) -> {
-                        hora1 = hourOfDay;
-                        minutos1 = minute;
-                        String tiempo = hora1 + ":" + minutos1;
+                    R.style.Theme_Dialog,
+                    (timePicker, hourOfDay, minute) -> {
+                        String tiempo = hourOfDay + ":" + minute;
                         f24horas = new SimpleDateFormat("HH:mm");
                         try {
                             dateMin = f24horas.parse(tiempo);
@@ -135,21 +136,16 @@ public class CrearRetoFragment extends BaseFragment {
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                    },12,0,true
-            );
-            timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-            timePickerDialog.updateTime(hora1, minutos1);
+                    }, 12, 0 , true);
             timePickerDialog.show();
         });
 
         binding.botonHora2.setOnClickListener(view1 -> {
             TimePickerDialog timePickerDialog = new TimePickerDialog(
                     getContext(),
-                    android.R.style.Theme_Black,
+                    R.style.Theme_Dialog,
                     (view2, hourOfDay, minute) -> {
-                        hora2 = hourOfDay;
-                        minutos2 = minute;
-                        String tiempo = hora2 + ":" + minutos2;
+                        String tiempo = hourOfDay + ":" + minute;
                         f24horas = new SimpleDateFormat("HH:mm");
                         try {
                             dateMax = f24horas.parse(tiempo);
@@ -159,13 +155,12 @@ public class CrearRetoFragment extends BaseFragment {
                         }
                     },12,0,true
             );
-            timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-            timePickerDialog.updateTime(hora1, minutos1);
             timePickerDialog.show();
         });
 
         binding.enviarRetoButton.setOnClickListener(v -> {
             // Estados del encuentro: Enviado -> Aceptado/Cancelado -> En proceso (-> Planeado) -> Completado
+
             if (rivalSeleccionado.size() == 0 || diasSeleccionados.size() == 0 || dateMin == null || dateMax == null ) {
                 Toast.makeText(getActivity(),"Hay campos sin rellenar!",Toast.LENGTH_LONG).show();
             } else {
@@ -253,6 +248,36 @@ public class CrearRetoFragment extends BaseFragment {
     }
 }
 
+class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        // Use the current time as the default values for the picker
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+
+        // Create a new instance of TimePickerDialog and return it
+        return new TimePickerDialog(getActivity(), this, hour, minute,
+                DateFormat.is24HourFormat(getActivity()));
+    }
+
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        // Do something with the time chosen by the user
+        String tiempo = hourOfDay + ":" + minute;
+        try {
+            devolverHoraEscogida(tiempo);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String devolverHoraEscogida(String time) throws ParseException {
+        SimpleDateFormat f24horas = new SimpleDateFormat("HH:mm");
+        Date date = f24horas.parse(time);
+        return f24horas.format(date);
+    }
+}
 class RoundedCornersTransformation implements Transformation<Bitmap> {
 
     public enum CornerType {

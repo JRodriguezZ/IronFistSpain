@@ -58,9 +58,6 @@ public class SeleccionPjPrincipalFragment extends BaseDialogFragment {
             }
         });
 
-//.collection("Usuarios")
-//                .orderBy("puntuacion", "asc")
-
         db.collection(CollectionDB.PERSONAJES)
                 .addSnapshotListener((value, error) -> {
                     personajes.clear();
