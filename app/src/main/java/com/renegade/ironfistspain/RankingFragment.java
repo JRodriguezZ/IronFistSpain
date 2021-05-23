@@ -45,19 +45,18 @@ public class RankingFragment extends BaseFragment {
 
         db.collection(CollectionDB.USUARIOS)
                 .orderBy("puntuacion", Query.Direction.DESCENDING)
-                .whereEqualTo("rol", "jugador")
+//                .whereEqualTo("rol", "jugador")
                 .addSnapshotListener((value, error) -> {
                     jugadores.clear();
-                    if (value != null) {
-                        for (QueryDocumentSnapshot jugador : value) {
-                                    String nickname = jugador.getString("nickname");
-                                    Long puntuacion = jugador.getLong("puntuacion");
+                    for (QueryDocumentSnapshot jugador : value) {
+                        if (jugador.get("rol").equals("jugador")) {
+                            String nickname = jugador.getString("nickname");
+                            Long puntuacion = jugador.getLong("puntuacion");
 
+                            jugadores.add(new Jugador(nickname, puntuacion));
+                            jugadoresAdapter.notifyDataSetChanged();
 
-                                                jugadores.add(new Jugador(nickname, puntuacion));
-                                                jugadoresAdapter.notifyDataSetChanged();
-
-                                            }
+                        }
                     }
                 });
 

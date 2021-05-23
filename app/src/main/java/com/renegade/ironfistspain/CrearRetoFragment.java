@@ -32,6 +32,7 @@ import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
 import com.dpro.widgets.WeekdaysPicker;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.renegade.ironfistspain.databinding.FragmentCrearRetoBinding;
 import com.renegade.ironfistspain.databinding.ViewholderSeleccionRivalBinding;
@@ -92,7 +93,7 @@ public class CrearRetoFragment extends BaseFragment {
             db.collection(CollectionDB.USUARIOS)
                     .whereGreaterThanOrEqualTo("puntuacion", (p-200))
                     .whereLessThanOrEqualTo("puntuacion", (p+200))
-//                    .orderBy("puntuacion", Query.Direction.valueOf("asc"))
+                    .orderBy("puntuacion", Query.Direction.ASCENDING)
                     .addSnapshotListener((value, error) -> {
                         rivalesDisponibles.clear();
                         for (QueryDocumentSnapshot rival : value) {

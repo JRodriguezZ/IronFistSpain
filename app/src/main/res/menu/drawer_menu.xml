@@ -3,14 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-
-        <item
-            android:id="@+id/historialFragment"
-            android:title="Historial" />
-
         <item
             android:id="@+id/retosPendientesFragment2"
-            android:title="Retos Pendientes" />
+            android:title="Tus Retos" />
 
         <item
             android:id="@+id/ajustesFragment"

@@ -1,41 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
-    android:layout_height="60dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="55dp"
     android:orientation="horizontal"
-    android:weightSum="5">
+    android:weightSum="5"
+    android:background="@drawable/rectangle2" >
 
     <TextView
         android:id="@+id/posicion"
         android:layout_width="0dp"
-        android:textColor="@color/black"
-        android:text="1"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:background="@drawable/rectangle2"
         android:gravity="center"
+        android:text="1"
+        android:textColor="@color/black"
         android:textSize="20sp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/nombreJugadorRanking"
         android:layout_width="0dp"
-        android:textColor="@color/black"
-        android:text="nombre jugador"
-        android:background="@drawable/rectangle2"
-        android:gravity="center"
-        android:textSize="20sp"
+        android:layout_height="match_parent"
         android:layout_weight="3"
-        android:layout_height="match_parent"/>
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/puntuacionRanking"
         android:layout_width="0dp"
-        android:textColor="@color/black"
-        android:text="1900"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:background="@drawable/rectangle2"
         android:gravity="center"
-        android:textSize="20sp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"/>
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
 </LinearLayout>

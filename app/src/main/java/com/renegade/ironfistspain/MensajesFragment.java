@@ -29,13 +29,6 @@ public class MensajesFragment extends BaseFragment {
 
         // Que se cree un chat para cada encuentro que se acepte entre los dos jugadores y el organizador.
 
-        binding.signOutButton2.setOnClickListener(v -> {
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build();
-            GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
 
-            auth.signOut();
-            mGoogleSignInClient.revokeAccess();
-            nav.navigate(R.id.startFragment);
-        });
     }
 }

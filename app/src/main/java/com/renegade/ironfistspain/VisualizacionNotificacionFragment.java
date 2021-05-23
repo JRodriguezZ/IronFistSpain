@@ -63,7 +63,7 @@ public class VisualizacionNotificacionFragment extends BaseDialogFragment {
                     .document(viewModel.idNotiRivalLiveData.getValue())
                     .update("estado", "Aceptado")
                     .addOnSuccessListener(doc -> {
-                        nav.popBackStack();
+                        nav.navigate(R.id.retosPendientesFragment2);
                     });
         });
 
