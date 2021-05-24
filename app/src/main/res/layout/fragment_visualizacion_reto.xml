@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="350dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
     tools:context=".VisualizacionRetoFragment">
@@ -83,7 +83,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintFase1"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,6 +95,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="5dp"
             android:text="Rango de horas"
             android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
@@ -164,7 +165,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintFase2"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -175,8 +176,9 @@
             android:id="@+id/tituloHoraEncuentro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="5dp"
             android:gravity="center"
-            android:text="Hora del encuentro"
+            android:text="Hora encuentro"
             android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@+id/tituloFechaEncuentro"
             app:layout_constraintStart_toStartOf="parent"
@@ -199,8 +201,9 @@
             android:id="@+id/tituloFechaEncuentro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="5dp"
             android:gravity="center"
-            android:text="Fecha del encuentro"
+            android:text="Fecha encuentro"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tituloHoraEncuentro"
@@ -223,7 +226,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintFase3"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -246,9 +249,10 @@
                 android:textColor="@color/black" />
 
             <TextView
+                android:id="@+id/firstTo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="5dp"
+                android:paddingStart="3dp"
                 android:text=""
                 android:textColor="@color/black"
                 android:textStyle="bold" />

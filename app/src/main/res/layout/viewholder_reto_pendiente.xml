@@ -29,7 +29,7 @@
                 android:id="@+id/textoTeHaRetado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Reto pendiente con "
+                android:text="Reto con "
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -37,7 +37,7 @@
                 android:id="@+id/nombreRivalNotificacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rival"
+                android:text=""
                 android:textColor="@color/DarkRed"
                 android:textSize="23sp"
                 android:textStyle="bold" />

@@ -45,7 +45,7 @@
                     android:id="@+id/nombreRivalNotificacion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rival"
+                    android:text=""
                     android:textSize="23sp"
                     android:textColor="@color/DarkRed"
                     android:textStyle="bold" />

@@ -48,14 +48,14 @@ public class VisualizacionRetoFragment extends BaseDialogFragment {
                             .get()
                             .addOnSuccessListener(doc1 -> {
                         binding.nombreRival1Reto.setText(doc1.getString("nickname"));
-                        binding.puntuacionRival1Reto.setText(doc1.getString("puntuacion"));
+                        binding.puntuacionRival1Reto.setText(""+doc1.getLong("puntuacion"));
 
                                 db.collection(CollectionDB.USUARIOS)
                                         .document(uidV)
                                         .get()
                                         .addOnSuccessListener(doc2 -> {
-                                            binding.nombreRival2Reto.setText(doc2.getString("puntuacion"));
-                                            binding.puntuacionRival2Reto.setText(doc2.getString("puntuacion"));
+                                            binding.nombreRival2Reto.setText(doc2.getString("nickname"));
+                                            binding.puntuacionRival2Reto.setText(""+doc2.getLong("puntuacion"));
                                         });
 
                     });
@@ -83,10 +83,13 @@ public class VisualizacionRetoFragment extends BaseDialogFragment {
                 .get()
                 .addOnSuccessListener(doc -> {
                     if (doc.getString("fechaEncuentro") != null) {
-                        String[] fechaEncuentro;
-                        fechaEncuentro = (String[]) doc.get("fechaEncuentro");
-                        binding.horaDelEncuentro.setText(fechaEncuentro[0]);
-                        binding.fechaDelEncuentro.setText(fechaEncuentro[1]);
+                        binding.horaDelEncuentro.setText(doc.getString("horaEncuentro"));
+                        binding.fechaDelEncuentro.setText(doc.getString("fechaEncuentro"));
+                    }
+                    if (doc.getLong("resultadoLocal") != null) {
+                        binding.resultadoFTLocal.setText(""+doc.getLong("resultadoLocal"));
+                        binding.resultadoFTVisitante.setText(""+doc.getLong("resultadoVisitante"));
+                        binding.firstTo.setText(""+doc.getLong("firstTo"));
                     }
         });
     }

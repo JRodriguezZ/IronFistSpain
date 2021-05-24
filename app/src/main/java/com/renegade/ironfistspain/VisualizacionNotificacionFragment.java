@@ -17,6 +17,7 @@ import java.util.Arrays;
 public class VisualizacionNotificacionFragment extends BaseDialogFragment {
 
     private FragmentVisualizacionNotificacionBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return (binding = FragmentVisualizacionNotificacionBinding.inflate(inflater, container, false)).getRoot();

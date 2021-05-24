@@ -90,16 +90,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textPjSec" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/historialPerfil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="30dp"
-                android:padding="5dp"
-                android:background="@drawable/rectangle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imagenPjMain" />
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/historialPerfil"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="30dp"-->
+<!--                android:padding="5dp"-->
+<!--                android:background="@drawable/rectangle"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/imagenPjMain" />-->
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

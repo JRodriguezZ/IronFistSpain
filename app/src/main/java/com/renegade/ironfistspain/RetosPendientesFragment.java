@@ -58,6 +58,9 @@ public class RetosPendientesFragment extends BaseFragment {
                     for (QueryDocumentSnapshot noti : value) {
                         if (noti != null) {
                             if (noti.getString("uidLocal").equals(user.getUid()) || noti.getString("uidVisitante").equals(user.getUid())) {
+//                                if (){
+//                                    Si el estado es diferente a enviado y el uidvisitante es diferente al tuyo
+//                                }
                                 String id = noti.getId();
                                 String estado = noti.getString("estado");
 //                                LocalDateTime fechaPeticion = noti.getDate("fechaPeticion");
@@ -75,7 +78,7 @@ public class RetosPendientesFragment extends BaseFragment {
 
                                             Log.e("ABCD", "Nickname Rival: " + nicknameRival + " - Hora minima: " + rangoHoraMin + " - Hora maxima: " + rangoHoraMax + " - Dias Seleccionados: " + diasDisponibles);
 
-                                            retosPendientes.add(new Encuentro(estado, uidLocal, uidVisitante, diasDisponibles, rangoHoraMin, rangoHoraMax, "a"));
+                                            retosPendientes.add(new Encuentro(estado, uidLocal, uidVisitante, diasDisponibles, rangoHoraMin, rangoHoraMax, id));
                                             retosPendientesAdapter.notifyDataSetChanged();
 
                                             if (retosPendientes.size() == 0) binding.noTienesRetosPend.setVisibility(View.VISIBLE);
@@ -149,7 +152,25 @@ public class RetosPendientesFragment extends BaseFragment {
             }
 
             holder.itemView.setOnClickListener(v -> {
-
+//                db.collection(CollectionDB.ENCUENTROS).document(encuentro.id).get().addOnSuccessListener(documentSnapshot -> {
+//                    viewModel.idNotiRivalLiveData.setValue(documentSnapshot.getId());
+//                    try {
+//                        Thread.sleep(1000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                });
+//
+//                db.collection(CollectionDB.ENCUENTROS).document(encuentro.id).get().addOnCompleteListener(task -> {
+//                    if (task.isSuccessful()) {
+//                        viewModel.idNotiRivalLiveData.setValue(task.getResult().getId());
+//                        try {
+//                            wait(1000);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                });
                 viewModel.idNotiRivalLiveData.setValue(encuentro.id);
                 viewModel.estadoRetoLiveData.setValue(encuentro.estado);
                 viewModel.hora1RivalLiveData.setValue(encuentro.rangoHoraMin);
