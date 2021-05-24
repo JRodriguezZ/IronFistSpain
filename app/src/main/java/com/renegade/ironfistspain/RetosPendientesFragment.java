@@ -151,14 +151,13 @@ public class RetosPendientesFragment extends BaseFragment {
             holder.itemView.setOnClickListener(v -> {
 
                 viewModel.idNotiRivalLiveData.setValue(encuentro.id);
-//                viewModel.nombreRivalLiveData.setValue(encuentro.nicknameRival);
+                viewModel.estadoRetoLiveData.setValue(encuentro.estado);
                 viewModel.hora1RivalLiveData.setValue(encuentro.rangoHoraMin);
                 viewModel.hora2RivalLiveData.setValue(encuentro.rangoHoraMax);
-//                viewModel.diasSelecRivalLiveData.setValue(encuentro.diasDisponibles);
-//                viewModel.uidRivalLiveData.setValue(encuentro.uidRival);
+                viewModel.diasSelecRivalLiveData.setValue(encuentro.diasSeleccionados);
 
                 Log.e("ABCD", "nombre: " + viewModel.nombreRivalLiveData.getValue() + " nombne: " + viewModel.hora1RivalLiveData.getValue() + " nombne: " + viewModel.hora2RivalLiveData.getValue() + " nombne: " + viewModel.diasSelecRivalLiveData.getValue());
-//                nav.navigate(R.id.action_notificacionesFragment_to_visualizacionNotificacionFragment);
+                nav.navigate(R.id.visualizacionRetoFragment);
             });
         }
 

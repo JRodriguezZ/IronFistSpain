@@ -58,7 +58,7 @@ public class NotificacionesFragment extends BaseFragment {
                                 String uidLocal = noti.getString("uidLocal");
                                 String rangoHoraMin = noti.getString("rangoHoraMin");
                                 String rangoHoraMax = noti.getString("rangoHoraMax");
-                                List<String> diasDisponibles = (List<String>) noti.get("diasSeleccionados");
+                                List<Integer> diasDisponibles = (List<Integer>) noti.get("diasSeleccionados");
 
                                 db.collection(CollectionDB.USUARIOS)
                                         .document(uidLocal)

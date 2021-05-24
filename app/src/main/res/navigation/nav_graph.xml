@@ -138,4 +138,9 @@
         android:name="com.renegade.ironfistspain.RetosPendientesFragment"
         android:label="Tus Retos"
         tools:layout="@layout/fragment_retos_pendientes" />
+    <dialog
+        android:id="@+id/visualizacionRetoFragment"
+        android:name="com.renegade.ironfistspain.VisualizacionRetoFragment"
+        android:label="fragment_visualizacion_reto"
+        tools:layout="@layout/fragment_visualizacion_reto" />
 </navigation>

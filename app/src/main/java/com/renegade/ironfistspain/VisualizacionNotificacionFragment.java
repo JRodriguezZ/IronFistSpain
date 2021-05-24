@@ -40,6 +40,7 @@ public class VisualizacionNotificacionFragment extends BaseDialogFragment {
 
                     Glide.with(requireContext()).load(doc.getString("imagen")).circleCrop().into(binding.imagenRivalNoti);
                     binding.puntuacionRivalNoti.setText(""+doc.getLong("puntuacion"));
+
                     db.collection(CollectionDB.PERSONAJES)
                             .document(pj1Rival)
                             .get()
