@@ -145,6 +145,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButtonPjPrincipal" />
 
+    <ImageView
+        android:id="@+id/infoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_baseline_info_24"
+        app:layout_constraintBottom_toTopOf="@+id/imagenRango"
+        app:layout_constraintEnd_toEndOf="@+id/imagenRango"
+        app:layout_constraintStart_toEndOf="@+id/imagenRango" />
 
     <ImageView
         android:id="@+id/imagenRango"

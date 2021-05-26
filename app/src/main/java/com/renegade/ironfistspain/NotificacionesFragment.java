@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +16,6 @@ import com.renegade.ironfistspain.databinding.FragmentNotificacionesBinding;
 import com.renegade.ironfistspain.databinding.ViewholderNotificacionBinding;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class NotificacionesFragment extends BaseFragment {
@@ -58,7 +56,7 @@ public class NotificacionesFragment extends BaseFragment {
                                 String uidLocal = noti.getString("uidLocal");
                                 String rangoHoraMin = noti.getString("rangoHoraMin");
                                 String rangoHoraMax = noti.getString("rangoHoraMax");
-                                List<Integer> diasDisponibles = (List<Integer>) noti.get("diasSeleccionados");
+                                List<String> diasDisponibles = (List<String>) noti.get("diasSeleccionados");
 
                                 db.collection(CollectionDB.USUARIOS)
                                         .document(uidLocal)

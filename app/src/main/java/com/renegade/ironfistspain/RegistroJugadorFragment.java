@@ -48,6 +48,10 @@ public class RegistroJugadorFragment extends BaseFragment {
             Glide.with(requireContext()).load(viewModel.imagenRangoLiveData.getValue()).into(binding.imagenRango);
         });
 
+        binding.infoButton.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "El rango se utiliza para otorgar una puntuacion que se aproxime a tu nivel de habilidad, selecciona tu rango mas alto alcanzado con un personaje", Toast.LENGTH_LONG).show();
+        });
+
         binding.botonRegistroJugador.setOnClickListener(v -> {
 
             boolean valid = true;
@@ -66,7 +70,13 @@ public class RegistroJugadorFragment extends BaseFragment {
             if (valid) {
                 db.collection(CollectionDB.USUARIOS)
                         .document(user.getUid())
-                        .set(new Jugador(user.getUid(), binding.editTextNombreUsuario.getText().toString(), viewModel.imagenPj1LiveData.getValue(), viewModel.nombrePj1LiveData.getValue(), viewModel.nombrePj2LiveData.getValue(), viewModel.puntuacionRangoLiveData.getValue(), "jugador"));
+                        .set(new Jugador(user.getUid(),
+                                binding.editTextNombreUsuario.getText().toString(),
+                                viewModel.imagenPj1LiveData.getValue(),
+                                viewModel.nombrePj1LiveData.getValue(),
+                                viewModel.nombrePj2LiveData.getValue(),
+                                viewModel.puntuacionRangoLiveData.getValue(),
+                                "jugador"));
 
                 nav.navigate(R.id.action_registroJugadorFragment_to_inicioFragment);
             }

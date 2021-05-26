@@ -1,6 +1,5 @@
 package com.renegade.ironfistspain;
 
-import androidx.arch.core.internal.SafeIterableMap;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -22,7 +21,7 @@ public class IFSViewModel extends ViewModel {
     public MutableLiveData<String> nombreRivalLiveData = new MutableLiveData<>();
     public MutableLiveData<String> hora1RivalLiveData = new MutableLiveData<>();
     public MutableLiveData<String> hora2RivalLiveData = new MutableLiveData<>();
-    public MutableLiveData<List<Integer>> diasSelecRivalLiveData = new MutableLiveData<>();
+    public MutableLiveData<List<String>> diasSelecRivalLiveData = new MutableLiveData<>();
     public MutableLiveData<String> uidRivalLiveData = new MutableLiveData<>();
 
     public MutableLiveData<String> estadoRetoLiveData = new MutableLiveData<>();

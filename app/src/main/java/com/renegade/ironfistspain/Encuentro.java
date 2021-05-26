@@ -14,13 +14,13 @@ public class Encuentro {
     String organizador;
     String resultadoLocal;
     String resultadoVisitante;
-    List<Integer> diasSeleccionados;
+    List<String> diasSeleccionados;
     String rangoHoraMin;
     String rangoHoraMax;
     String id;
 
     // Constructor del nuevo encuentro
-    public Encuentro(String estado, String uidLocal, String uidVisitante, List<Integer> diasSeleccionados, String rangoHoraMin, String rangoHoraMax) {
+    public Encuentro(String estado, String uidLocal, String uidVisitante, List<String> diasSeleccionados, String rangoHoraMin, String rangoHoraMax) {
         this.estado = estado;
         this.uidLocal = uidLocal;
         this.uidVisitante = uidVisitante;
@@ -31,7 +31,7 @@ public class Encuentro {
     }
 
     // Constructor del encuentro modificado
-    public Encuentro(String estado, String uidLocal, String uidVisitante, List<Integer> diasSeleccionados, String rangoHoraMin, String rangoHoraMax, String id) {
+    public Encuentro(String estado, String uidLocal, String uidVisitante, List<String> diasSeleccionados, String rangoHoraMin, String rangoHoraMax, String id) {
         this.estado = estado;
         this.uidLocal = uidLocal;
         this.uidVisitante = uidVisitante;
@@ -113,11 +113,11 @@ public class Encuentro {
         this.resultadoVisitante = resultadoVisitante;
     }
 
-    public List<Integer> getDiasSeleccionados() {
+    public List<String> getDiasSeleccionados() {
         return diasSeleccionados;
     }
 
-    public void setDiasSeleccionados(List<Integer> diasSeleccionados) {
+    public void setDiasSeleccionados(List<String> diasSeleccionados) {
         this.diasSeleccionados = diasSeleccionados;
     }
 

@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -45,6 +44,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class CrearRetoFragment extends BaseFragment {
@@ -52,12 +52,16 @@ public class CrearRetoFragment extends BaseFragment {
     SimpleDateFormat f24horas;
     private FragmentCrearRetoBinding binding;
 
-    List<Integer> diasSeleccionados = Arrays.asList();
+    List<Integer> establecer0dias = Arrays.asList();
+
+    List<String> diasSeleccionados = Arrays.asList();
     List<Rival> rivalesDisponibles = new ArrayList<>();
 
     RivalesAdapter rivalesAdapter = new RivalesAdapter();
 
     List<Rival> rivalSeleccionado = new ArrayList<>();
+
+    Locale spanish = new Locale("es", "ES");
 
     class Rival { String uid; String nombre; Long puntuacion; String imagen; Boolean estaSeleccionado; public Rival(String uid, String nombre, Long puntuacion, String imagen) { this.uid = uid; this.nombre = nombre; this.puntuacion = puntuacion; this.imagen = imagen; estaSeleccionado = false;}}
 
@@ -117,9 +121,9 @@ public class CrearRetoFragment extends BaseFragment {
         });
 
         WeekdaysPicker weekdaysPicker = binding.weekdays;
-        weekdaysPicker.setSelectedDays(diasSeleccionados);
+        weekdaysPicker.setSelectedDays(establecer0dias);
         weekdaysPicker.setOnWeekdaysChangeListener((view1, clickedDayOfWeek, selectedDays) -> {
-                diasSeleccionados = weekdaysPicker.getSelectedDays();
+                diasSeleccionados = weekdaysPicker.getSelectedDaysText(spanish);
 
             Log.e("ABCD", "Dias seleccionados: " + diasSeleccionados);
         });

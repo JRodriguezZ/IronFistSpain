@@ -1,29 +1,22 @@
 package com.renegade.ironfistspain;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.arch.core.internal.SafeIterableMap;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.renegade.ironfistspain.databinding.FragmentRetosPendientesBinding;
-import com.renegade.ironfistspain.databinding.ViewholderNotificacionBinding;
 import com.renegade.ironfistspain.databinding.ViewholderRetoPendienteBinding;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 
 public class RetosPendientesFragment extends BaseFragment {
@@ -66,7 +59,7 @@ public class RetosPendientesFragment extends BaseFragment {
 //                                LocalDateTime fechaPeticion = noti.getDate("fechaPeticion");
                                 String uidLocal = noti.getString("uidLocal");
                                 String uidVisitante = noti.getString("uidVisitante");
-                                List<Integer> diasDisponibles = (List<Integer>) noti.get("diasSeleccionados");
+                                List<String> diasDisponibles = (List<String>) noti.get("diasSeleccionados");
                                 String rangoHoraMin = noti.getString("rangoHoraMin");
                                 String rangoHoraMax = noti.getString("rangoHoraMax");
 

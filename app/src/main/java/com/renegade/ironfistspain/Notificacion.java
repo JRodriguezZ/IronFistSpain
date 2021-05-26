@@ -6,11 +6,11 @@ public class Notificacion {
     String rangoHoraMin;
     String rangoHoraMax;
     String nicknameRival;
-    List<Integer> diasDisponibles;
+    List<String> diasDisponibles;
     String uidRival;
     String id;
 
-    public Notificacion(String nicknameRival, String rangoHoraMin, String rangoHoraMax, List<Integer> diasDisponibles, String uidRival, String id) {
+    public Notificacion(String nicknameRival, String rangoHoraMin, String rangoHoraMax, List<String> diasDisponibles, String uidRival, String id) {
         this.nicknameRival = nicknameRival;
         this.rangoHoraMin = rangoHoraMin;
         this.rangoHoraMax = rangoHoraMax;
@@ -43,11 +43,11 @@ public class Notificacion {
         this.nicknameRival = nicknameRival;
     }
 
-    public List<Integer> getDiasDisponibles() {
+    public List<String> getDiasDisponibles() {
         return diasDisponibles;
     }
 
-    public void setDiasDisponibles(List<Integer> diasDisponibles) {
+    public void setDiasDisponibles(List<String> diasDisponibles) {
         this.diasDisponibles = diasDisponibles;
     }
 
