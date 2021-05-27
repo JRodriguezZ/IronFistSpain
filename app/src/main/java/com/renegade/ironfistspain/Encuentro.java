@@ -19,6 +19,9 @@ public class Encuentro {
     String rangoHoraMax;
     String id;
 
+    String nombreLocal, imagenLocal;
+    String nombreVisitante, imagenVisitante;
+
     // Constructor del nuevo encuentro
     public Encuentro(String estado, String uidLocal, String uidVisitante, List<String> diasSeleccionados, String rangoHoraMin, String rangoHoraMax) {
         this.estado = estado;
@@ -39,6 +42,16 @@ public class Encuentro {
         this.rangoHoraMin = rangoHoraMin;
         this.rangoHoraMax = rangoHoraMax;
         this.id = id;
+    }
+
+    // Constructor de un reto ya planificado
+    public Encuentro(String fechaEncuentro, String horaEncuentro, String nombreLocal, String imagenLocal, String nombreVisitante, String imagenVisitante) {
+        this.fechaEncuentro = fechaEncuentro;
+        this.horaEncuentro = horaEncuentro;
+        this.nombreLocal = nombreLocal;
+        this.imagenLocal = imagenLocal;
+        this.nombreVisitante = nombreVisitante;
+        this.imagenVisitante = imagenVisitante;
     }
 
     public String getEnlace() {
